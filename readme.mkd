@@ -80,10 +80,25 @@ Copia e incolla la descrizione divisa per tabelle
 
 ## 2 Progettazione concettuale  
 
-### 2a. Identificazioen delle entità e relazioni (bottom-up)
+### 2a. Identificazione delle entità e relazioni (bottom-up)
+Sono state identificate (seguendo la strategia bottom-up) inizialmente le seguenti entità: sede, paese, tecnici,specializzazione, vari tipi di richiesta, macchina, componente, staff
+Le entità sopra elencate si possono suddividere in tre gruppi principali: sede che gestisce le richieste, richiesta che comprende tutti i tipi di interventi, tecnici che elaborano le richieste della sede. 
 
-### 2 e Dizionario dei dati  
-Per tutte le tabelle tutti i loro attributi , descrizioni, identificativi
+### 2b. Un primo scheletro dello schema (top-down)
+Ad un primo livello di astrazione, tenendo conto delle considerazioni fatte sopra è stato concepito il seguente primo scheletro di schema concettuale:
+
+![schema1](./schema1.png)
+
+### 2c. Sviluppo delle componenti dello scheletro (inside-out)
+![schemasede](./sede.png)
+
+L' entità sede è caratterizzata dagli attributi: ragione sociale e identificativo azienda, nome indica il nominativo dell'azienda.
+L'entità sede è messa associata all'entita Paese attraverso la relazione 'Situata'.  
+
+
+
+
+### 2e Dizionario dei dati  
 
 ### 2f Regole aziendali  
 Vincoli e regole di derivazione  
