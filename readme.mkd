@@ -1,0 +1,119 @@
+# Cose da fare relazione  
+
+## 1 Analisi dei requisiti  
+
+### 1a linguaggio naturale
+
+Si vuole realizzare un database per un azienda multinazionale che vuole mantenere sotto controllo i vari tecnici che viaggiano tra le sedi per fornire supporto o manutenzione.  
+I dati da salvare saranno:  
+
++ Riguardo ai paesi si vorrà salvare il nome , l'identificativo ISO e il livello di pericolo.  
++ Riguardo alle sedi si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.
++ Riguarlo allo Staff, cioè i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.
++ I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare(dipende dall'anzianità nell'azienda), ragione sociale.
++ Per le specializzazioni si vorrà specificare il costo e il tipo e il codice univoco
++ Si andranno poi a rappresentare le tipologie di interventi, rappresentate da nome, descrizione, costo giornaliero e codice univoco.  
++ Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo e la garanzia
++ Dei componenti si vorrà rappresentare il costo, il codice e il peso
++ Per ogni tipologia di intervento si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno diverse tipologie di intervento:  
+
+1. Gli interventi di sostituzione (di un componente) , si vorrà rappresentare inoltre il costo di trasferimento e il costo giornaliero del tecnico
+2. Gli interventi di riparazione (di un componente)
+3. Gli interventi di aggiornamento (istruzione dello staff) , si vorrà rappresentare il costo di trasferimento e il costo giornaliero del tecnico
+
+### 1b glossario
+
+**Termini** 	**Descrizione**		**Sinonimi**	**Collegamenti**
+Paese - Nazione in cui può essere presente una sede - Stato/Nazione   
+Sede - Filiale dell'azienda multinazionale - Filiale/sottosede
+Staff - Dipendenti stazionati ad una singola sede - Impiegati/Personale  
+Tecnici - Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari - nessuno  
+Interventi - L'operazione che è richiesta dalla sede - log/richiesta 
+Macchinario - Macchina che produce beni - nessuno  
+Componente - Pezzo di un macchinario - nessuno
+Livello di pericolo - Indice delle precauzioni necessarie a lavorare in uno stato - nessuno  
+Multinazionale - Azienda madre di cui tutte le vari sedi sono filiali - Azienda madre   
+Identificativo ISO - Codice standard univoco fornito ad ogni paese - ISO 
+Specializzazione - Formazione specialistica su un determinato argomento - nessuno 
+Costo di trasferimento - Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno 
+Aggiornamento - Corsi di formazine dello staff da tecnici specializzati - nessuno
+
+
+### 1c eliminazione delle ambiguità  
+La ragione sociale sarà data da nome, codice fiscale e numero telefonico in caso di persona oppure nome legale ,  partita iva e indirizzo in caso di sede.  
+La garanzia è un periodo di tempo scritto in anni in cui tutti i costi di intervento al macchinario sono coperti dalla multinazionale.
+Il termine azienda può essere usato sia per definire una singola sede che per definire la multinazionale di cui sono tutte filiali.  
+Il costo totale è calcolato in base al costo giornaliero di un intervento moltiplicato per i giorni lavorati e sarà contenuto in log. 
+
+### 1d Strutturazione dei requisiti  
+Copia e incolla la descrizione divisa per tabelle  
+
+### 1e Specifiche operazioni  
+
+1. Inserire una nuova sede (1 volta all'anno)  
+2. Inserire un nuovo tecnico (5 volte all'anno)
+3. Inserire un nuovo membro dello staff (2 volte al mese)
+4. Inserire un nuovo paese  (1 volta ogni paio d'anni)
+5. Inserire una nuova macchina  (1 volta al mese)
+6. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
+8. Richiedere un intervento di riparazione  (1 volta al giorno)
+9. Risponedere ad un intervento di riparazione  (1 volta al giorno) 
+1. Richiere un intervento di sostituzione ( 1 volta a settimana)
+1. Rispondere ad un intervento di sostituzione ( 1 volta a settimana)
+1. Richiedere un intervento di aggiornamento (1 volta al mese)
+1. Rispondere ad un intervento di aggiornamento (1 volta al mese)
+1. Formare un tecnico in una specializzazione (2 volte all'anno)
+1. Aggiornare il livello di pericolo di un paese ( 1 volta all'anno)
+11. Visualizzare tutti gli interventi in corso (5 volte al giorno)
+1. Visualizzare tutti gli interventi completati (1 volta alla settimana)
+13. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno) 
+1. Aggiungere un paese su cui può operare un tecnico ( 1 volta al mese)
+14. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
+16. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
+17. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
+18. Visualizzare tutte le sedi per un determinato paese (5 volte al giorno)
+19. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+20. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
+21. Visualizzare tutte le macchine per una sede (1 volta al giorno)
+1. Visualizzare tutti i componenti per una macchina ( 1 volta al giorno)
+22. Visualizzare tutto lo staff per una data sede. (1 volta al mese) 
+
+## 2 Progettazione concettuale  
+
+### 2a. Identificazioen delle entità e relazioni (bottom-up)
+
+### 2 e Dizionario dei dati  
+Per tutte le tabelle tutti i loro attributi , descrizioni, identificativi
+
+### 2f Regole aziendali  
+Vincoli e regole di derivazione  
+
+## 3 Progettazione logica  
+
+### 3a Tavole dei volumi  
+Spariamo a caso quanti elementi ci saranno nella tabella e sparaiamo a caso quante volte verranno eseguite le operazioni detti in 1e  
+
+### 3b ristrutturazione dello schema concettuale
++ Si vede se ci sono elementi ridondanti e fa una stima dei costi per vedere se è necessario rimuoverle  
+
++ Vede se ci sono gerarchie che possono essere semplificate  
+
++ Vede se ci sono cose simili che possono essere accorpate  
+
+### 3c Normalizzazione
+Bho
+
+### 3d Traduzione verso il modello relazionale  
+Fare le tabelle scritte in modo relazionale  
+
+## 4 Codifica SQL 
+### 4a definizione schema in codice  
+
+### 4c codifica delle operazioni
+Riscrivi operazioni codice  
+
+## 5 Testing 
+Ogni tabella avrà una pagina web con il display di tute le sue entità  
+Ogni operazione avrà una pagina web in cui si farà quella singola operazione.  
+  
+
