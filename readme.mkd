@@ -22,11 +22,15 @@ I dati da salvare saranno:
 
 ### 1b glossario
 
-**Termini** 	**Descrizione**		**Sinonimi**	**Collegamenti**
-Paese - Nazione in cui può essere presente una sede - Stato/Nazione   
-Sede - Filiale dell'azienda multinazionale - Filiale/sottosede
-Staff - Dipendenti stazionati ad una singola sede - Impiegati/Personale  
-Tecnici - Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari - nessuno  
+|Termini | Descrizione 					|Sinonimi	  |Collegamenti |
+|--------|----------------------------------------------|-----------------|-------------|
+|Paese   |Nazione in cui può essere presente una sede   | Stato/Nazione   | 		|
+|--------|----------------------------------------------|-----------------|-------------|
+|Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|		|
+|--------|----------------------------------------------|-----------------|-------------|
+|Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale|  		|
+|--------|----------------------------------------------|-----------------|-------------|
+|Tecnici - Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari - nessuno  
 Interventi - L'operazione che è richiesta dalla sede - log/richiesta 
 Macchinario - Macchina che produce beni - nessuno  
 Componente - Pezzo di un macchinario - nessuno
