@@ -109,6 +109,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 
 ### 2e Dizionario dei dati  
+####entità:
 |Nome entità | Descrizione	 		|Attributi		 |Identificatore |
 |------------|----------------------------------|------------------------|---------------|
 |sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa), partita Iva(numerico)|codice Azienda(numerico)|
@@ -122,9 +123,14 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|
 |staff |staff di una filiale, frequenta i corsi di aggiornamento e ripara i componenti delle macchine|ruolo(stringa), codiceazienda(numerico), nome(stringa), telefono(numerico)|CF(stringa) 
 
+####relazioni: 
+|Nome relazione | Descrizione	 		|entità coinvolte |Attributi		|
+|------------|----------------------------------|------------------------|---------------|
+|situata|associa ad una sede il paese in cui è situata| Sede(1,1), paese(0,N)|
+|inviata|associa alle richieste la sede da cui sono state inviate|sede(1,n)(1,N)|
+|contenuto|associa un componente alla macchina di cui fa parte|macchina(1,n),componente(0,1)|
 
 ### 2f Regole aziendali  
-Vincoli e regole di derivazione  
 
 ## 3 Progettazione logica  
 
