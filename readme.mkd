@@ -129,8 +129,17 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |situata|associa ad una sede il paese in cui è situata| Sede(1,1), paese(0,N)|
 |inviata|associa alle richieste la sede da cui sono state inviate|sede(1,n)(1,N)|
 |contenuto|associa un componente alla macchina di cui fa parte|macchina(1,n),componente(0,1)|
+|sostituisce | associa la richiesta di sostituzione al componente da sostituire|componente(1,n), richiesta sostituzione(1,1)|
+|riparazione|  associa la richiesta di riparazione al componente da sostituire di cui se ne occuperà lo staff|componente(1,n), richiesta riparazione(1,1), staff(1,n)|
+|formazione|associa la richiesta di aggiornamento allo staff dell'azienda| staff(1,1),richiesta aggiornamento(1,1)|
+|soddisfatto| associa le richieste al tecnico che se ne occuperà| tecnici(1,n), richieste(1,1)|
+|frequentato| associa il tecnico alle specializzazione che ha frequentato|tecnici(1,n), specializzazioni(1,n)|
+|operato|associa il tecnico ai paesi in cui gli è consentito operare dato il suo livello di pericolo|tecnici(1,n) paese(1,n)|
+
 
 ### 2f Regole aziendali  
+|(RV1) per lavorare in un determinato paese il tecnico deve possedere un |livello di pericolo <= al livello di pericolo del paese
+
 
 ## 3 Progettazione logica  
 
