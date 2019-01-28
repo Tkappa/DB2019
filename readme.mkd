@@ -111,7 +111,17 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 ### 2e Dizionario dei dati  
 |Nome entità | Descrizione	 		|Attributi		 |Identificatore |
 |------------|----------------------------------|------------------------|---------------|
-|sede	     |Filiale della multinazionale      |nome(stringa), indirizzo(stringa), partita Iva(numerico)|codice Azienda(numerico|	      |               |
+|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa), partita Iva(numerico)|codice Azienda(numerico)|
+|Paese| nazione in cui è presente una sottosede| nome(stringa),livello pericolo(numerico)| codice ISO(stringa)|
+|tecnico| Persona che risponde ad alcune delle richieste della sede|nome(stringa), telefono(numerico), livello di pericolo(numerico)|CF(stringa) 
+|specializzazione|titolo richiesto per i tecnici per poter rispondere ad alcune richieste|tipo(stringa),costo(numerico)|ID(numerico)|
+|macchina|strumento di lavoro posseduto dall'azienda sul quale possono essere fatte delle richieste d'intervento |nome(stringa),garanzia (data), stato(stringa), descrizione(stringa), data inizio/fine (data)|ID(numerico)|
+|componente|componente della macchina su cui viene fatta una richiesta di riparazione/sostituzione|peso(numerico),costo(numerico)|ID(numerico)|
+|richiesta sostituzione|richiesta della sostituzione di un componente da parte dei tecnici| costo gg(numerico),costo trasferta(numerico)|
+|richiesta riparazione|richiesta della riparazione di un componente| |
+|richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|
+|staff |staff di una filiale, frequenta i corsi di aggiornamento e ripara i componenti delle macchine|ruolo(stringa), codiceazienda(numerico), nome(stringa), telefono(numerico)|CF(stringa) 
+
 
 ### 2f Regole aziendali  
 Vincoli e regole di derivazione  
