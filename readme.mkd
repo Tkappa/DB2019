@@ -91,17 +91,16 @@ Ad un primo livello di astrazione, tenendo conto delle considerazioni fatte sopr
 ### 2c. Sviluppo delle componenti dello scheletro (inside-out)
 ![schemasede](./sede.png)
 
-L' entità sede è caratterizzata dagli attributi: ragione sociale e identificativo azienda, nome indica il nominativo dell'azienda.
-L'entità sede è messa associata all'entita Paese attraverso la relazione 'Situata'.  
+L'entità sede è caratterizzata dagli attributi: ragione sociale e identificativo azienda,l'attributo nome indica il nominativo dell'azienda.
+L'entità sede è associata all'entità Paese attraverso la relazione 'Situata'.  
 
 ![schematecnici](./tecnici.png)
 
-scrivi qualcosa
+L'entità tecnici è caratterizzata dall'attributo livello di pericolo, che vincolerà i paesi nel quale un tecnico può spostarsi. Inoltre, per poter adempiere alcune richieste, è necessario che abbia conseguito dei corsi di formazione. 
 
 ![schemarichiesta](./richiesta.png)
 
-scrivi qualcosa
-
+L' entità richiesta è una generalizzazione totale delle possibili richieste effettuate dalla sede. La singola richiesta necessita di comportamenti diversi
 ### 2d.Unione delle componenti nello schema finale ridotto
 ![schemafinale](./finale.png)
 
@@ -109,6 +108,9 @@ scrivi qualcosa
 
 
 ### 2e Dizionario dei dati  
+|Nome entità | Descrizione |Attributi |Identificatore |
+|------------|-------------|----------|---------------|
+|sede	     |             |	      |               |
 
 ### 2f Regole aziendali  
 Vincoli e regole di derivazione  
