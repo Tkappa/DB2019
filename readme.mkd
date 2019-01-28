@@ -27,7 +27,7 @@ I dati da salvare saranno:
 |Paese   |Nazione in cui può essere presente una sede   | Stato/Nazione   | 		|
 |Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|		|
 |Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale|  		|
-|Tecnici | Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari | | |  
+|Tecnici | Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari |
 |Interventi | L'operazione che è richiesta dalla sede | log/richiesta |
 |Macchinario| Macchina che produce beni |nessuno  
 |Componente | Pezzo di un macchinario | nessuno
@@ -109,9 +109,9 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 
 ### 2e Dizionario dei dati  
-|Nome entità | Descrizione |Attributi |Identificatore |
-|------------|-------------|----------|---------------|
-|sede	     |             |	      |               |
+|Nome entità | Descrizione	 		|Attributi		 |Identificatore |
+|------------|----------------------------------|------------------------|---------------|
+|sede	     |Filiale della multinazionale      |nome(stringa), indirizzo(stringa), partita Iva(numerico)|codice Azienda(numerico|	      |               |
 
 ### 2f Regole aziendali  
 Vincoli e regole di derivazione  
