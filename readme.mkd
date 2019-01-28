@@ -28,15 +28,15 @@ I dati da salvare saranno:
 |Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|		|
 |Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale|  		|
 |Tecnici | Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari | | |  
-|Interventi | L'operazione che è richiesta dalla sede | log/richiesta 
-Macchinario - Macchina che produce beni - nessuno  
-Componente - Pezzo di un macchinario - nessuno
-Livello di pericolo - Indice delle precauzioni necessarie a lavorare in uno stato - nessuno  
-Multinazionale - Azienda madre di cui tutte le vari sedi sono filiali - Azienda madre   
-Identificativo ISO - Codice standard univoco fornito ad ogni paese - ISO 
-Specializzazione - Formazione specialistica su un determinato argomento - nessuno 
-Costo di trasferimento - Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno 
-Aggiornamento - Corsi di formazine dello staff da tecnici specializzati - nessuno
+|Interventi | L'operazione che è richiesta dalla sede | log/richiesta |
+|Macchinario| Macchina che produce beni |nessuno  
+|Componente | Pezzo di un macchinario | nessuno
+|Livello di pericolo | Indice delle precauzioni necessarie a lavorare in uno stato | nessuno  
+|Multinazionale | Azienda madre di cui tutte le vari sedi sono filiali | Azienda madre   
+|Identificativo ISO | Codice standard univoco fornito ad ogni paese | ISO 
+|Specializzazione | Formazione specialistica su un determinato argomento | nessuno 
+|Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno 
+|Aggiornamento | Corsi di formazine dello staff da tecnici specializzati | nessuno
 
 
 ### 1c eliminazione delle ambiguità  
