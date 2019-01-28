@@ -24,17 +24,17 @@ I dati da salvare saranno:
 
 |Termini | Descrizione 					|Sinonimi	  |Collegamenti |
 |--------|----------------------------------------------|-----------------|-------------|
-|Paese   |Nazione in cui può essere presente una sede   | Stato/Nazione   | 		|
-|Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|		|
-|Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale|  		|
-|Tecnici | Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari |
-|Interventi | L'operazione che è richiesta dalla sede | log/richiesta |
-|Macchinario| Macchina che produce beni |nessuno  
-|Componente | Pezzo di un macchinario | nessuno
+|Paese   |Nazione in cui può essere presente una sede   | Stato/Nazione   | Sede, Tecnici	|
+|Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|Paese, Richieste, Macchine	|
+|Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale| Richieste aggiornamento, componente|
+|Tecnici | Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari |Specializzazione, Paese, Richieste|
+|Interventi | L'operazione che è richiesta dalla sede | log/richiesta |staff, Tecnici,componente, sede|
+|Macchinario| Macchina che produce beni |nessuno|Componente, Sede  
+|Componente | Pezzo di un macchinario | nessuno|Macchina, Staff
 |Livello di pericolo | Indice delle precauzioni necessarie a lavorare in uno stato | nessuno  
 |Multinazionale | Azienda madre di cui tutte le vari sedi sono filiali | Azienda madre   
 |Identificativo ISO | Codice standard univoco fornito ad ogni paese | ISO 
-|Specializzazione | Formazione specialistica su un determinato argomento | nessuno 
+|Specializzazione | Formazione specialistica su un determinato argomento | nessuno |tecnici
 |Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno 
 |Aggiornamento | Corsi di formazine dello staff da tecnici specializzati | nessuno
 
@@ -138,9 +138,14 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 
 ### 2f Regole aziendali  
-|(RV1) per lavorare in un determinato paese il tecnico deve possedere un |livello di pericolo <= al livello di pericolo del paese
-
-
+|(RV1) per lavorare in un determinato paese il tecnico deve possedere un livello di pericolo <= al livello di pericolo del paese
+(RV2) il livello di percolo di un paese dev'essere compreso tra 0 e 10
+(RV3) la data di fine garanzia - data di inizio dev'essere = 730 giorni
+(RV4) lo stato di una richiesta può essere: 
+	-in attesa
+	-in carico	
+	-completata
+(RV6)  
 ## 3 Progettazione logica  
 
 ### 3a Tavole dei volumi  
