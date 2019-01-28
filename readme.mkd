@@ -12,7 +12,6 @@ I dati da salvare saranno:
 + Riguarlo allo Staff, cioè i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.
 + I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare(dipende dall'anzianità nell'azienda), ragione sociale.
 + Per le specializzazioni si vorrà specificare il costo e il tipo e il codice univoco
-+ Si andranno poi a rappresentare le tipologie di interventi, rappresentate da nome, descrizione, costo giornaliero e codice univoco.  
 + Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo e la garanzia
 + Dei componenti si vorrà rappresentare il costo, il codice e il peso
 + Per ogni tipologia di intervento si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno diverse tipologie di intervento:  
@@ -94,6 +93,17 @@ Ad un primo livello di astrazione, tenendo conto delle considerazioni fatte sopr
 
 L' entità sede è caratterizzata dagli attributi: ragione sociale e identificativo azienda, nome indica il nominativo dell'azienda.
 L'entità sede è messa associata all'entita Paese attraverso la relazione 'Situata'.  
+
+![schematecnici](./tecnici.png)
+
+scrivi qualcosa
+
+![schemarichiesta](./richiesta.png)
+
+scrivi qualcosa
+
+### 2d.Unione delle componenti nello schema finale ridotto
+![schemafinale](./finale.png)
 
 
 
