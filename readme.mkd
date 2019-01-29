@@ -174,7 +174,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |soddisfatto| associa le richieste al tecnico che se ne occuperà| tecnici(1,n), richieste(1,1)|
 |frequentato| associa il tecnico alle specializzazione che ha frequentato|tecnici(1,n), specializzazioni(1,n)|
 |operato|associa il tecnico ai paesi in cui gli è consentito operare dato il suo livello di pericolo|tecnici(1,n) paese(1,n)|
-
+|dipendente| associa lo staff alla sede in cui lavora| sede(1,n),sede(1,1)|
 
 ### 2f Regole aziendali  
 
