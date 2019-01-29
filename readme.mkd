@@ -1,4 +1,18 @@
-# Cose da fare/relazione  
+# Cose da fare
+
++ Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva (Oppure accorgergene dopo durante la relazione?)
++ Aggiungere la relazione staff <- dipendente -> sede
++ Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
++ 3c Normalizzazione
++ Rileggere ad alta voce in cerca di errori grammaticali e lessicali
+
+## Dopo la progettazione definitiva del database
++ 3d Traduzione verso il modello relazionale
++ 4. Creazione di tutte le operazioni SQL
++ 5. Creazione di tutte le pagine web che supportano le operazioni SQL
++ Creare il sito con Bootstrap 4 in modo che venga anche carino alla vista
+
+# Relazione (2 punti facili in più all'esame)
 
 ## 1 Analisi dei requisiti  
 
