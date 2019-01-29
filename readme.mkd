@@ -1,7 +1,7 @@
 # Cose da fare
 
 + Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva (Oppure accorgergene dopo durante la relazione?)
-+ Aggiungere la relazione staff <- dipendente -> sede
++ Aggiungere la relazione staff <- dipendente -> sede       (fatto)
 + Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
 + 3c Normalizzazione
 + Rileggere ad alta voce in cerca di errori grammaticali e lessicali
