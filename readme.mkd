@@ -379,22 +379,22 @@ Non sono stati rilevati attributi multivalore.
 |-------------|--------------|
 |Sede(__PIva__,nome,indirizzo)|-|
 |Paese(__ISO__,nome,LivelloPericolo)|-|
-|Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo)|-|
-|Specializzazione| Specializzazione(__ID__,tipo,costo)|-|
-|Macchina| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|-|
-|Componente|Componente(__ID__,peso,costo,operativo)|-|
-|RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
-|RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
-|Staff |Staff(__CF__,ruolo,nome,telefono)|-|
-|SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__,__Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta->RichiestaSostituzione.ID|
-|Sostituisce | Sostituisce(__Componente__,__Richiesta__)|Componente -> Componente.ID , Richiesta->RichiestaSostituzione.ID|
-|Riparazione|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|Staff -> Staff.CF , Sede->Sede.PIva , Componente-> Componente.ID|
-|SoddisfaFormazione|SoddisfaFormazione(__Richiesta__,__Tecnico__)| Richiesta->RichiestaAggiornamento.ID , Tecnico->Tecnico.CF|
-|Formazione|Formazione(__Staff__,__Richiesta__)|Richiesta->RichiestaAggiornamento.ID ,Staff.CF|
-|Operato|Operato(__Tecnico__,__Paese__)|  Tecnico->Tecnico.ID, Paese->Paese.ISO|
-|Situata|Situata(__Sede__,__Paese__)| Sede->Sede.PIva, Paese->Paese.ISO|
-|Contenuto|Contenuto(__Macchina__,__Componente__)| Macchina->Macchina.ID, Componente->Componente.ID|
-|Dipendente| Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
+| Tecnico(__CF__, nome,tel,PermessoPericolo)|-|
+| Specializzazione(__ID__,tipo,costo)|-|
+| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|-|
+|Componente(__ID__,peso,costo,operativo)|-|
+| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+|Staff(__CF__,ruolo,nome,telefono)|-|
+| SoddisfaSostituzione(__Tecnico__,__Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta->RichiestaSostituzione.ID|
+| Sostituisce(__Componente__,__Richiesta__)|Componente -> Componente.ID , Richiesta->RichiestaSostituzione.ID|
+|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|Staff -> Staff.CF , Sede->Sede.PIva , Componente-> Componente.ID|
+|SoddisfaFormazione(__Richiesta__,__Tecnico__)| Richiesta->RichiestaAggiornamento.ID , Tecnico->Tecnico.CF|
+|Formazione(__Staff__,__Richiesta__)|Richiesta->RichiestaAggiornamento.ID ,Staff.CF|
+|Operato(__Tecnico__,__Paese__)|  Tecnico->Tecnico.ID, Paese->Paese.ISO|
+|Situata(__Sede__,__Paese__)| Sede->Sede.PIva, Paese->Paese.ISO|
+|Contenuto(__Macchina__,__Componente__)| Macchina->Macchina.ID, Componente->Componente.ID|
+| Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
 
 ## 4 Codifica SQL
 ### 4a definizione schema in codice  
