@@ -182,9 +182,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |(RV14) Una richiesta in carico deve avere una data di inizio|
 |(RV15) Un Tecnico può avere una singola richiesta "in carico"|
 |(RV16) Un membro dello staff può avere una singola richiesta di riparazione "in carico"|
-|-------------------------------------------------------------------------------------------------------------------------------|
 |**Regole di derivazione**|
-|-------------------------------------------------------------------------------------------------------------------------------|
 |(RD1) La durata dell'intervento è data dalla data Fine dell'intervento - la Data inizio|
 |(RD2) Il costo totale di un intervento è dato dalla (durata dell'intervento * costo giornaliero dell'intervento)+ costo trasferta del tecnico, oppure è solamente il costo di trasferta del tecnico se la macchina è ancora in garanzia( durata rimanente della garanzia >=0)|
 |(RD3) La durata rimanente della garanzia è data da Data fine garanzia - Giorno attuale|
