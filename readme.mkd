@@ -137,15 +137,15 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 #### entità:
 |Nome entità | Descrizione	 		|Attributi		 |Identificatore |
 |------------|----------------------------------|------------------------|---------------|
-|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa), partita Iva(numerico)|codice Azienda(numerico)|
+|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa), partita Iva(numerico)|Partita IVA(stringa)|
 |Paese| nazione in cui è presente una sottosede| nome(stringa),livello pericolo(numerico)| codice ISO(stringa)|
 |tecnico| Persona che risponde ad alcune delle richieste della sede|nome(stringa), telefono(numerico), livello di pericolo(numerico)|CF(stringa)
 |specializzazione|titolo richiesto per i tecnici per poter rispondere ad alcune richieste|tipo(stringa),costo(numerico)|ID(numerico)|
 |macchina|strumento di lavoro posseduto dall'azienda sul quale possono essere fatte delle richieste d'intervento |nome(stringa),garanzia (data), stato(stringa), descrizione(stringa), data inizio/fine (data)|ID(numerico)|
 |componente|componente della macchina su cui viene fatta una richiesta di riparazione/sostituzione|peso(numerico),costo(numerico)|ID(numerico)|
-|richiesta sostituzione|richiesta della sostituzione di un componente da parte dei tecnici| costo gg(numerico),costo trasferta(numerico)|
-|richiesta riparazione|richiesta della riparazione di un componente| |
-|richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|
+|richiesta sostituzione|richiesta della sostituzione di un componente da parte dei tecnici| costo gg(numerico),costo trasferta(numerico)|ID(numerico)|
+|richiesta riparazione|richiesta della riparazione di un componente| |ID(numerico)|
+|richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|ID(numerico)|
 |staff |staff di una filiale, frequenta i corsi di aggiornamento e ripara i componenti delle macchine|ruolo(stringa), codiceazienda(numerico), nome(stringa), telefono(numerico)|CF(stringa)
 
 #### relazioni:
@@ -169,11 +169,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |(RV1) per lavorare in un determinato paese il tecnico deve possedere un livello di pericolo <= al livello di pericolo del paese|
 |(RV2) il livello di percolo di un paese dev'essere compreso tra 0 e 10|
 |(RV3) la data di fine garanzia - data di inizio dev'essere = 730 giorni|
-|(RV4) lo stato di una richiesta può essere:
-
-	- in attesa
-	- in carico
-	- completata |
+|(RV4) lo stato di una richiesta può essere: "in attesa","in carico" o  "completata" |
 |(RV5) Un tecnico per fornire supporto a una richiesta di aggiornamento deve aver frequentato una specializzazione|
 |(RV6) Una sede può essere situata in un singolo paese|
 |(RV7) Il numero di componenti di una macchina deve essere >0|
@@ -200,6 +196,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 ### 3a Tavole dei volumi e delle operazioni
 
 **Tavola dei volumi**:  
+
 |Concetto|Tipo|Volume|
 |-------------|--------------|-----------------|
 |Paese|E|7|
@@ -257,36 +254,36 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 ### 3b ristrutturazione dello schema concettuale
 
-**Dobbiamo farlo insieme perchè ci dobbiamo inventare delle rindondanze**
-**Eliminazione delle ridondanze:**  
-+ Si vede se ci sono elementi ridondanti e fa una stima dei costi per vedere se è necessario rimuoverle  
+**Dobbiamo farlo insieme perchè ci dobbiamo inventare delle rindondanze**  
+**Eliminazione delle ridondanze:**    
++ Si vede se ci sono elementi ridondanti e fa una stima dei costi per vedere se è necessario rimuoverle    
 
-**Secondo me c'è da mettere una gerarchia per staff e tecnici in modo da semplificarla in questo passo**
-**Eliminazione delle gerarchie:**  
+**Secondo me c'è da mettere una gerarchia per staff e tecnici in modo da semplificarla in questo passo**  
+**Eliminazione delle gerarchie:**    
 Riguardo all'entità richieste si è deciso di accorparle in Richiesta di sostituzione, Richiesta di riparazione e Richiesta di aggiornamento perchè le operazioni 7,8,9,10,11 e 12 fanno riferimenti distinti alle varie richieste e la generalizzione è di tipo totale. Inoltre si vogliono dividere le richieste di riparazione dagli altri tipi perchè visto che sono eseguiti dallo staff non hanno costi.
 
-**Idem qui secondo me c'è da inventarsi cose nuove**
-**Accorpamenti e partizionamenti:**
+**Idem qui secondo me c'è da inventarsi cose nuove**  
+**Accorpamenti e partizionamenti:**  
 + Vede se ci sono cose simili che possono essere accorpate    
 
-**Dobbiamo inventre anche qui , spero abbiate seguito corsi di scrittura creativa**
-**Oppure possiamo scrivere che non si sono rilevati
-**Eliminazione degli attributi multivalore:**  
+**Dobbiamo inventre anche qui , spero abbiate seguito corsi di scrittura creativa**  
+**Oppure possiamo scrivere che non si sono rilevati  
+**Eliminazione degli attributi multivalore:**    
 
-**Elenco degi identificatori principali:**  
+**Elenco degi identificatori principali:**    
 
 |Nome entità|Identificatore|
 |-------------|--------------|
-|Paese|ISO(stringa)|
+|Paese|codice ISO(stringa)|
 |Sede|Partita IVA(stringa)|
-|Staff|Codice fiscale(stringa)|
-|Tecnico|Codice fiscale(stringa)|
-|Specializzazione|Numero di corso(numero)|
-|Macchinari|Numero seriale (numero)|
-|Componenti|Codice seriale(stringa)|
-|Richiesta sostituzione|Identificativo numerico (numero)|
-|Richiesta riparazione|Identificativo numerico (numero)|
-|Richiesta aggiornamento|Identificativo numerico (numero)|
+|Staff|CF(stringa)|
+|Tecnico|CF(stringa)|
+|Specializzazione|ID(numerico)|
+|Macchinari|ID(numerico)|
+|Componenti|ID(numerico)|
+|Richiesta sostituzione|ID(numerico)|
+|Richiesta riparazione|ID(numerico)|
+|Richiesta aggiornamento|ID(numerico)|
 
 ### 3c Normalizzazione
 Bho
