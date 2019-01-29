@@ -6,6 +6,7 @@
 + 3c Normalizzazione
 + Rileggere ad alta voce in cerca di errori grammaticali e lessicali
 + Togliere Rv17 e mettere la relazione tra tecnici e specializzazioni (0,1)
++ C'è garanzia che nella tabella dei campi è messa come data, con poi dopo le date inizio/fine. Cosa vuol dire?
 
 ## Dopo la progettazione definitiva del database
 + 3d Traduzione verso il modello relazionale
@@ -155,7 +156,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 #### entità:
 |Nome entità | Descrizione	 		|Attributi		 |Identificatore |
 |------------|----------------------------------|------------------------|---------------|
-|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa), partita Iva(numerico)|Partita IVA(stringa)|
+|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa)|Partita IVA(stringa)|
 |Paese| nazione in cui è presente una sottosede| nome(stringa),livello pericolo(numerico)| codice ISO(stringa)|
 |tecnico| Persona che risponde ad alcune delle richieste della sede|nome(stringa), telefono(numerico), livello di pericolo(numerico)|CF(stringa)
 |specializzazione|titolo richiesto per i tecnici per poter rispondere ad alcune richieste|tipo(stringa),costo(numerico)|ID(numerico)|
@@ -274,27 +275,64 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 **Eliminazione delle ridondanze:**    
 Data la natura dell'attributo "operativo" di una macchina si nota una ridondanza. Questo valore si può calcolare controllando tutti i componenti associati alla macchina per vedere se sono tutti operativi.
-Le operazioni che coinvolgono questo attributo sono l'operazione 28, l'operazione 8 (un componente riparato ritorna operativo) e visto il vincolo R17 anche le operazioni 7 e 9.  
+Le operazioni che coinvolgono questo attributo sono l'operazione 28, l'operazione 8 (un componente riparato ritorna operativo e quindi anche la macchina ad esso associata)
 
 **Tavole degli accessi in presenza di ridondanza:**  
 
-Operazione 28:  
+Operazione 28(Assumento una media di 10 macchine per sede):  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
-|Test|Test|1|R|
+|Macchina|Entità|20|R|
 
-**Secondo me c'è da mettere una gerarchia per staff e tecnici in modo da semplificarla in questo passo**  
+Operazione 8:  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Componente|Entità|1|W|
+|Contenuto|Relazione|1|R|
+|Macchina|Entità|1|W|
+
+**Tavole degli accessi in assenza di ridondanza:**
+
+Operazione 28(Assumendo una media di 10 macchine per sede e 10 componenti per macchina):  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Macchina|Entità|10|R|
+|Contenuto|Relazione|100|R|
+|Componente|Entità|100|R|   
+
+Operazione 8:  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Componente|Entità|1|W|
+
+In presenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):  
+Op.28 = 20(costo)* 150 (Volte al mese) = 3000  
+Op 8 = (1*2 + 1 + 1*2)(costo) * 30 (Volte al mese) = 150  
+Totale = 3150
+
+In assenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):
+Op.28 = (10+100+100)(costo)* 150 (Volte al mese) = 31500    
+Op 8 = (1*2)(costo) * 30 (Volte al mese) = 60  
+Totale = 31560  
+
+Di conseguenza si ritiene opportuno mantenere la ridondanza    
+
 **Eliminazione delle gerarchie:**    
 Riguardo all'entità richieste si è deciso di accorparle in Richiesta di sostituzione, Richiesta di riparazione e Richiesta di aggiornamento perchè le operazioni 7,8,9,10,11 e 12 fanno riferimenti distinti alle varie richieste e la generalizzione è di tipo totale. Inoltre si vogliono dividere le richieste di riparazione dagli altri tipi perchè visto che sono eseguiti dallo staff non hanno costi.
 
 **Accorpamenti e partizionamenti:**  
-Dato il vincolo RV17 si nota che la relazione "frequentato" potrebbe essere accorpata come un campo aggiuntivo nell'entità Tecnico, rimuovendo quindi la relazione in favore di una chiave esterna.
+Data la natura (1,1) della relazione "frequentato" da parte dei Tecnici si nota che potrebbe essere accorpata come un campo aggiuntivo nell'entità Tecnico, rimuovendo quindi la relazione in favore di una chiave esterna.  
+Visto che le relazioni "richiesta sostituzione inviata", "richiesta riparazione inviata" e "richiesta sostituzione inviata" hanno una relazione (1,1) da parte delle relazioni si è deciso di accorparle nelle entità richieste associate, aggiungendo una chiave esterna che rappresenta la sede che ha inserito la richiesta.  
 Inoltre data la relazione (1,1) tra "richiesta riparazione" e la relazione "riparazione", e l'assenza di campi non derivati dall'ex-entità padre si è deciso di accorpare questa entità, insieme alla relazione "invio richiesta riparazione" direttamente nella relazione "riparazione", che ora diventerà una relazione a tre tra "Sede","Staff" e "Componente", con in aggiunta gli attributi di "richiesta riparazione".
 
 **Dobbiamo inventre anche qui , spero abbiate seguito corsi di scrittura creativa**  
 **Oppure possiamo scrivere che non si sono rilevati  
 **Eliminazione degli attributi multivalore:**    
+Non sono stati rilevati attributi multivalore.
 
 **Elenco degi identificatori principali:**    
 
@@ -312,10 +350,51 @@ Inoltre data la relazione (1,1) tra "richiesta riparazione" e la relazione "ripa
 |Richiesta aggiornamento|ID(numerico)|
 
 ### 3c Normalizzazione
-Bho
+**Salvatemi vi prego**
 
 ### 3d Traduzione verso il modello relazionale  
-Fare le tabelle scritte in modo relazionale  
+
+|Entità-Relazione|Traduzione|
+|-------------|--------------|
+|Sede|Sede(__PIva__,nome,indirizzo)|
+|Paese| Paese(__ISO__,nome,LivelloPericolo)|
+|Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo)|
+|Specializzazione| Specializzazione(__ID__,tipo,costo)|
+|Macchina| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|
+|Componente|Componente(__ID__,peso,costo,operativo)|
+|RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
+|RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
+|Staff |Staff(__CF__,ruolo,nome,telefono)|
+|SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__,__Richiesta__)
+|Sostituisce | Sostituisce(__Componente__,__Richiesta__)|
+|Riparazione|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|
+|SoddisfaFormazione|SoddisfaFormazione(__RichiestaAggiornamento__,__Tecnico__)|
+|Formazione|Formazione(__Staff__,__RichiestaAggiornamento__,__Tecnico__)|
+|Operato|Operato(__Tecnico__,__Paese__)|  
+|Situata|Situata(__Sede__,__Paese__)|
+|Contenuto|Contenuto(__Macchina__,__Componente__)|
+|Dipendente| Dipendente(__Sede__,__Staff__)|
+
+|Traduzione|Vincoli di riferimento|
+|-------------|--------------|
+|Sede(__PIva__,nome,indirizzo)|-|
+|Paese(__ISO__,nome,LivelloPericolo)|-|
+|Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo)|-|
+|Specializzazione| Specializzazione(__ID__,tipo,costo)|-|
+|Macchina| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|-|
+|Componente|Componente(__ID__,peso,costo,operativo)|-|
+|RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+|RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+|Staff |Staff(__CF__,ruolo,nome,telefono)|-|
+|SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__,__Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta->RichiestaSostituzione.ID|
+|Sostituisce | Sostituisce(__Componente__,__Richiesta__)|Componente -> Componente.ID , Richiesta->RichiestaSostituzione.ID|
+|Riparazione|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|Staff -> Staff.CF , Sede->Sede.PIva , Componente-> Componente.ID|
+|SoddisfaFormazione|SoddisfaFormazione(__Richiesta__,__Tecnico__)| Richiesta->RichiestaAggiornamento.ID , Tecnico->Tecnico.CF|
+|Formazione|Formazione(__Staff__,__Richiesta__)|Richiesta->RichiestaAggiornamento.ID ,Staff.CF|
+|Operato|Operato(__Tecnico__,__Paese__)|  Tecnico->Tecnico.ID, Paese->Paese.ISO|
+|Situata|Situata(__Sede__,__Paese__)| Sede->Sede.PIva, Paese->Paese.ISO|
+|Contenuto|Contenuto(__Macchina__,__Componente__)| Macchina->Macchina.ID, Componente->Componente.ID|
+|Dipendente| Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
 
 ## 4 Codifica SQL
 ### 4a definizione schema in codice  
