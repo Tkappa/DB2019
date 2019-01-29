@@ -312,3 +312,4 @@ Riscrivi operazioni codice
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.  
+ciao
