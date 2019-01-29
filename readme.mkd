@@ -1,10 +1,11 @@
 # Cose da fare
 
 + Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva (Oppure accorgergene dopo durante la relazione?)
-+ Aggiungere la relazione staff <- dipendente -> sede       (fatto)
++ Per aggiornare e mettere il campo "operativo" a componenti e macchine si dovranno aggiornare i grafici, le tabelle, i vincoli e le operazioni. Dateci perfavore una ricontrollata in caso mi sia dimenticato di aggiungerli da qualche parte.  
 + Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
 + 3c Normalizzazione
 + Rileggere ad alta voce in cerca di errori grammaticali e lessicali
++ Togliere Rv17 e mettere la relazione tra tecnici e specializzazioni (0,1)
 
 ## Dopo la progettazione definitiva del database
 + 3d Traduzione verso il modello relazionale
@@ -26,8 +27,8 @@ I dati da salvare saranno:
 + Riguarlo allo Staff, cioè i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.
 + I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare(dipende dall'anzianità nell'azienda), ragione sociale.
 + Per le specializzazioni si vorrà specificare il costo e il tipo e il codice univoco
-+ Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo e la garanzia
-+ Dei componenti si vorrà rappresentare il costo, il codice e il peso
++ Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo, se è operativa o no, e la garanzia
++ Dei componenti si vorrà rappresentare il costo, il codice, il peso e se è operativo o no
 + Per ogni tipologia di intervento si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno diverse tipologie di intervento:  
 
     1. Gli interventi di sostituzione (di un componente), svolte da un tecnico. Si vorrà rappresentare inoltre il costo di trasferimento e il costo giornaliero del tecnico
@@ -51,6 +52,7 @@ I dati da salvare saranno:
 |Specializzazione | Formazione specialistica su un determinato argomento | nessuno |tecnici
 |Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno
 |Aggiornamento | Corsi di formazine dello staff da tecnici specializzati | nessuno
+|Operativo| Se il componente o la macchina sono funzionanti e non rotti| nessuno|
 
 
 ### 1c. Eliminazione delle ambiguità presenti
@@ -58,6 +60,7 @@ La ragione sociale sarà data da nome, codice fiscale e numero telefonico in cas
 La garanzia è un periodo di tempo scritto in anni in cui tutti i costi di intervento al macchinario sono coperti dalla multinazionale.
 Il termine azienda può essere usato sia per definire una singola sede che per definire la multinazionale di cui sono tutte filiali.  
 Il costo totale è calcolato in base al costo giornaliero di un intervento moltiplicato per i giorni lavorati e sarà contenuto in log.
+Una macchina si considera operativa se tutti i suoi componenti sono operativi.
 
 ### 1d. Strutturazione dei requisiti  
 
@@ -74,9 +77,9 @@ andranno rappresentati attraverso il livello di pericolo su cui possono operare(
 + Frasi riguaranti e specializzazioni  
 si vorrà specificare il costo e il tipo e il codice univoco  
 + Frasi riguardanti i macchinari  
- si vuole conoscere il nome , la data di acquisto , il codice identificativo e la garanzia
+si vuole conoscere il nome , la data di acquisto , il codice identificativo, se è operativa o no, e la garanzia
 + Frasi riguardanti i componenti  
-si vorrà rappresentare il costo, il codice e il peso
+si vorrà rappresentare il costo, il codice, il peso e se è operativo o no
 + Frasi riguardanti gli Interventi  
 si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno diverse tipologie di intervento:  
 
@@ -114,6 +117,7 @@ si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno divers
 25. Visualizzare tutte le macchine per una sede (1 volta al giorno)
 26. Visualizzare tutti i componenti per una macchina ( 1 volta al giorno)
 27. Visualizzare tutto lo staff per una data sede. (1 volta al mese)
+28. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 
 ## 2 Progettazione concettuale  
 
@@ -155,8 +159,8 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |Paese| nazione in cui è presente una sottosede| nome(stringa),livello pericolo(numerico)| codice ISO(stringa)|
 |tecnico| Persona che risponde ad alcune delle richieste della sede|nome(stringa), telefono(numerico), livello di pericolo(numerico)|CF(stringa)
 |specializzazione|titolo richiesto per i tecnici per poter rispondere ad alcune richieste|tipo(stringa),costo(numerico)|ID(numerico)|
-|macchina|strumento di lavoro posseduto dall'azienda sul quale possono essere fatte delle richieste d'intervento |nome(stringa),garanzia (data), stato(stringa), descrizione(stringa), data inizio/fine (data)|ID(numerico)|
-|componente|componente della macchina su cui viene fatta una richiesta di riparazione/sostituzione|peso(numerico),costo(numerico)|ID(numerico)|
+|macchina|strumento di lavoro posseduto dall'azienda sul quale possono essere fatte delle richieste d'intervento |nome(stringa), stato(stringa), descrizione(stringa),garanzia (data), data inizio/fine (data), stato operativo(booleano)|ID(numerico)|
+|componente|componente della macchina su cui viene fatta una richiesta di riparazione/sostituzione|peso(numerico),costo(numerico), stato operativo(booleano)|ID(numerico)|
 |richiesta sostituzione|richiesta della sostituzione di un componente da parte dei tecnici| costo gg(numerico),costo trasferta(numerico)|ID(numerico)|
 |richiesta riparazione|richiesta della riparazione di un componente| |ID(numerico)|
 |richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|ID(numerico)|
@@ -196,6 +200,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |(RV14) Una richiesta in carico deve avere una data di inizio|
 |(RV15) Un Tecnico può avere una singola richiesta "in carico"|
 |(RV16) Un membro dello staff può avere una singola richiesta di riparazione "in carico"|
+|(RV17) Una richiesta di riparazione o sostituzione può essere inserita solo per un componente non operativo|
 |**Regole di derivazione**|
 |(RD1) La durata dell'intervento è data dalla data Fine dell'intervento - la Data inizio|
 |(RD2) Il costo totale di un intervento è dato dalla (durata dell'intervento * costo giornaliero dell'intervento)+ costo trasferta del tecnico, oppure è solamente il costo di trasferta del tecnico se la macchina è ancora in garanzia( durata rimanente della garanzia >=0)|
@@ -263,20 +268,28 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |25|1 volta al giorno|
 |26|1 volta al giorno|
 |27|1 volta al mese|
+|28|5 volte al giorno|
 
 ### 3b ristrutturazione dello schema concettuale
 
-**Dobbiamo farlo insieme perchè ci dobbiamo inventare delle rindondanze**  
 **Eliminazione delle ridondanze:**    
-+ Si vede se ci sono elementi ridondanti e fa una stima dei costi per vedere se è necessario rimuoverle    
+Data la natura dell'attributo "operativo" di una macchina si nota una ridondanza. Questo valore si può calcolare controllando tutti i componenti associati alla macchina per vedere se sono tutti operativi.
+Le operazioni che coinvolgono questo attributo sono l'operazione 28, l'operazione 8 (un componente riparato ritorna operativo) e visto il vincolo R17 anche le operazioni 7 e 9.  
+
+**Tavole degli accessi in presenza di ridondanza:**  
+
+|Operazione 28|
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Test|Test|1|R|
 
 **Secondo me c'è da mettere una gerarchia per staff e tecnici in modo da semplificarla in questo passo**  
 **Eliminazione delle gerarchie:**    
 Riguardo all'entità richieste si è deciso di accorparle in Richiesta di sostituzione, Richiesta di riparazione e Richiesta di aggiornamento perchè le operazioni 7,8,9,10,11 e 12 fanno riferimenti distinti alle varie richieste e la generalizzione è di tipo totale. Inoltre si vogliono dividere le richieste di riparazione dagli altri tipi perchè visto che sono eseguiti dallo staff non hanno costi.
 
-**Idem qui secondo me c'è da inventarsi cose nuove**  
 **Accorpamenti e partizionamenti:**  
-+ Vede se ci sono cose simili che possono essere accorpate    
+Dato il vincolo RV17 si nota che la relazione "frequentato" potrebbe essere accorpata come un campo aggiuntivo nell'entità Tecnico, rimuovendo quindi la relazione in favore di una chiave esterna.
+Inoltre data la relazione (1,1) tra "richiesta riparazione" e la relazione "riparazione", e l'assenza di campi non derivati dall'ex-entità padre si è deciso di accorpare questa entità, insieme alla relazione "invio richiesta riparazione" direttamente nella relazione "riparazione", che ora diventerà una relazione a tre tra "Sede","Staff" e "Componente", con in aggiunta gli attributi di "richiesta riparazione".
 
 **Dobbiamo inventre anche qui , spero abbiate seguito corsi di scrittura creativa**  
 **Oppure possiamo scrivere che non si sono rilevati  
