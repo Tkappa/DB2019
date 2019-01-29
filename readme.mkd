@@ -278,7 +278,8 @@ Le operazioni che coinvolgono questo attributo sono l'operazione 28, l'operazion
 
 **Tavole degli accessi in presenza di ridondanza:**  
 
-|Operazione 28|
+Operazione 28:  
+
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
 |Test|Test|1|R|
