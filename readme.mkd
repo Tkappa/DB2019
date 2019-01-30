@@ -1,8 +1,26 @@
-# Cose da fare relazione  
+# Cose da fare
+
+- [ ] Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva
+- [x] Ho messo il campo "Stato operativo/Operativo" in macchiana e componenti, controllate se non c'è da qualche parte.  
+- [ ] Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
+- [ ] 3c Normalizzazione
+- [ ] Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
+- [ ] C'è garanzia che nella tabella dei campi è messa come data, con poi dopo le date inizio/fine. Cosa vuol dire?
+- [ ] **RIGUARDARE LE IMMAGINI DELLA PARTE LOGICA E DITEMI CHE SONO FATTE BENE/NO, NON NE SONO SICURO PER NIENTE**
+- [ ] Ridisegnare le immagini della parte logica in modo che non siano cosi orribili da guardare
+- [ ] Rileggere ad alta voce in cerca di errori grammaticali e lessicali
+- [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
+
+## Dopo la progettazione definitiva del database
++ 4. Creazione di tutte le operazioni SQL
++ 5. Creazione di tutte le pagine web che supportano le operazioni SQL
++ Creare il sito con Bootstrap 4 in modo che venga anche carino alla vista
+
+# Relazione (2 punti facili in più all'esame)
 
 ## 1 Analisi dei requisiti  
 
-### 1a linguaggio naturale
+### 1a. Requisiti espressi in linguaggio naturale
 
 Si vuole realizzare un database per un azienda multinazionale che vuole mantenere sotto controllo i vari tecnici che viaggiano tra le sedi per fornire supporto o manutenzione.  
 I dati da salvare saranno:  
@@ -10,45 +28,70 @@ I dati da salvare saranno:
 + Riguardo ai paesi si vorrà salvare il nome , l'identificativo ISO e il livello di pericolo.  
 + Riguardo alle sedi si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.
 + Riguarlo allo Staff, cioè i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.
-+ I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare(dipende dall'anzianità nell'azienda), ragione sociale.
++ I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare, ragione sociale.
 + Per le specializzazioni si vorrà specificare il costo e il tipo e il codice univoco
-+ Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo e la garanzia
-+ Dei componenti si vorrà rappresentare il costo, il codice e il peso
++ Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo, se è operativa o no, e la garanzia
++ Dei componenti si vorrà rappresentare il costo, il codice, il peso e se è operativo o no
 + Per ogni tipologia di intervento si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno diverse tipologie di intervento:  
 
-1. Gli interventi di sostituzione (di un componente) , si vorrà rappresentare inoltre il costo di trasferimento e il costo giornaliero del tecnico
-2. Gli interventi di riparazione (di un componente)
-3. Gli interventi di aggiornamento (istruzione dello staff) , si vorrà rappresentare il costo di trasferimento e il costo giornaliero del tecnico
+    1. Gli interventi di sostituzione (di un componente), svolte da un tecnico. Si vorrà rappresentare inoltre il costo di trasferimento e il costo giornaliero del tecnico
+    2. Gli interventi di riparazione (di un componente), che verranno svolti dallo staff presente in azienda
+    3. Gli interventi di aggiornamento (istruzione dello staff), svolti da un tecnico. Si vorrà rappresentare il costo di trasferimento e il costo giornaliero del tecnico
 
-### 1b glossario
+### 1b. Glossario dei termini
 
 |Termini | Descrizione 					|Sinonimi	  |Collegamenti |
-|--------|----------------------------------------------|-----------------|-------------|
+|--------|----------------------------------------------|-----------------|------------
 |Paese   |Nazione in cui può essere presente una sede   | Stato/Nazione   | Sede, Tecnici	|
-|Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|Paese, Richieste, Macchine	|
-|Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale| Richieste aggiornamento, componente|
+|Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|Paese, Richieste, Macchine,Staff	|
+|Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale| Richieste aggiornamento, componente,Sede|
 |Tecnici | Dipendenti specializzati che vengono trasferiti per aggiustare problemi relativi ai macchinari |Specializzazione, Paese, Richieste|
 |Interventi | L'operazione che è richiesta dalla sede | log/richiesta |staff, Tecnici,componente, sede|
 |Macchinario| Macchina che produce beni |nessuno|Componente, Sede  
 |Componente | Pezzo di un macchinario | nessuno|Macchina, Staff
 |Livello di pericolo | Indice delle precauzioni necessarie a lavorare in uno stato | nessuno  
 |Multinazionale | Azienda madre di cui tutte le vari sedi sono filiali | Azienda madre   
-|Identificativo ISO | Codice standard univoco fornito ad ogni paese | ISO 
+|Identificativo ISO | Codice standard univoco fornito ad ogni paese | ISO
 |Specializzazione | Formazione specialistica su un determinato argomento | nessuno |tecnici
-|Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno 
+|Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare | nessuno
 |Aggiornamento | Corsi di formazine dello staff da tecnici specializzati | nessuno
+|Operativo| Se il componente o la macchina sono funzionanti e non rotti| nessuno|
 
 
-### 1c eliminazione delle ambiguità  
+### 1c. Eliminazione delle ambiguità presenti
 La ragione sociale sarà data da nome, codice fiscale e numero telefonico in caso di persona oppure nome legale ,  partita iva e indirizzo in caso di sede.  
 La garanzia è un periodo di tempo scritto in anni in cui tutti i costi di intervento al macchinario sono coperti dalla multinazionale.
 Il termine azienda può essere usato sia per definire una singola sede che per definire la multinazionale di cui sono tutte filiali.  
-Il costo totale è calcolato in base al costo giornaliero di un intervento moltiplicato per i giorni lavorati e sarà contenuto in log. 
+Il costo totale è calcolato in base al costo giornaliero di un intervento moltiplicato per i giorni lavorati e sarà contenuto in log.
+Una macchina si considera operativa se tutti i suoi componenti sono operativi.
 
-### 1d Strutturazione dei requisiti  
-Copia e incolla la descrizione divisa per tabelle  
+### 1d. Strutturazione dei requisiti  
 
-### 1e Specifiche operazioni  
++ Frasi di carattere generale
+Si vuole realizzare un database per un azienda multinazionale che vuole mantenere sotto controllo i vari tecnici che viaggiano tra le sedi per fornire supporto o manutenzione.   
++ Frasi riguardanti i paesi
+si vorrà salvare il nome , l'identificativo ISO e il livello di pericolo.  
++ Frasi riguardanti le sedi  
+si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.  
++ Frasi riguardanti lo Staff  
+i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.  
++ Frasi riguardanti i Tecnici  
+andranno rappresentati attraverso il livello di pericolo su cui possono operare(dipende dall'anzianità nell'azienda), ragione sociale.  
++ Frasi riguaranti e specializzazioni  
+si vorrà specificare il costo e il tipo e il codice univoco  
++ Frasi riguardanti i macchinari  
+si vuole conoscere il nome , la data di acquisto , il codice identificativo, se è operativa o no, e la garanzia
++ Frasi riguardanti i componenti  
+si vorrà rappresentare il costo, il codice, il peso e se è operativo o no
++ Frasi riguardanti gli Interventi  
+si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno diverse tipologie di intervento:  
+
+    1. Gli interventi di sostituzione (di un componente), svolte da un tecnico. Si vorrà rappresentare inoltre il costo di trasferimento e il costo giornaliero del tecnico
+    2. Gli interventi di riparazione (di un componente), che verranno svolti dallo staff presente in azienda
+    3. Gli interventi di aggiornamento (istruzione dello staff), svolti da un tecnico. Si vorrà rappresentare il costo di trasferimento e il costo giornaliero del tecnico
+
+
+### 1e. Specifica operazioni  
 
 1. Inserire una nuova sede (1 volta all'anno)  
 2. Inserire un nuovo tecnico (5 volte all'anno)
@@ -56,54 +99,57 @@ Copia e incolla la descrizione divisa per tabelle
 4. Inserire un nuovo paese  (1 volta ogni paio d'anni)
 5. Inserire una nuova macchina  (1 volta al mese)
 6. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
-8. Richiedere un intervento di riparazione  (1 volta al giorno)
-9. Risponedere ad un intervento di riparazione  (1 volta al giorno) 
-1. Richiere un intervento di sostituzione ( 1 volta a settimana)
-1. Rispondere ad un intervento di sostituzione ( 1 volta a settimana)
-1. Richiedere un intervento di aggiornamento (1 volta al mese)
-1. Rispondere ad un intervento di aggiornamento (1 volta al mese)
-1. Formare un tecnico in una specializzazione (2 volte all'anno)
-1. Aggiornare il livello di pericolo di un paese ( 1 volta all'anno)
-11. Visualizzare tutti gli interventi in corso (5 volte al giorno)
-1. Visualizzare tutti gli interventi completati (1 volta alla settimana)
-13. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno) 
-1. Aggiungere un paese su cui può operare un tecnico ( 1 volta al mese)
-14. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
-16. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
-17. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
-18. Visualizzare tutte le sedi per un determinato paese (5 volte al giorno)
-19. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
-20. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
-21. Visualizzare tutte le macchine per una sede (1 volta al giorno)
-1. Visualizzare tutti i componenti per una macchina ( 1 volta al giorno)
-22. Visualizzare tutto lo staff per una data sede. (1 volta al mese) 
+7. Richiedere un intervento di riparazione  (1 volta al giorno)
+8. Risponedere ad un intervento di riparazione  (1 volta al giorno)
+9. Richiere un intervento di sostituzione ( 1 volta a settimana)
+10. Rispondere ad un intervento di sostituzione ( 1 volta a settimana)
+11. Richiedere un intervento di aggiornamento (1 volta al mese)
+12. Rispondere ad un intervento di aggiornamento (1 volta al mese)
+13. Formare un tecnico in una specializzazione (2 volte all'anno)
+14. Aggiornare il livello di pericolo di un paese ( 1 volta all'anno)
+15. Visualizzare tutti gli interventi in corso (5 volte al giorno)
+16. Visualizzare tutti gli interventi completati (1 volta alla settimana)
+17. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
+18. Aggiungere un paese su cui può operare un tecnico ( 1 volta al mese)
+19. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
+20. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
+21. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
+22. Visualizzare tutte le sedi per un determinato paese (5 volte al giorno)
+23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+24. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
+25. Visualizzare tutte le macchine per una sede (1 volta al giorno)
+26. Visualizzare tutti i componenti per una macchina ( 1 volta al giorno)
+27. Visualizzare tutto lo staff per una data sede. (1 volta al mese)
+28. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 
 ## 2 Progettazione concettuale  
 
+Abbiamo optato per una strategia mista, sviluppata nel modo seguente  
+
 ### 2a. Identificazione delle entità e relazioni (bottom-up)
 Sono state identificate (seguendo la strategia bottom-up) inizialmente le seguenti entità: sede, paese, tecnici,specializzazione, vari tipi di richiesta, macchina, componente, staff
-Le entità sopra elencate si possono suddividere in tre gruppi principali: sede che gestisce le richieste, richiesta che comprende tutti i tipi di interventi, tecnici che elaborano le richieste della sede. 
+Le entità sopra elencate si possono suddividere in tre gruppi principali: sede che gestisce le richieste, richiesta che comprende tutti i tipi di interventi, tecnici che elaborano le richieste della sede.
 
 ### 2b. Un primo scheletro dello schema (top-down)
 Ad un primo livello di astrazione, tenendo conto delle considerazioni fatte sopra è stato concepito il seguente primo scheletro di schema concettuale:
 
-![schema1](./schema1.png)
+![schema1](./concettuale/schema1.png)
 
 ### 2c. Sviluppo delle componenti dello scheletro (inside-out)
-![schemasede](./sede.png)
+![schemasede](./concettuale/sede.png)
 
 L'entità sede è caratterizzata dagli attributi: ragione sociale e identificativo azienda,l'attributo nome indica il nominativo dell'azienda.
 L'entità sede è associata all'entità Paese attraverso la relazione 'Situata'.  
 
-![schematecnici](./tecnici.png)
+![schematecnici](./concettuale/tecnici.png)
 
-L'entità tecnici è caratterizzata dall'attributo livello di pericolo, che vincolerà i paesi nel quale un tecnico può spostarsi. Inoltre, per poter adempiere alcune richieste, è necessario che abbia conseguito dei corsi di formazione. 
+L'entità tecnici è caratterizzata dall'attributo livello di pericolo, che vincolerà i paesi nel quale un tecnico può spostarsi. Inoltre, per poter adempiere alcune richieste, è necessario che abbia conseguito dei corsi di formazione.
 
-![schemarichiesta](./richiesta.png)
+![schemarichiesta](./concettuale/richiesta.png)
 
 L' entità richiesta è una generalizzazione totale delle possibili richieste effettuate dalla sede. La singola richiesta necessita di comportamenti diversi
 ### 2d.Unione delle componenti nello schema finale ridotto
-![schemafinale](./finale.png)
+![schemafinale](./concettuale/finale.png)
 
 
 
@@ -112,18 +158,18 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 #### entità:
 |Nome entità | Descrizione	 		|Attributi		 |Identificatore |
 |------------|----------------------------------|------------------------|---------------|
-|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa), partita Iva(numerico)|codice Azienda(numerico)|
+|sede	     |filiale che effettua richieste     |nome(stringa), indirizzo(stringa)|Partita IVA(stringa)|
 |Paese| nazione in cui è presente una sottosede| nome(stringa),livello pericolo(numerico)| codice ISO(stringa)|
-|tecnico| Persona che risponde ad alcune delle richieste della sede|nome(stringa), telefono(numerico), livello di pericolo(numerico)|CF(stringa) 
+|tecnico| Persona che risponde ad alcune delle richieste della sede|nome(stringa), telefono(numerico), livello di pericolo(numerico)|CF(stringa)
 |specializzazione|titolo richiesto per i tecnici per poter rispondere ad alcune richieste|tipo(stringa),costo(numerico)|ID(numerico)|
-|macchina|strumento di lavoro posseduto dall'azienda sul quale possono essere fatte delle richieste d'intervento |nome(stringa),garanzia (data), stato(stringa), descrizione(stringa), data inizio/fine (data)|ID(numerico)|
-|componente|componente della macchina su cui viene fatta una richiesta di riparazione/sostituzione|peso(numerico),costo(numerico)|ID(numerico)|
-|richiesta sostituzione|richiesta della sostituzione di un componente da parte dei tecnici| costo gg(numerico),costo trasferta(numerico)|
-|richiesta riparazione|richiesta della riparazione di un componente| |
-|richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|
-|staff |staff di una filiale, frequenta i corsi di aggiornamento e ripara i componenti delle macchine|ruolo(stringa), codiceazienda(numerico), nome(stringa), telefono(numerico)|CF(stringa) 
+|macchina|strumento di lavoro posseduto dall'azienda sul quale possono essere fatte delle richieste d'intervento |nome(stringa), descrizione(stringa), data inizio(data),data fine (data), stato operativo(booleano)|ID(numerico)|
+|componente|componente della macchina su cui viene fatta una richiesta di riparazione/sostituzione|peso(numerico),costo(numerico), stato operativo(booleano)|ID(numerico)|
+|richiesta sostituzione|richiesta della sostituzione di un componente da parte dei tecnici| costo gg(numerico),costo trasferta(numerico)|ID(numerico)|
+|richiesta riparazione|richiesta della riparazione di un componente| |ID(numerico)|
+|richiesta aggiornamento|richiesta di aggiornamento dello staff tramite le lezioni di un tecnico|costo gg(numerico),costo trasferta(numerico)|ID(numerico)|
+|staff |staff di una filiale, frequenta i corsi di aggiornamento e ripara i componenti delle macchine|ruolo(stringa), codiceazienda(numerico), nome(stringa), telefono(numerico)|CF(stringa)
 
-#### relazioni: 
+#### relazioni:
 |Nome relazione | Descrizione	 		|entità coinvolte |Attributi		|
 |------------|----------------------------------|------------------------|---------------|
 |situata|associa ad una sede il paese in cui è situata| Sede(1,1), paese(0,N)|
@@ -135,43 +181,294 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 |soddisfatto| associa le richieste al tecnico che se ne occuperà| tecnici(1,n), richieste(1,1)|
 |frequentato| associa il tecnico alle specializzazione che ha frequentato|tecnici(1,n), specializzazioni(1,n)|
 |operato|associa il tecnico ai paesi in cui gli è consentito operare dato il suo livello di pericolo|tecnici(1,n) paese(1,n)|
-
+|dipendente| associa lo staff alla sede in cui lavora| sede(1,n),staff(1,1)|
 
 ### 2f Regole aziendali  
-|(RV1) per lavorare in un determinato paese il tecnico deve possedere un livello di pericolo <= al livello di pericolo del paese
-(RV2) il livello di percolo di un paese dev'essere compreso tra 0 e 10
-(RV3) la data di fine garanzia - data di inizio dev'essere = 730 giorni
-(RV4) lo stato di una richiesta può essere: 
-	-in attesa
-	-in carico	
-	-completata
-(RV6)  
+
+|**Regole di vincolo**|
+|-------------------------------------------------------------------------------------------------------------------------------|
+|(RV1) per lavorare in un determinato paese il tecnico deve possedere un livello di pericolo <= al livello di pericolo del paese|
+|(RV2) il livello di percolo di un paese dev'essere compreso tra 0 e 10|
+|(RV3) la data di fine garanzia - data di inizio dev'essere = 730 giorni|
+|(RV4) lo stato di una richiesta può essere: "in attesa","in carico" o  "completata" |
+|(RV5) Un tecnico per fornire supporto a una richiesta di aggiornamento deve aver frequentato una specializzazione|
+|(RV6) Una sede può essere situata in un singolo paese|
+|(RV7) Il numero di componenti di una macchina deve essere >0|
+|(RV8) Il numero di macchine per una sede deve essere >0|
+|(RV9) Il numero di staff per una sede deve essere >0|
+|(RV10) Una macchina può essere posseduta da una singola sede|
+|(RV11) Un membro dello staff può essere dipendente da una sola sede|
+|(RV12) Un membro dello staff può riparare solo una macchina presente nella sede in cui lavora|
+|(RV13) Una richiesta completata deve avere una data di inizio e una data di fine|
+|(RV14) Una richiesta in carico deve avere una data di inizio|
+|(RV15) Un Tecnico può avere una singola richiesta "in carico"|
+|(RV16) Un membro dello staff può avere una singola richiesta di riparazione "in carico"|
+|(RV17) Una richiesta di riparazione o sostituzione può essere inserita solo per un componente non operativo|
+|**Regole di derivazione**|
+|(RD1) La durata dell'intervento è data dalla data Fine dell'intervento - la Data inizio|
+|(RD2) Il costo totale di un intervento è dato dalla (durata dell'intervento * costo giornaliero dell'intervento)+ costo trasferta del tecnico, oppure è solamente il costo di trasferta del tecnico se la macchina è ancora in garanzia( durata rimanente della garanzia >=0)|
+|(RD3) La durata rimanente della garanzia è data da Data fine garanzia - Giorno attuale|
+|(RD4) Spesa mensile di un azienda è dato dalla somma dei costi totali di tutti gli interventi richiesti da quell'azienda in quel mese|
+
+
 ## 3 Progettazione logica  
 
-### 3a Tavole dei volumi  
-Spariamo a caso quanti elementi ci saranno nella tabella e sparaiamo a caso quante volte verranno eseguite le operazioni detti in 1e  
+### 3a Tavole dei volumi e delle operazioni
+
+**Tavola dei volumi**:  
+
+|Concetto|Tipo|Volume|
+|-------------|--------------|-----------------|
+|Paese|E|7|
+|Sede|E|15|
+|Staff|E|300|
+|Tecnice|E|50|
+|Specializzazione|E|10|
+|Macchinari|E|70|
+|Componenti|E|1400|
+|Richiesta sostituzione|E|200|
+|Richiesta riparazione|E|1000|
+|Richiesta aggiornamento|E|30|
+|Operato|R|250|
+|Frequentato|R|100|
+|Inviata|R|1230|
+|Soddisfatto|R|1230|
+|Formazione|R|30|
+|Sostituisce|R|200|
+|Riparazione|R|1000|
+|Contenuto|R|1400|
+|Posseduto|R|70|
+|Situata|R|15|
+
+**Tavola delle operazioni**
+
+|Operazione|Frequenza|
+|-------------|--------------|
+|1|1 volta all'anno|
+|2|5 volte all'anno|
+|3|2 volte al mese|
+|4|1 volta ogni paio d'anni|
+|5|1 volta al mese|
+|6|1 volta al mese|
+|7|1 volta al giorno|
+|8|1 volta al giorno|
+|9|1 volta a settimana|
+|10|1 volta a settimana|
+|11|1 volta al mese|
+|12|1 volta al mese|
+|13|2 volte all'anno|
+|14|1 volta all'anno|
+|15|5 volte al giorno|
+|16|1 volta alla settimana|
+|17|1 volta all'anno|
+|18|1 volta al mese|
+|19|1 volta al mese|
+|20|2 volte all'anno|
+|21|1 volta all'anno|
+|22|5 volte al giorno|
+|23|1 volta al giorno|
+|24|1 volta al giorno|
+|25|1 volta al giorno|
+|26|1 volta al giorno|
+|27|1 volta al mese|
+|28|5 volte al giorno|
 
 ### 3b ristrutturazione dello schema concettuale
-+ Si vede se ci sono elementi ridondanti e fa una stima dei costi per vedere se è necessario rimuoverle  
 
-+ Vede se ci sono gerarchie che possono essere semplificate  
+**Eliminazione delle ridondanze:**    
+Data la natura dell'attributo "operativo" di una macchina si nota una ridondanza. Questo valore si può calcolare controllando tutti i componenti associati alla macchina per vedere se sono tutti operativi.
+Le operazioni che coinvolgono questo attributo sono l'operazione 28, l'operazione 8 (un componente riparato ritorna operativo e quindi anche la macchina ad esso associata)
 
-+ Vede se ci sono cose simili che possono essere accorpate  
+**Tavole degli accessi in presenza di ridondanza:**  
+
+Operazione 28(Assumento una media di 10 macchine per sede):  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Macchina|Entità|20|R|
+
+Operazione 8:  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Componente|Entità|1|W|
+|Contenuto|Relazione|1|R|
+|Macchina|Entità|1|W|
+
+**Tavole degli accessi in assenza di ridondanza:**
+
+Operazione 28(Assumendo una media di 10 macchine per sede e 10 componenti per macchina):  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Macchina|Entità|10|R|
+|Contenuto|Relazione|100|R|
+|Componente|Entità|100|R|   
+
+Operazione 8:  
+
+|Concetto|Costrutto|Accessi|Tipo|
+|-------------|--------------|---|---|
+|Componente|Entità|1|W|
+
+In presenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):  
+Op.28 = 20(costo)* 150 (Volte al mese) = 3000  
+Op 8 = (1*2 + 1 + 1*2)(costo) * 30 (Volte al mese) = 150  
+Totale = 3150
+
+In assenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):
+Op.28 = (10+100+100)(costo)* 150 (Volte al mese) = 31500    
+Op 8 = (1*2)(costo) * 30 (Volte al mese) = 60  
+Totale = 31560  
+
+Di conseguenza si ritiene opportuno mantenere la ridondanza    
+
+**Eliminazione delle gerarchie:**    
+Riguardo all'entità richieste si è deciso di accorparle in Richiesta di sostituzione, Richiesta di riparazione e Richiesta di aggiornamento perchè le operazioni 7,8,9,10,11 e 12 fanno riferimenti distinti alle varie richieste e la generalizzione è di tipo totale. Inoltre si vogliono dividere le richieste di riparazione dagli altri tipi perchè visto che sono eseguiti dallo staff non hanno costi.
+
+![logicogen](./logico/logicogen.png)
+
+**Accorpamenti e partizionamenti:**  
+Data la natura (1,1) della relazione "frequentato" da parte dei Tecnici si nota che potrebbe essere accorpata come un campo aggiuntivo nell'entità Tecnico, rimuovendo quindi la relazione in favore di una chiave esterna.  
+Visto che le relazioni "richiesta sostituzione inviata", "richiesta riparazione inviata" e "richiesta sostituzione inviata" hanno una relazione (1,1) da parte delle relazioni si è deciso di accorparle nelle entità richieste associate, aggiungendo una chiave esterna che rappresenta la sede che ha inserito la richiesta.  
+Inoltre data la relazione (1,1) tra "richiesta riparazione" e la relazione "riparazione", e l'assenza di campi non derivati dall'ex-entità padre si è deciso di accorpare questa entità, insieme alla relazione "invio richiesta riparazione" direttamente nella relazione "riparazione", che ora diventerà una relazione a tre tra "Sede","Staff" e "Componente", con in aggiunta gli attributi di "richiesta riparazione".
+
+![logicofin](./logico/logicofin.png)
+
+**Eliminazione degli attributi multivalore:**    
+Non sono stati rilevati attributi multivalore.
+
+**Elenco degi identificatori principali:**    
+
+|Nome entità|Identificatore|
+|-------------|--------------|
+|Paese|codice ISO(stringa)|
+|Sede|Partita IVA(stringa)|
+|Staff|CF(stringa)|
+|Tecnico|CF(stringa)|
+|Specializzazione|ID(numerico)|
+|Macchinari|ID(numerico)|
+|Componenti|ID(numerico)|
+|Richiesta sostituzione|ID(numerico)|
+|Richiesta riparazione|ID(numerico)|
+|Richiesta aggiornamento|ID(numerico)|
 
 ### 3c Normalizzazione
-Bho
+|Nome entità |Commento|
+|------------|--------|
+|Sede|Non esistono dipendenze non banali tra gli attributi. L’unica dipendenza presente è tra codice fiscale e ragione sociale (dipendenza banale)
+|Paese|Non presenta dipendenze non banali tra gli attributi ISO, livello pericolo, nome.|
+|Macchina|
+|componente|Non presenta dipendenze non banali tra gli attributi ID,peso,costo,statoOperativo.
+|staff|non esistono dipendenza non banali tra gli attributi. L'unica dipendenza presente è tra codice fiscale e ragione sociale(dipendenza banale)
+|tecnici|Non esistono dipendenze non banali tra gli attributi. L’unica dipendenza presente è tra codice fiscale e ragione sociale (dipendenza banale).
+|richiestaAggiornamento|
+|richiestaSostituzione|
+|macchina|
+
+
+
+
+
 
 ### 3d Traduzione verso il modello relazionale  
-Fare le tabelle scritte in modo relazionale  
 
-## 4 Codifica SQL 
+|Entità-Relazione|Traduzione|
+|-------------|--------------|
+|Sede|Sede(__PIva__,nome,indirizzo)|
+|Paese| Paese(__ISO__,nome,LivelloPericolo)|
+|Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo)|
+|Specializzazione| Specializzazione(__ID__,tipo,costo)|
+|Macchina| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|
+|Componente|Componente(__ID__,peso,costo,operativo)|
+|RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
+|RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
+|Staff |Staff(__CF__,ruolo,nome,telefono)|
+|SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__,__Richiesta__)
+|Sostituisce | Sostituisce(__Componente__,__Richiesta__)|
+|Riparazione|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|
+|SoddisfaFormazione|SoddisfaFormazione(__RichiestaAggiornamento__,__Tecnico__)|
+|Formazione|Formazione(__Staff__,__RichiestaAggiornamento__,__Tecnico__)|
+|Operato|Operato(__Tecnico__,__Paese__)|  
+|Situata|Situata(__Sede__,__Paese__)|
+|Contenuto|Contenuto(__Macchina__,__Componente__)|
+|Dipendente| Dipendente(__Sede__,__Staff__)|
+
+|Traduzione|Vincoli di riferimento|
+|-------------|--------------|
+|Sede(__PIva__,nome,indirizzo)|-|
+|Paese(__ISO__,nome,LivelloPericolo)|-|
+| Tecnico(__CF__, nome,tel,PermessoPericolo)|-|
+| Specializzazione(__ID__,tipo,costo)|-|
+| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|-|
+|Componente(__ID__,peso,costo,operativo)|-|
+| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+|Staff(__CF__,ruolo,nome,telefono)|-|
+| SoddisfaSostituzione(__Tecnico__,__Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta->RichiestaSostituzione.ID|
+| Sostituisce(__Componente__,__Richiesta__)|Componente -> Componente.ID , Richiesta->RichiestaSostituzione.ID|
+|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|Staff -> Staff.CF , Sede->Sede.PIva , Componente-> Componente.ID|
+|SoddisfaFormazione(__Richiesta__,__Tecnico__)| Richiesta->RichiestaAggiornamento.ID , Tecnico->Tecnico.CF|
+|Formazione(__Staff__,__Richiesta__)|Richiesta->RichiestaAggiornamento.ID ,Staff.CF|
+|Operato(__Tecnico__,__Paese__)|  Tecnico->Tecnico.ID, Paese->Paese.ISO|
+|Situata(__Sede__,__Paese__)| Sede->Sede.PIva, Paese->Paese.ISO|
+|Contenuto(__Macchina__,__Componente__)| Macchina->Macchina.ID, Componente->Componente.ID|
+| Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
+
+## 4 Codifica SQL
 ### 4a definizione schema in codice  
 
 ### 4c codifica delle operazioni
-Riscrivi operazioni codice  
+create table sede(
+    PIva char(20) not null primary key,
+    nome char(30) not null,
+    indirizzo char(30)
+)
+create table paese(
+    ISO char(10) not null primary key,
+    nome char(30) not null,
+    livello pericolo char(30) not null
+    )
+create table tecnico(
+    CF char(20) not null primary key,
+    nome char(30) not null,
+    telefono char(30),
+    livello pericolo char(30) not null
+)
+create table macchina(
+    ID numeric(5) not null primary key,
+    nome char(30) not null,
+    stato char(30) not null,
+    descrizione(30),
+    data inizio date not null,
+    data fine date not null,
+    stato operativo bool not null
+)
+create table componente(
+    ID numeric(5) not null primary key,
+    peso numeric(5) not null,
+    costo numeric(5) not null,
+    stato operativo bool not null 
+)
+create table richiestaSostituzione(
+   ID numeric(5) not null primary key,
+   costogiorn numeric(5) not null,
+   costotrasf numeric(5) not null
+)
+create table richiestaAggiornamento(
+   ID numeric(5) not null primary key,
+   costogiorn numeric(5) not null,
+   costotrasf numeric(5) not null
+)
+create table staff(
+    CF char(20) not null primary key,
+    ruolo char(20) not null,
+    nome char(20) not null,
+    telefono char(20) not null,
+    codAzienda char(20) references sede(PIva)
+)
 
-## 5 Testing 
+## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.  
-  
-
+ciao
