@@ -28,7 +28,7 @@ I dati da salvare saranno:
 + Riguardo ai paesi si vorrà salvare il nome , l'identificativo ISO e il livello di pericolo.  
 + Riguardo alle sedi si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.
 + Riguarlo allo Staff, cioè i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.
-+ I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare(dipende dall'anzianità nell'azienda), ragione sociale.
++ I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare, ragione sociale.
 + Per le specializzazioni si vorrà specificare il costo e il tipo e il codice univoco
 + Dei macchinari si vuole conoscere il nome , la data di acquisto , il codice identificativo, se è operativa o no, e la garanzia
 + Dei componenti si vorrà rappresentare il costo, il codice, il peso e se è operativo o no
@@ -354,7 +354,22 @@ Non sono stati rilevati attributi multivalore.
 |Richiesta aggiornamento|ID(numerico)|
 
 ### 3c Normalizzazione
-**Salvatemi vi prego**
+|Nome entità |Commento|
+|------------|--------|
+|Sede|Non esistono dipendenze non banali tra gli attributi. L’unica dipendenza presente è tra codice fiscale e ragione sociale (dipendenza banale)
+|Paese|Non presenta dipendenze non banali tra gli attributi ISO, livello pericolo, nome.|
+|Macchina|
+|componente|Non presenta dipendenze non banali tra gli attributi ID,peso,costo,statoOperativo.
+|staff|non esistono dipendenza non banali tra gli attributi. L'unica dipendenza presente è tra codice fiscale e ragione sociale(dipendenza banale)
+|tecnici|Non esistono dipendenze non banali tra gli attributi. L’unica dipendenza presente è tra codice fiscale e ragione sociale (dipendenza banale).
+|richiestaAggiornamento|
+|richiestaSostituzione|
+|macchina|
+
+
+
+
+
 
 ### 3d Traduzione verso il modello relazionale  
 
