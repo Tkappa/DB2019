@@ -1,15 +1,15 @@
 # Cose da fare
 
-+ Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva
-+ Ho messo il campo "Stato operativo/Operativo" in macchiana e componenti, controllate se non c'è da qualche parte.  
-+ Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
-+ 3c Normalizzazione
-+ Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
-+ C'è garanzia che nella tabella dei campi è messa come data, con poi dopo le date inizio/fine. Cosa vuol dire?
-+ **RIGUARDARE LE IMMAGINI DELLA PARTE LOGICA E DITEMI CHE SONO FATTE BENE/NO, NON NE SONO SICURO PER NIENTE**
-+ Ridisegnare le immagini della parte logica in modo che non siano cosi orribili da guardare
-+ Rileggere ad alta voce in cerca di errori grammaticali e lessicali
-+ Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
+- [ ] Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva
+- [x] Ho messo il campo "Stato operativo/Operativo" in macchiana e componenti, controllate se non c'è da qualche parte.  
+- [ ] Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
+- [ ] 3c Normalizzazione
+- [ ] Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
+- [ ] C'è garanzia che nella tabella dei campi è messa come data, con poi dopo le date inizio/fine. Cosa vuol dire?
+- [ ] **RIGUARDARE LE IMMAGINI DELLA PARTE LOGICA E DITEMI CHE SONO FATTE BENE/NO, NON NE SONO SICURO PER NIENTE**
+- [ ] Ridisegnare le immagini della parte logica in modo che non siano cosi orribili da guardare
+- [ ] Rileggere ad alta voce in cerca di errori grammaticali e lessicali
+- [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
 
 ## Dopo la progettazione definitiva del database
 + 4. Creazione di tutte le operazioni SQL
@@ -41,7 +41,7 @@ I dati da salvare saranno:
 ### 1b. Glossario dei termini
 
 |Termini | Descrizione 					|Sinonimi	  |Collegamenti |
-|--------|----------------------------------------------|-----------------|-------------|
+|--------|----------------------------------------------|-----------------|------------
 |Paese   |Nazione in cui può essere presente una sede   | Stato/Nazione   | Sede, Tecnici	|
 |Sede    |Filiale dell'azienda multinazionale   	|Filiale/sottosede|Paese, Richieste, Macchine,Staff	|
 |Staff 	 |Dipendenti stazionati ad una singola sede 	|Impiegati/Personale| Richieste aggiornamento, componente,Sede|
