@@ -381,7 +381,7 @@ Non sono stati rilevati attributi multivalore.
 |Paese| Paese(__ISO__,nome,LivelloPericolo)|
 |Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo)|
 |Specializzazione| Specializzazione(__ID__,tipo,costo)|
-|Macchina| Macchina(__ID__,nome,stato,descrizione,garanzia, ginizio,gfine, operativo)|
+|Macchina| Macchina(__ID__,nome,stato,descrizione, ginizio,gfine, operativo)|
 |Componente|Componente(__ID__,peso,costo,operativo)|
 |RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
 |RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
@@ -469,11 +469,69 @@ create table richiestaAggiornamento(
 )
 
 create table staff(  
-   *Tabspace* CF char(20) not null primary key,
-   *Tabspace* ruolo char(20) not null,
-   *Tabspace* nome char(20) not null,
-   *Tabspace* tel char(20) not null,
-   *Tabspace* codAzienda char(20) references sede(PIva)  
+CF char(20) not null primary key,
+    ruolo char(20) not null,
+    nome char(20) not null,
+    tel char(20) not null,
+    codAzienda char(20) references sede(PIva)  
+)
+
+create table SoddisfaSostituzione(  
+    tecnico char(20) not null references tecnici(CF),
+    richiesta numeric(5) not null references richiestaSostituzione(ID),
+    primary key(tecnico, richiesta)  
+)
+
+create table  Sostituisce(  
+    componente numeric(5) not null references componente(ID),
+    richiesta numeric(5) not null references richiestaSostituzione(ID),
+    primary key(componente, richiesta)  
+)
+
+create table riparazione(  
+    componente numeric(5) not null references componente(ID),
+    staff numeric(5) not null references staff(CF),
+    sede char(20) not null references sede(PIva),
+    stato bool not null,
+    dataInizio date not null,
+    dataFine date not null,
+    descrizione char(20),
+    primary key(componente,staff,sede)  
+)
+
+create table soddisfaFormazione(  
+    richiesta numeric(5) not null references richiestaSostituzione(ID),
+    tecnico char(20) not null references tecnici(CF),
+    primary key(richiesta,tecnico)  
+)
+
+
+create table formazione(  
+    richiesta numeric(5) not null references richiestaAggiornamento(ID),
+    staff char(20) not null references staff(CF),
+     primary key(richiesta, staff)  
+    )
+create table operato(  
+    tecnico char(20) not null references tecnici(CF),
+    paese char(10) not null references paese(ISO),
+    primary key(tecnico, paese) 
+) 
+create table situata ( 
+    sede char(20) not null references sede(PIva),
+    paese char(10) not null references paese(ISO),
+    primary key(sede, paese) 
+)  
+create table contenuto(
+   macchina  numeric(5) not null,
+   componente numeric(5) not null references componente(ID),
+   primary key(macchina, componente)
+)
+
+
+create table dipendente(__Sede__,__Staff__)|
+    sede char(20) not null references sede(PIva),
+    staff char(20) not null references staff(CF),
+    primary key(sede,staff)
 )
 
 ### 4c codifica delle operazioni
@@ -487,10 +545,14 @@ INSERT INTO tecnici (CF, nome,tel,PermessoPericolo)) VALUES('MRARSS111111', 'MAR
 INSERT INTO staff (CF,ruolo,nome,tel) VALUES ('LGUVRD22222', 'operaio','luigi verdi' '1125656')
 
 4. Inserire un nuovo paese (1 volta ogni paio d'anni  
-INSERT INTO paese(ISO,nome,LivelloPericolo) VALUES ('ISO 3166-2:IT', ITALIA, 5);
+INSERT INTO paese(ISO,nome,LivelloPericolo) VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
 
-5.Inserire una nuova macchina (1 volta al mese)  
+5. Inserire una nuova macchina (1 volta al mese)  
+INSERT INTO macchina(ID,nome,descrizione,ginizio,gfine, operativo) VALUES ('M1', 'stampante', 'stampante',1);
 
+6. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
+
+7. Richiedere un intervento di riparazione (1 volta al giorno)
 
 
 
