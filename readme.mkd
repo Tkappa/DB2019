@@ -512,9 +512,9 @@ create table formazione(
     )   
    
 create table operato(  
-    tecnico char(20) not null references tecnici(CF),
-    paese char(10) not null references paese(ISO),
-    primary key(tecnico, paese) 
+    tecnico char(20) not null references tecnici(CF),  
+    paese char(10) not null references paese(ISO),  
+    primary key(tecnico, paese)   
 )   
 
 create table situata (   
