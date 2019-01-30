@@ -535,7 +535,7 @@ create table dipendente(
 
 ### 4c codifica delle operazioni
 1. Inserire una nuova sede (1 volta all'anno)  
-INSERT INTO sede (PIva, nome, indirizzo) VALUES('12345', 'ITALY1', "Via rizzoli)  
+INSERT INTO sede (PIva, nome, indirizzo) VALUES('S01', 'ITALY1', "Via rizzoli)  
 
 2. Inserire un nuovo tecnico (5 volte all'anno)  
 INSERT INTO tecnici (CF, nome,tel,PermessoPericolo)) VALUES('MRARSS111111', 'MARIO ROSSI', '3332445559',7)  
@@ -556,6 +556,8 @@ WHERE macchina=m1 and componente=c1;
 
 
 7. Richiedere un intervento di riparazione (1 volta al giorno)
+insert into RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione) values('R1','01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
+
 
 8. Risponedere ad un intervento di riparazione (1 volta al giorno)
 
