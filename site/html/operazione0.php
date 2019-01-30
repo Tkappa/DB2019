@@ -3,8 +3,8 @@
 
 <head>
   <title>DB</title>
-  <link href="../css/bootstrap.css" rel="stylesheet">
-  <link href="../css/site.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/site.css" rel="stylesheet">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
       $username = "my1902";
       $password = "Eech4Ieh";
 
-      $conn = new mysqli_connect($server,$username,$password,$username);
+      $conn = mysqli_connect($server,$username,$password,$username);
 
       if ($conn->connect_error){
       	die("Connection failed:" . $conn->connect_error);
@@ -57,7 +57,7 @@
 
       $sql = $_POST["sql"];
 
-      echo("<p>".$sql."</p>")
+      echo("<p>".$sql.",!!Haha</p>");
       $conn->query($sql);
     ?>
   </div>
