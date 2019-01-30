@@ -5,9 +5,9 @@
 - [ ] Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
 - [ ] 3c Normalizzazione
 - [ ] Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
-- [ ] C'è garanzia che nella tabella dei campi è messa come data, con poi dopo le date inizio/fine. Cosa vuol dire?
-- [ ] **RIGUARDARE LE IMMAGINI DELLA PARTE LOGICA E DITEMI CHE SONO FATTE BENE/NO, NON NE SONO SICURO PER NIENTE**
-- [ ] Ridisegnare le immagini della parte logica in modo che non siano cosi orribili da guardare
+- [x] C'è garanzia che nella tabella dei campi è messa come data, con poi dopo le date inizio/fine. Cosa vuol dire?
+- [x] **RIGUARDARE LE IMMAGINI DELLA PARTE LOGICA E DITEMI CHE SONO FATTE BENE/NO, NON NE SONO SICURO PER NIENTE**
+- [x] Ridisegnare le immagini della parte logica in modo che non siano cosi orribili da guardare
 - [ ] Rileggere ad alta voce in cerca di errori grammaticali e lessicali
 - [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
 
@@ -419,23 +419,25 @@ Non sono stati rilevati attributi multivalore.
 ### 4a definizione schema in codice  
 
 ### 4c codifica delle operazioni
-create table sede(
++create table sede(
     PIva char(20) not null primary key,
     nome char(30) not null,
     indirizzo char(30)
 )
-create table paese(
+
++create table paese(
     ISO char(10) not null primary key,
     nome char(30) not null,
     livello pericolo char(30) not null
     )
-create table tecnico(
++create table tecnico(
     CF char(20) not null primary key,
     nome char(30) not null,
     telefono char(30),
     livello pericolo char(30) not null
 )
-create table macchina(
+
++create table macchina(
     ID numeric(5) not null primary key,
     nome char(30) not null,
     stato char(30) not null,
@@ -444,23 +446,27 @@ create table macchina(
     data fine date not null,
     stato operativo bool not null
 )
-create table componente(
+
++create table componente(
     ID numeric(5) not null primary key,
     peso numeric(5) not null,
     costo numeric(5) not null,
     stato operativo bool not null 
 )
-create table richiestaSostituzione(
+
++create table richiestaSostituzione(
    ID numeric(5) not null primary key,
    costogiorn numeric(5) not null,
    costotrasf numeric(5) not null
 )
-create table richiestaAggiornamento(
+
++create table richiestaAggiornamento(
    ID numeric(5) not null primary key,
    costogiorn numeric(5) not null,
    costotrasf numeric(5) not null
 )
-create table staff(
+
++create table staff(
     CF char(20) not null primary key,
     ruolo char(20) not null,
     nome char(20) not null,
