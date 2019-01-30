@@ -107,7 +107,6 @@ si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno divers
 10. Rispondere ad un intervento di sostituzione ( 1 volta a settimana)
 11. Richiedere un intervento di aggiornamento (1 volta al mese)
 12. Rispondere ad un intervento di aggiornamento (1 volta al mese)
-13. Formare un tecnico in una specializzazione (2 volte all'anno)
 14. Aggiornare il livello di pericolo di un paese ( 1 volta all'anno)
 15. Visualizzare tutti gli interventi in corso (5 volte al giorno)
 16. Visualizzare tutti gli interventi completati (1 volta alla settimana)
@@ -548,11 +547,19 @@ INSERT INTO staff (CF,ruolo,nome,tel) VALUES ('LGUVRD22222', 'operaio','luigi ve
 INSERT INTO paese(ISO,nome,LivelloPericolo) VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
 
 5. Inserire una nuova macchina (1 volta al mese)  
-INSERT INTO macchina(ID,nome,descrizione,ginizio,gfine, operativo) VALUES ('M1', 'stampante', 'stampante',1);
+INSERT INTO componente(ID,peso,costo,operativo) VALUES ('C1', '500', '50',1);
 
-6. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
+6. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
+UPDATE contenuto
+SET ID=C2,
+WHERE macchina=m1 and componente=c1; 
+
 
 7. Richiedere un intervento di riparazione (1 volta al giorno)
+
+8. Risponedere ad un intervento di riparazione (1 volta al giorno)
+
+9. Richiere un intervento di sostituzione ( 1 volta a settimana)
 
 
 
