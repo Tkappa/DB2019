@@ -11,6 +11,8 @@
 - [ ] Rileggere ad alta voce in cerca di errori grammaticali e lessicali
 - [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
 
+- [ ] il campo indirizzo ha bisogno di numero civico e cap
+
 ## Dopo la progettazione definitiva del database
 + 4. Creazione di tutte le operazioni SQL
 + 5. Creazione di tutte le pagine web che supportano le operazioni SQL
@@ -383,7 +385,7 @@ Non sono stati rilevati attributi multivalore.
 |Componente|Componente(__ID__,peso,costo,operativo)|
 |RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
 |RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
-|Staff |Staff(__CF__,ruolo,nome,telefono)|
+|Staff |Staff(__CF__,ruolo,nome,tel)|
 |SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__,__Richiesta__)
 |Sostituisce | Sostituisce(__Componente__,__Richiesta__)|
 |Riparazione|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|
@@ -404,7 +406,7 @@ Non sono stati rilevati attributi multivalore.
 |Componente(__ID__,peso,costo,operativo)|-|
 | RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
 | RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
-|Staff(__CF__,ruolo,nome,telefono)|-|
+|Staff(__CF__,ruolo,nome,tel)|-|
 | SoddisfaSostituzione(__Tecnico__,__Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta->RichiestaSostituzione.ID|
 | Sostituisce(__Componente__,__Richiesta__)|Componente -> Componente.ID , Richiesta->RichiestaSostituzione.ID|
 |Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|Staff -> Staff.CF , Sede->Sede.PIva , Componente-> Componente.ID|
@@ -417,24 +419,22 @@ Non sono stati rilevati attributi multivalore.
 
 ## 4 Codifica SQL
 ### 4a definizione schema in codice  
-
-### 4c codifica delle operazioni
 create table sede(  
     PIva char(20) not null primary key,
     nome char(30) not null,
-    indirizzo char(30)
+    indirizzo char(30)  
 )
 
 create table paese(  
     ISO char(10) not null primary key,
     nome char(30) not null,
-    livello pericolo char(30) not null
+    livelloPericolo char(30) not null  
     )
-create table tecnico(  
+create table tecnici(  
     CF char(20) not null primary key,
     nome char(30) not null,
-    telefono char(30),
-    livello pericolo char(30) not null
+    tel char(30),
+    PermessoPericolo char(30) not null  
 )
 
 create table macchina(  
@@ -444,7 +444,7 @@ create table macchina(
     descrizione(30),
     data inizio date not null,
     data fine date not null,
-    stato operativo bool not null
+    stato operativo bool not null  
 )
 
 create table componente(  
@@ -454,25 +454,45 @@ create table componente(
     stato operativo bool not null 
 )
 
-+create table richiestaSostituzione(
+create table richiestaSostituzione(
    ID numeric(5) not null primary key,
    costogiorn numeric(5) not null,
-   costotrasf numeric(5) not null
+   IDsede char(20) references sede(PIva),
+   costotrasf numeric(5) not null  
 )
 
 create table richiestaAggiornamento(  
    ID numeric(5) not null primary key,
    costogiorn numeric(5) not null,
-   costotrasf numeric(5) not null
+   IDsede char(20) references sede(PIva),
+   costotrasf numeric(5) not null  
 )
 
-+create table staff(  
+create table staff(  
     CF char(20) not null primary key,
     ruolo char(20) not null,
     nome char(20) not null,
-    telefono char(20) not null,
-    codAzienda char(20) references sede(PIva)
+    tel char(20) not null,
+    codAzienda char(20) references sede(PIva)  
 )
+
+### 4c codifica delle operazioni
+1. Inserire una nuova sede (1 volta all'anno)  
+INSERT INTO sede (PIva, nome, indirizzo) VALUES('12345', 'ITALY1', "Via rizzoli)  
+
+2. Inserire un nuovo tecnico (5 volte all'anno)  
+INSERT INTO tecnici (CF, nome,tel,PermessoPericolo)) VALUES('MRARSS111111', 'MARIO ROSSI', '3332445559',7)  
+
+3. Inserire un nuovo membro dello staff (2 volte al mese)  
+INSERT INTO staff (CF,ruolo,nome,tel) VALUES ('LGUVRD22222', 'operaio','luigi verdi' '1125656')
+
+4. Inserire un nuovo paese (1 volta ogni paio d'anni  
+INSERT INTO paese(ISO,nome,LivelloPericolo) VALUES ('ISO 3166-2:IT', ITALIA, 5);
+
+5.Inserire una nuova macchina (1 volta al mese)  
+
+
+
 
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
