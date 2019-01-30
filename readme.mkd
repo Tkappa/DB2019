@@ -329,8 +329,6 @@ Data la natura (1,1) della relazione "frequentato" da parte dei Tecnici si nota 
 Visto che le relazioni "richiesta sostituzione inviata", "richiesta riparazione inviata" e "richiesta sostituzione inviata" hanno una relazione (1,1) da parte delle relazioni si è deciso di accorparle nelle entità richieste associate, aggiungendo una chiave esterna che rappresenta la sede che ha inserito la richiesta.  
 Inoltre data la relazione (1,1) tra "richiesta riparazione" e la relazione "riparazione", e l'assenza di campi non derivati dall'ex-entità padre si è deciso di accorpare questa entità, insieme alla relazione "invio richiesta riparazione" direttamente nella relazione "riparazione", che ora diventerà una relazione a tre tra "Sede","Staff" e "Componente", con in aggiunta gli attributi di "richiesta riparazione".
 
-**Dobbiamo inventre anche qui , spero abbiate seguito corsi di scrittura creativa**  
-**Oppure possiamo scrivere che non si sono rilevati  
 **Eliminazione degli attributi multivalore:**    
 Non sono stati rilevati attributi multivalore.
 
