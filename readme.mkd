@@ -324,10 +324,14 @@ Di conseguenza si ritiene opportuno mantenere la ridondanza
 **Eliminazione delle gerarchie:**    
 Riguardo all'entità richieste si è deciso di accorparle in Richiesta di sostituzione, Richiesta di riparazione e Richiesta di aggiornamento perchè le operazioni 7,8,9,10,11 e 12 fanno riferimenti distinti alle varie richieste e la generalizzione è di tipo totale. Inoltre si vogliono dividere le richieste di riparazione dagli altri tipi perchè visto che sono eseguiti dallo staff non hanno costi.
 
+![logicogen](./logico/logicogen.png)
+
 **Accorpamenti e partizionamenti:**  
 Data la natura (1,1) della relazione "frequentato" da parte dei Tecnici si nota che potrebbe essere accorpata come un campo aggiuntivo nell'entità Tecnico, rimuovendo quindi la relazione in favore di una chiave esterna.  
 Visto che le relazioni "richiesta sostituzione inviata", "richiesta riparazione inviata" e "richiesta sostituzione inviata" hanno una relazione (1,1) da parte delle relazioni si è deciso di accorparle nelle entità richieste associate, aggiungendo una chiave esterna che rappresenta la sede che ha inserito la richiesta.  
 Inoltre data la relazione (1,1) tra "richiesta riparazione" e la relazione "riparazione", e l'assenza di campi non derivati dall'ex-entità padre si è deciso di accorpare questa entità, insieme alla relazione "invio richiesta riparazione" direttamente nella relazione "riparazione", che ora diventerà una relazione a tre tra "Sede","Staff" e "Componente", con in aggiunta gli attributi di "richiesta riparazione".
+
+![logicofin](./logico/logicofin.png)
 
 **Eliminazione degli attributi multivalore:**    
 Non sono stati rilevati attributi multivalore.
