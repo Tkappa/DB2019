@@ -420,119 +420,119 @@ Non sono stati rilevati attributi multivalore.
 ## 4 Codifica SQL
 ### 4a definizione schema in codice  
 create table sede(  
-    PIva char(20) not null primary key,
-    nome char(30) not null,
+    PIva char(20) not null primary key,  
+    nome char(30) not null,  
     indirizzo char(30)  
-)
+)  
 
 create table paese(  
-    ISO char(10) not null primary key,
-    nome char(30) not null,
+    ISO char(10) not null primary key,  
+    nome char(30) not null,  
     livelloPericolo char(30) not null  
-    )
+    )  
 create table tecnici(  
-    CF char(20) not null primary key,
-    nome char(30) not null,
-    tel char(30),
+    CF char(20) not null primary key,  
+    nome char(30) not null,  
+    tel char(30),  
     PermessoPericolo char(30) not null  
-)
+)  
 
 create table macchina(  
-    ID numeric(5) not null primary key,
-    nome char(30) not null,
-    stato char(30) not null,
-    descrizione(30),
-    data inizio date not null,
-    data fine date not null,
+    ID numeric(5) not null primary key,  
+    nome char(30) not null,  
+    stato char(30) not null,  
+    descrizione(30),  
+    data inizio date not null,  
+    data fine date not null,  
     stato operativo bool not null  
-)
+)  
 
 create table componente(  
-    ID numeric(5) not null primary key,
-    peso numeric(5) not null,
-    costo numeric(5) not null,
-    stato operativo bool not null 
-)
+    ID numeric(5) not null primary key,  
+    peso numeric(5) not null,  
+    costo numeric(5) not null,  
+    stato operativo bool not null   
+)  
 
-create table richiestaSostituzione(
-   ID numeric(5) not null primary key,
-   costogiorn numeric(5) not null,
-   IDsede char(20) references sede(PIva),
+create table richiestaSostituzione(  
+   ID numeric(5) not null primary key,  
+   costogiorn numeric(5) not null,  
+   IDsede char(20) references sede(PIva),  
    costotrasf numeric(5) not null  
-)
+)  
 
 create table richiestaAggiornamento(  
-   ID numeric(5) not null primary key,
-   costogiorn numeric(5) not null,
-   IDsede char(20) references sede(PIva),
+   ID numeric(5) not null primary key,  
+   costogiorn numeric(5) not null,  
+   IDsede char(20) references sede(PIva),  
    costotrasf numeric(5) not null  
 )
 
 create table staff(  
-CF char(20) not null primary key,
-    ruolo char(20) not null,
-    nome char(20) not null,
-    tel char(20) not null,
+CF char(20) not null primary key,  
+    ruolo char(20) not null,  
+    nome char(20) not null,  
+    tel char(20) not null,  
     codAzienda char(20) references sede(PIva)  
-)
+)  
 
 create table SoddisfaSostituzione(  
-    tecnico char(20) not null references tecnici(CF),
-    richiesta numeric(5) not null references richiestaSostituzione(ID),
+    tecnico char(20) not null references tecnici(CF),  
+    richiesta numeric(5) not null references richiestaSostituzione(ID),  
     primary key(tecnico, richiesta)  
-)
+)  
 
 create table  Sostituisce(  
-    componente numeric(5) not null references componente(ID),
-    richiesta numeric(5) not null references richiestaSostituzione(ID),
+    componente numeric(5) not null references componente(ID),  
+    richiesta numeric(5) not null references richiestaSostituzione(ID),  
     primary key(componente, richiesta)  
-)
+)  
 
 create table riparazione(  
-    componente numeric(5) not null references componente(ID),
-    staff numeric(5) not null references staff(CF),
-    sede char(20) not null references sede(PIva),
-    stato bool not null,
-    dataInizio date not null,
-    dataFine date not null,
-    descrizione char(20),
+    componente numeric(5) not null references componente(ID),  
+    staff numeric(5) not null references staff(CF),  
+    sede char(20) not null references sede(PIva),  
+    stato bool not null,  
+    dataInizio date not null,  
+    dataFine date not null,  
+    descrizione char(20),  
     primary key(componente,staff,sede)  
-)
+)  
 
 create table soddisfaFormazione(  
-    richiesta numeric(5) not null references richiestaSostituzione(ID),
-    tecnico char(20) not null references tecnici(CF),
+    richiesta numeric(5) not null references richiestaSostituzione(ID),  
+    tecnico char(20) not null references tecnici(CF),  
     primary key(richiesta,tecnico)  
 )
 
 
 create table formazione(  
-    richiesta numeric(5) not null references richiestaAggiornamento(ID),
-    staff char(20) not null references staff(CF),
+    richiesta numeric(5) not null references richiestaAggiornamento(ID),  
+    staff char(20) not null references staff(CF),  
      primary key(richiesta, staff)  
-    )
+    )  
 create table operato(  
     tecnico char(20) not null references tecnici(CF),
     paese char(10) not null references paese(ISO),
     primary key(tecnico, paese) 
-) 
-create table situata ( 
-    sede char(20) not null references sede(PIva),
-    paese char(10) not null references paese(ISO),
-    primary key(sede, paese) 
+)   
+create table situata (   
+    sede char(20) not null references sede(PIva),  
+    paese char(10) not null references paese(ISO),  
+    primary key(sede, paese)   
 )  
-create table contenuto(
-   macchina  numeric(5) not null,
-   componente numeric(5) not null references componente(ID),
-   primary key(macchina, componente)
-)
+create table contenuto(  
+   macchina  numeric(5) not null,  
+   componente numeric(5) not null references componente(ID),  
+   primary key(macchina, componente)  
+)  
 
 
-create table dipendente(__Sede__,__Staff__)|
-    sede char(20) not null references sede(PIva),
-    staff char(20) not null references staff(CF),
-    primary key(sede,staff)
-)
+create table dipendente(  
+	sede char(20) not null references sede(PIva),  
+	staff char(20) not null references staff(CF),  
+	primary key(sede,staff)  
+)  
 
 ### 4c codifica delle operazioni
 1. Inserire una nuova sede (1 volta all'anno)  
