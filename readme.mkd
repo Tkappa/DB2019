@@ -436,22 +436,22 @@ create table tecnici(
     PermessoPericolo char(30) not null  
 )  
 
-create table macchina(  
-    ID numeric(5) not null primary key,  
-    nome char(30) not null,  
-    stato char(30) not null,  
-    descrizione(30),  
-    data inizio date not null,  
-    data fine date not null,  
-    stato operativo bool not null  
-)  
+create table macchina(
+    ID numeric(5) not null primary key,
+    nome char(30) not null,
+    stato char(30) not null,
+    descrizione char(30),
+    data_inizio date not null,
+    data_fine date not null,
+    stato_operativo bool not null
+)
 
-create table componente(  
-    ID numeric(5) not null primary key,  
-    peso numeric(5) not null,  
-    costo numeric(5) not null,  
-    stato operativo bool not null   
-)  
+create table componente(
+    ID numeric(5) not null primary key,
+    peso numeric(5) not null,
+    costo numeric(5) not null,
+    stato_operativo bool not null
+)
 
 create table richiestaSostituzione(  
    ID numeric(5) not null primary key,  
@@ -509,17 +509,20 @@ create table formazione(
     richiesta numeric(5) not null references richiestaAggiornamento(ID),  
     staff char(20) not null references staff(CF),  
      primary key(richiesta, staff)  
-    )  
+    )   
+   
 create table operato(  
     tecnico char(20) not null references tecnici(CF),
     paese char(10) not null references paese(ISO),
     primary key(tecnico, paese) 
 )   
+
 create table situata (   
     sede char(20) not null references sede(PIva),  
     paese char(10) not null references paese(ISO),  
     primary key(sede, paese)   
 )  
+
 create table contenuto(  
    macchina  numeric(5) not null,  
    componente numeric(5) not null references componente(ID),  
