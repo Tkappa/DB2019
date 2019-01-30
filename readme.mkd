@@ -556,10 +556,10 @@ WHERE macchina=m1 and componente=c1
 ON UPDATE CASCADE 
 
 
-7. Richiedere un intervento di riparazione (1 volta al giorno)
+7. Richiedere un intervento di riparazione (1 volta al giorno)  
 insert into RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione) values('R1','01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
 
-19. Rimuovere un membro dello staff che non è più dipendente
+19. Rimuovere un membro dello staff che non è più dipendente    
 DELETE FROM staff 
 	WHERE CF='LGUVRD22222'
 	ON DELETE SET DEFAULT 
@@ -572,7 +572,7 @@ from situata , sede
 where situata.paese = sede.ISO and ISO='ISO 3166-2:IT'
 
 
-23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)  
 create view paesePericolo
         (nomePaese,ISO ) as
 select Name, Surname, Salary
