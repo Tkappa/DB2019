@@ -53,7 +53,7 @@ I dati da salvare saranno:
 |Multinazionale | Azienda madre di cui tutte le vari sedi sono filiali | Azienda madre   
 |Identificativo ISO | Codice standard univoco fornito ad ogni paese | ISO
 |Specializzazione | Formazione specialistica su un determinato argomento | nessuno |tecnici
-|Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare- nessuno
+|Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare | nessuno
 |Aggiornamento | Corsi di formazine dello staff da tecnici specializzati | nessuno
 |Operativo| Se il componente o la macchina sono funzionanti e non rotti| nessuno|
 
