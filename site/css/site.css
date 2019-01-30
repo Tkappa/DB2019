@@ -16,7 +16,7 @@ body
 .inizio{
   width:100%;
   height: 300px;
-  background-image: url(../img/tecnico.jpg);
+  background-image: url(../data/img/tecnico.jpg);
   background-size:auto;
 
 }
