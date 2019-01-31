@@ -710,6 +710,23 @@ WHERE data_fine > CURRENT_DATE
 DELETE FROM staff   
 WHERE CF='LGUVRD22222'    
 ```
+
+20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)	
+```sql	
+select sum(	
+(select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
+from richiestaSostituzione 	
+where (idsede='S03' and stato='completato' 	
+and datediff(datafine,'2019-02-20')<0 	
+and datediff(datainizio,'2019-02-09')>0 ))	
++	
+(select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
+as tot from richiestaAggiornamento 	
+where idsede='S03' and stato='completata'	
+and datediff(datafine,'2019-02-20')<0 	
+and datediff(datainizio,'2019-02-09')>0 )	
+)   	
+```
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.
