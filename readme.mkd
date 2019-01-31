@@ -115,7 +115,7 @@ si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno divers
 19. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
 20. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
 21. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
-22. Visualizzare tutte le sedi per un determinato paese (5 volte al giorno)
+22. Visualizzare tutte le sedi per un determinato paese dato il codice ISO(5 volte al giorno)
 23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
 24. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
 25. Visualizzare tutte le macchine per una sede (1 volta al giorno)
@@ -436,6 +436,7 @@ create table tecnici(
     PermessoPericolo char(30) not null  
 )  
 
+<<<<<<< HEAD
 create table macchina(  
     ID numeric(5) not null primary key,  
     nome char(30) not null,  
@@ -444,13 +445,24 @@ create table macchina(
     data fine date not null,  
     stato operativo bool not null  
 )  
+=======
+create table macchina(
+    ID numeric(5) not null primary key,
+    nome char(30) not null,
+    stato char(30) not null,
+    descrizione char(30),
+    data_inizio date not null,
+    data_fine date not null,
+    stato_operativo bool not null
+)
+>>>>>>> 3ee1e7b0571d3d4d216de50cc35485117584650e
 
-create table componente(  
-    ID numeric(5) not null primary key,  
-    peso numeric(5) not null,  
-    costo numeric(5) not null,  
-    stato operativo bool not null   
-)  
+create table componente(
+    ID numeric(5) not null primary key,
+    peso numeric(5) not null,
+    costo numeric(5) not null,
+    stato_operativo bool not null
+)
 
 create table richiestaSostituzione(  
    ID numeric(5) not null primary key,  
@@ -508,17 +520,26 @@ create table formazione(
     richiesta numeric(5) not null references richiestaAggiornamento(ID),  
     staff char(20) not null references staff(CF),  
      primary key(richiesta, staff)  
-    )  
+    )   
+   
 create table operato(  
+<<<<<<< HEAD
     tecnico char(20) not null references tecnici(CF),
     paese char(10) not null references paese(ISO),
     primary key(tecnico, paese)
+=======
+    tecnico char(20) not null references tecnici(CF),  
+    paese char(10) not null references paese(ISO),  
+    primary key(tecnico, paese)   
+>>>>>>> 3ee1e7b0571d3d4d216de50cc35485117584650e
 )   
+
 create table situata (   
     sede char(20) not null references sede(PIva),  
     paese char(10) not null references paese(ISO),  
     primary key(sede, paese)   
 )  
+
 create table contenuto(  
    macchina  numeric(5) not null,  
    componente numeric(5) not null references componente(ID),  
@@ -549,18 +570,40 @@ INSERT INTO paese(ISO,nome,LivelloPericolo) VALUES ('ISO 3166-2:IT', 'ITALIA', 5
 INSERT INTO macchina(ID,nome,descrizione,data_inizio,data_fine,stato_operativo) VALUES ('1', 'Caffettiera', 'Macchinetta del caffe',12/01/19,12/01/22,True);  
 
 6. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
+<<<<<<< HEAD
 UPDATE contenuto
 SET ID=C2,
 WHERE macchina=m1 and componente=c1;
+=======
+UPDATE contenuto  
+SET ID=C2,  
+WHERE macchina=m1 and componente=c1   
+ON UPDATE CASCADE   
+>>>>>>> 3ee1e7b0571d3d4d216de50cc35485117584650e
 
 
 7. Richiedere un intervento di riparazione (1 volta al giorno)
 insert into RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione) values('R1','01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
 
+19. Rimuovere un membro dello staff che non è più dipendente
+DELETE FROM staff   
+	WHERE CF='LGUVRD22222'  
+	ON DELETE SET DEFAULT   
 
-8. Risponedere ad un intervento di riparazione (1 volta al giorno)
+22. Visualizzare tutte le sedi per un determinato paese dato il codice iso
+create view sediPaese  
+        (ID,nomeSede, nomePaese,ISO ) as  
+select Name, Surname, Salary  
+from situata , sede  
+where situata.paese = sede.ISO and ISO='ISO 3166-2:IT'  
 
-9. Richiere un intervento di sostituzione ( 1 volta a settimana)
+
+23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+create view paesePericolo  
+        (nomePaese,ISO ) as  
+select Name, Surname, Salary  
+from paese  
+where ISO='ISO 3166-2:IT'  
 
 
 
