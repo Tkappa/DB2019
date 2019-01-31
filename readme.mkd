@@ -483,7 +483,8 @@ CREATE TABLE staff(
     ruolo char(20) not null,  
     nome char(20) not null,  
     tel char(20) not null,  
-    codAzienda char(20) references sede(PIva)  
+    codAzienda char(20) references sede(PIva) ,
+    ON DELETE SET DEFAULT   
 )
 
 CREATE TABLE SoddisfaSostituzione(  
@@ -537,6 +538,7 @@ CREATE TABLE contenuto(
     macchina  numeric(5) not null references macchina(ID),  
     componente numeric(5) not null references componente(ID),  
     primary key(macchina, componente)  
+    ON UPDATE CASCADE   
 )  
 
 CREATE TABLE dipendente(  
@@ -629,20 +631,19 @@ INSERT INTO soddisfaFormazione(Tecnico,Richiesta) values ('MRARSS111111',2)
 INSERT INTO Formazione(staff,richiestaAggiornamento) VALUES(..)
 ```
 
-6. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
+10. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
 ```sql
 UPDATE contenuto  
-SET ID=C2,  
-WHERE macchina=m1 and componente=c1   
-ON UPDATE CASCADE   
+SET ID=2,  
+WHERE macchina=1 and componente=1   
+
 ```
 
 
-10. Rimuovere un membro dello staff che non è più dipendente
+11. Rimuovere un membro dello staff che non è più dipendente
 ```sql
 DELETE FROM staff   
-WHERE CF='LGUVRD22222'  
-ON DELETE SET DEFAULT   
+WHERE CF='LGUVRD22222'    
 ```
 
 11. Visualizzare tutte le sedi per un determinato paese dato il codice iso
