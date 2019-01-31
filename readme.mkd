@@ -67,23 +67,23 @@ Una macchina si considera operativa se tutti i suoi componenti sono operativi.
 
 ### 1d. Strutturazione dei requisiti  
 
-+ Frasi di carattere generale
++ **Frasi di carattere generale**  
 Si vuole realizzare un database per un azienda multinazionale che vuole mantenere sotto controllo i vari tecnici che viaggiano tra le sedi per fornire supporto o manutenzione.   
-+ Frasi riguardanti i paesi
++ **Frasi riguardanti i paesi**  
 si vorrà salvare il nome , l'identificativo ISO e il livello di pericolo.  
-+ Frasi riguardanti le sedi  
++ **Frasi riguardanti le sedi**  
 si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.  
-+ Frasi riguardanti lo Staff  
++ **Frasi riguardanti lo Staff**    
 i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.  
-+ Frasi riguardanti i Tecnici  
++ **Frasi riguardanti i Tecnici**
 andranno rappresentati attraverso il livello di pericolo su cui possono operare (dipende dall'anzianità nell'azienda), ragione sociale.  
-+ Frasi riguaranti e specializzazioni  
++ **Frasi riguaranti e specializzazioni**  
 si vorrà specificare il costo e il tipo e il codice univoco  
-+ Frasi riguardanti i macchinari  
++ **Frasi riguardanti i macchinari**    
 si vuole conoscere il nome, la data di acquisto, il codice identificativo, se è operativa o no, e la garanzia
-+ Frasi riguardanti i componenti  
++ **Frasi riguardanti i componenti**  
 si vorrà rappresentare il costo, il codice, il peso e se è operativo o no
-+ Frasi riguardanti gli Interventi  
++ **Frasi riguardanti gli Interventi**  
 si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse tipologie di intervento:  
 
     1. Gli interventi di sostituzione (di un componente), svolte da un tecnico. Si vorrà rappresentare inoltre il costo di trasferimento e il costo giornaliero del tecnico;
