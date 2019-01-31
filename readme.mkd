@@ -527,7 +527,7 @@ CREATE TABLE situata (
 )  
 
 CREATE TABLE contenuto(  
-    macchina  numeric(5) not null,  
+    macchina  numeric(5) not null references macchina(ID),  
     componente numeric(5) not null references componente(ID),  
     primary key(macchina, componente)  
 )  
@@ -536,6 +536,12 @@ CREATE TABLE dipendente(
     sede char(20) not null references sede(PIva),  
     staff char(20) not null references staff(CF),  
     primary key(sede,staff)  
+)
+
+CREATE TABLE possiede(
+    sede char(20) not null references sede(PIva),
+    macchina numeric(5) not null references macchina(ID),
+    primary key(sede, macchina)
 )
 ```
 
