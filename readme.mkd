@@ -26,7 +26,7 @@ Si vuole realizzare un database per un azienda multinazionale che vuole mantener
 I dati da salvare saranno:  
 
 + Riguardo ai paesi si vorrà salvare il nome , l'identificativo ISO e il livello di pericolo.  
-+ Riguardo alle sedi si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.
+operativo+ Riguardo alle sedi si vorrà codificare l'identificativo aziendale , la tipologia di sede e la ragione sociale.
 + Riguarlo allo Staff, cioè i dipendenti di una sottosede, si vorranno identificare la sede per cui lavora(codice sede), ruolo e la ragione sociale.
 + I tecnici, che  andranno rappresentati attraverso il livello di pericolo su cui possono operare, ragione sociale.
 + Per le specializzazioni si vorrà specificare il costo e il tipo e il codice univoco
@@ -456,19 +456,25 @@ CREATE TABLE componente(
 )
 
 CREATE TABLE richiestaSostituzione(  
-    ID numeric(5) not null auto_increment,  
-    costogiorn numeric(5) not null,  
-    IDsede char(20) references sede(PIva),  
-    costotrasf numeric(5) not null,
-    primary key (ID)
-)
+   ID numeric(5) not null primary key,  
+   costogiorn numeric(5) not null,  
+   IDsede char(20) references sede(PIva),  
+   costotrasf numeric(5) not null,  
+   stato char(12) not null ,
+   dataInizio date not null,
+   dataFinedate not null,
+   descrizione char(20) not null  
+)  
 
 CREATE TABLE richiestaAggiornamento(  
-    ID numeric(5) not null auto_increment,  
-    costogiorn numeric(5) not null,  
-    IDsede char(20) references sede(PIva),  
-    costotrasf numeric(5) not null,
-    primary key (ID)
+   ID numeric(5) not null primary key,  
+   IDsede char(20) references sede(PIva),  
+   costogiorn numeric(5) not null,  
+   costotrasf numeric(5) not null,  
+   stato char(12) not null ,
+   dataInizio date not null,
+   dataFine date not null,
+   descrizione char(20) not null  
 )
 
 CREATE TABLE staff(  
