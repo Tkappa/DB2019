@@ -10,7 +10,7 @@ Sito: http://site1909.tw.cs.unibo.it
 - [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
 - [ ] il campo indirizzo ha bisogno di numero civico e cap
 - [ ] **Ci mancano delle operazioni base come l'aggiunta e la rimozione di uno staff da una sede, controlliamo meglio se tutte le relazioni sono rappresentate**
-- [ ] **Considerare di convertire le varie tabelle con un ID numerico in uno autoincrementabile, cosi da non dovere sparare un numero a caso all'inserimento**
+- [x] **Considerare di convertire le varie tabelle con un ID numerico in uno autoincrementabile, cosi da non dovere sparare un numero a caso all'inserimento**
 - [x] Utilizzare lo styling di markdown per anche per il codice SQL 
 - [ ] Creazione di tutte le operazioni SQL (Fatte da 1 a 7 + varie)
 - [ ] Creazione di tutte le pagine web che supportano le operazioni SQL (Fatte da 0 a 5)
@@ -437,33 +437,37 @@ CREATE TABLE tecnici(
 )
 
 CREATE TABLE macchina(  
-    ID numeric(5) not null primary key,  
+    ID numeric(5) not null auto_increment,  
     nome char(30) not null,  
     descrizione(30),  
     data inizio date not null,  
     data fine date not null,  
-    stato operativo bool not null  
+    stato operativo bool not null,
+    primary key (ID)
 ) 
 
 CREATE TABLE componente(
-    ID numeric(5) not null primary key,
+    ID numeric(5) not null auto_increment,
     peso numeric(5) not null,
     costo numeric(5) not null,
-    stato_operativo bool not null
+    stato_operativo bool not null,
+    primary key (ID)
 )
 
 CREATE TABLE richiestaSostituzione(  
-    ID numeric(5) not null primary key,  
+    ID numeric(5) not null auto_increment,  
     costogiorn numeric(5) not null,  
     IDsede char(20) references sede(PIva),  
-    costotrasf numeric(5) not null  
+    costotrasf numeric(5) not null,
+    primary key (ID)
 )
 
 CREATE TABLE richiestaAggiornamento(  
-    ID numeric(5) not null primary key,  
+    ID numeric(5) not null auto_increment,  
     costogiorn numeric(5) not null,  
     IDsede char(20) references sede(PIva),  
-    costotrasf numeric(5) not null  
+    costotrasf numeric(5) not null,
+    primary key (ID)
 )
 
 CREATE TABLE staff(  
