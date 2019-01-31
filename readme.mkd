@@ -413,6 +413,7 @@ Non sono stati rilevati attributi multivalore.
 |Situata(__Sede__,__Paese__)| Sede->Sede.PIva, Paese->Paese.ISO|
 |Contenuto(__Macchina__,__Componente__)| Macchina->Macchina.ID, Componente->Componente.ID|
 | Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
+|Possiede(__Sede__,__Macchina__)|Sede->Sede.PIva, Macchina->Macchina.ID|
 
 ## 4 Codifica SQL
 ### 4a definizione schema in codice
@@ -594,19 +595,20 @@ ON DELETE SET DEFAULT
 22. Visualizzare tutte le sedi per un determinato paese dato il codice iso
 ```sql
 CREATE VIEW sediPaese  
-        (ID,nomeSede, nomePaese,ISO ) as  
-SELECT Name, Surname, Salary  
-FROM situata , sede  
-WHERE situata.paese = sede.ISO and ISO='ISO 3166-2:IT'  
+        (ID, nomeSede, nomePaese, ISO) as  
+SELECT sede.PIva, sede.nome, paese.nome, paese.ISO
+FROM situata, sede, paese
+WHERE situata.sede = sede.PIva and paese.ISO='it' ;
 ```
 
 23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
 ```sql
 CREATE VIEW paesePericolo  
-        (nomePaese,ISO ) as  
-SELECT Name, Surname, Salary  
-FROM paese  
-WHERE ISO='ISO 3166-2:IT'  
+        (ISO, nomePaese) as  
+SELECT paese.ISO, paese.nome
+FROM paese
+WHERE paese.livelloPericolo = 5 ;
+ 
 ```
 
 
