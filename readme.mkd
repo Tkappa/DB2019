@@ -362,9 +362,12 @@ Non sono stati rilevati attributi multivalore.
 |Componente|Non presenta dipendenze non banali tra gli attributi ID, peso, costo, statoOperativo.|
 |Staff|non esistono dipendenza non banali tra gli attributi. L'unica dipendenza presente è tra codice fiscale e ragione sociale (dipendenza banale).|
 |Tecnico|Non esistono dipendenze non banali tra gli attributi. L’unica dipendenza presente è tra codice fiscale e ragione sociale (dipendenza banale).|
-|RichiestaAggiornamento|
-|RichiestaSostituzione|
-|Macchina|
+|RichiestaAggiornamento|Non esistono dipendenze non banali tra gli attributi.
+|RichiestaSostituzione|Non esistono dipendenze non banali tra gli attributi.
+|Macchina|Non esistono dipendenze non banali tra gli attributi.
+
+
+
 
 
 
