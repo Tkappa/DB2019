@@ -100,7 +100,7 @@ si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse 
 5. Inserire una nuova macchina  (1 volta al mese)
 6. Inserire un nuvo componente 
 7. Aggiungere una nuova richiesta di riparazione
-8. Aggiungere una nuova richiesta di sostituzione
+. Aggiungere una nuova richiesta di sostituzione
 9. Aggiungere una nuova richiesta di Aggiornamento:
 10. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
 11. Visualizzare tutte le sedi per un determinato paese dato il codice ISO (5 volte al giorno)
@@ -553,7 +553,7 @@ CREATE TABLE possiede(
 
 1.  Inserire un nuovo paese (1 volta ogni paio d'anni
 ```sql
-INSERT INTO paese(ISO,nome,LivelloPericolo)
+INSERT INTO paese(ISO, nome, LivelloPericolo)
 VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
 ```
 2. Inserire una nuova sede (1 volta all'anno)
@@ -563,62 +563,70 @@ VALUES ('S01', 'ITALY1', 'Via rizzoli')
 ```
 per ogni sede:
 ```sql
-INSERT INTO situata(sede, paese) VALUES(..)  
+INSERT INTO situata(sede, paese)
+VALUES (..)  
 ```
 
 2. Inserire un nuovo tecnico (5 volte all'anno)  
 ```sql
-INSERT INTO tecnici (CF, nome,tel,PermessoPericolo)
-VALUES ('MRARSS111111', 'MARIO ROSSI', '3332445559',7)  
+INSERT INTO tecnici (CF, nome, tel, PermessoPericolo)
+VALUES ('MRARSS111111', 'MARIO ROSSI', '3332445559',7 )  
 ```
 per ogni tecnico:
 ```sql
-INSERT INTO operato(Tecnico,Paese) VALUES('MRARSS111111', 'it')   
+INSERT INTO operato(Tecnico, Paese)
+VALUES('MRARSS111111', 'it')   
 ```
 3. Inserire un nuovo membro dello staff (2 volte al mese)  
 ```sql
 INSERT INTO staff (CF,ruolo,nome,tel)
-VALUES ('LGUVRD22222', 'operaio','luigi verdi' '1125656')
+VALUES ('LGUVRD22222', 'operaio', 'luigi verdi', '1125656')
 ```
 per ogni nuovo membro:
 ```sql
-INSERT INTO dipendente(sede,staff) VALUES('S01', 'LGIVRD')   
+INSERT INTO dipendente(sede, staff)
+VALUES ('S01', 'LGIVRD')   
 ```
 5. Inserire una nuova macchina (1 volta al mese)
 ```sql
-INSERT INTO macchina(ID,nome,descrizione,data_inizio,data_fine,stato_operativo)
-VALUES ('1', 'Caffettiera', 'Macchinetta del caffe',12/01/19,12/01/22,True);  
+INSERT INTO macchina(ID, nome, descrizione, data_inizio, data_fine, stato_operativo)
+VALUES ('1', 'Caffettiera', 'Macchinetta del caffe', 12/01/19, 12/01/22, True);  
 ```
 per ogni macchina: 
 ```sql
-INSERT INTO possiede(sede, macchina)VALUES(..)
+INSERT INTO possiede(sede, macchina)
+VALUES (..)
 ```
 6. Inserire un nuvo componente 
 ```sql
-INSERT INTO componente(peso,costo,stato_operativo) VALUES()
+INSERT INTO componente(peso,costo,stato_operativo)
+VALUES (...)
 ```
 per ogni componente: 
 ```sql
-INSERT INTO contenuto(macchina,componente))VALUES(..)
+INSERT INTO contenuto(macchina,componente))
+VALUES (..)
 ```
 7. Aggiungere una nuova richiesta di riparazione
 ```sql
-INSERT INTO RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)
-VALUES (1,'S01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
+INSERT INTO RichiestaRiparazione(ID, Sede, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)
+VALUES (1, 'S01', 15, 20, 'in attesa', 12/01/19, 14/01/19, 'riparazione componente c1' )
 ```
 
 8. Aggiungere una nuova richiesta di sostituzione:
 ```sql
-insert into richiestaSostituzione(ID,IDsede,costogiorn,costotrasf,stato,dataInizio,dataFine,descrizione) values (1, 'S03',15,20,'in attesa', '2019-01-30','2019-01-31', 'sostituzione' ) 
+INSERT INTO richiestaSostituzione(ID, IDsede, costogiorn, costotrasf, stato, dataInizio, dataFine, descrizione)
+VALUES (1, 'S03',15,20, 'in attesa', '2019-01-30', '2019-01-31', 'sostituzione' ) 
 ```
 per ogni richiesta di sostituzione: 
 ```sql
-INSERT INTO soddisfaSostituzione(Tecnico,Richiesta) VALUES(..)
-INSERT INTO sostituisce(Componente,Richiesta) VALUESS(..)
+INSERT INTO soddisfaSostituzione(Tecnico,Richiesta) VALUES (..)
+INSERT INTO sostituisce(Componente,Richiesta) VALUESS (..)
 ```
 9. Aggiungere una nuova richiesta di Aggiornamento:
 ```sql
-insert into richiestaAggiornamento(ID,IDsede,costogiorn,costotrasf,stato,dataInizio,dataFine,descrizione) values ('1', 'S03',15,20,'in attesa', '2019-01-30','2019-01-31', 'formazione staff')
+INSERT INTO richiestaAggiornamento(ID, IDsede, costogiorn, costotrasf, stato, dataInizio, dataFine, descrizione)
+VALUES ('1', 'S03',15,20,'in attesa', '2019-01-30','2019-01-31', 'formazione staff')
 ```
 per ogni richiesta di sostituzione: 
 ```sql
@@ -687,34 +695,21 @@ WHERE nome = 'MARIO ROSSI'
 ```
 17. Calcolare il numero di richiesteAggiornamento che risultano "completate"
 ```sql
-select count(*) from richiestaAggiornamento where stato='completata'
+SELECT count(*)
+FROM richiestaAggiornamento
+WHERE stato='completata'
 ```
 18. Visualizzare tutte le macchine che sono ancora in garanzia  
 ```sql
-select nome,descrizione from macchina where data_fine>CURRENT_DATE 
+SELECT nome, descrizione
+FROM macchina
+WHERE data_fine > CURRENT_DATE 
 ```
 19. Rimuovere un membro dello staff che non è più dipendente
 ```sql
 DELETE FROM staff   
 WHERE CF='LGUVRD22222'    
 ```
-20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
-```sql
-select sum(
-(select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 
-from richiestaSostituzione 
-where (idsede='S03' and stato='completato' 
-and datediff(datafine,'2019-02-20')<0 
-and datediff(datainizio,'2019-02-09')>0 ))
-+
-(select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 
-as tot from richiestaAggiornamento 
-where idsede='S03' and stato='completata'
-and datediff(datafine,'2019-02-20')<0 
-and datediff(datainizio,'2019-02-09')>0 )
-)   
-```
-
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.
