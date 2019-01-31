@@ -634,11 +634,10 @@ INSERT INTO Formazione(staff,richiestaAggiornamento) VALUES(..)
 10. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
 ```sql
 UPDATE contenuto  
-SET ID=2,  
+SET  macchina=0
 WHERE macchina=1 and componente=1   
 
 ```
-
 
 11. Rimuovere un membro dello staff che non è più dipendente
 ```sql
