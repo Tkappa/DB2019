@@ -11,7 +11,7 @@ Sito: http://site1909.tw.cs.unibo.it
 - [ ] il campo indirizzo ha bisogno di numero civico e cap
 - [ ] **Ci mancano delle operazioni base come l'aggiunta e la rimozione di uno staff da una sede, controlliamo meglio se tutte le relazioni sono rappresentate**
 - [ ] **Considerare di convertire le varie tabelle con un ID numerico in uno autoincrementabile, cosi da non dovere sparare un numero a caso all'inserimento**
-- [ ] Utilizzare lo styling di markdown per anche per il codice SQL 
+- [x] Utilizzare lo styling di markdown per anche per il codice SQL 
 - [ ] Creazione di tutte le operazioni SQL (Fatte da 1 a 7 + varie)
 - [ ] Creazione di tutte le pagine web che supportano le operazioni SQL (Fatte da 0 a 5)
 - [x] Fatto il sito con bootstrap (è comunque brutto lo so), usate una qualsiasi delle operazioni 1-5 insieme al suo php come template
@@ -415,76 +415,78 @@ Non sono stati rilevati attributi multivalore.
 | Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
 
 ## 4 Codifica SQL
-### 4a definizione schema in codice  
-create table sede(  
-	 PIva char(20) not null primary key,  
-	 nome char(30) not null,  
-	 indirizzo char(30)  
-)  
+### 4a definizione schema in codice
+```sql
+CREATE TABLE sede(  
+    PIva char(20) not null primary key,  
+    nome char(30) not null,  
+    indirizzo char(30)  
+)
 
-create table paese(  
+CREATE TABLE paese(  
     ISO char(10) not null primary key,  
     nome char(30) not null,  
     livelloPericolo char(30) not null  
-    )  
-create table tecnici(  
+)
+
+CREATE TABLE tecnici(  
     CF char(20) not null primary key,  
     nome char(30) not null,  
     tel char(30),  
     PermessoPericolo char(30) not null  
-)  
+)
 
-create table macchina(  
+CREATE TABLE macchina(  
     ID numeric(5) not null primary key,  
     nome char(30) not null,  
     descrizione(30),  
     data inizio date not null,  
     data fine date not null,  
     stato operativo bool not null  
-)  
+) 
 
-create table componente(
+CREATE TABLE componente(
     ID numeric(5) not null primary key,
     peso numeric(5) not null,
     costo numeric(5) not null,
     stato_operativo bool not null
 )
 
-create table richiestaSostituzione(  
-   ID numeric(5) not null primary key,  
-   costogiorn numeric(5) not null,  
-   IDsede char(20) references sede(PIva),  
-   costotrasf numeric(5) not null  
-)  
-
-create table richiestaAggiornamento(  
-   ID numeric(5) not null primary key,  
-   costogiorn numeric(5) not null,  
-   IDsede char(20) references sede(PIva),  
-   costotrasf numeric(5) not null  
+CREATE TABLE richiestaSostituzione(  
+    ID numeric(5) not null primary key,  
+    costogiorn numeric(5) not null,  
+    IDsede char(20) references sede(PIva),  
+    costotrasf numeric(5) not null  
 )
 
-create table staff(  
-CF char(20) not null primary key,  
+CREATE TABLE richiestaAggiornamento(  
+    ID numeric(5) not null primary key,  
+    costogiorn numeric(5) not null,  
+    IDsede char(20) references sede(PIva),  
+    costotrasf numeric(5) not null  
+)
+
+CREATE TABLE staff(  
+    CF char(20) not null primary key,  
     ruolo char(20) not null,  
     nome char(20) not null,  
     tel char(20) not null,  
     codAzienda char(20) references sede(PIva)  
-)  
+)
 
-create table SoddisfaSostituzione(  
+CREATE TABLE SoddisfaSostituzione(  
     tecnico char(20) not null references tecnici(CF),  
     richiesta numeric(5) not null references richiestaSostituzione(ID),  
     primary key(tecnico, richiesta)  
-)  
+)
 
-create table  Sostituisce(  
+CREATE TABLE  Sostituisce(  
     componente numeric(5) not null references componente(ID),  
     richiesta numeric(5) not null references richiestaSostituzione(ID),  
     primary key(componente, richiesta)  
 )  
 
-create table riparazione(  
+CREATE TABLE riparazione(  
     componente numeric(5) not null references componente(ID),  
     staff numeric(5) not null references staff(CF),  
     sede char(20) not null references sede(PIva),  
@@ -495,90 +497,113 @@ create table riparazione(
     primary key(componente,staff,sede)  
 )  
 
-create table soddisfaFormazione(  
+CREATE TABLE soddisfaFormazione(  
     richiesta numeric(5) not null references richiestaSostituzione(ID),  
     tecnico char(20) not null references tecnici(CF),  
     primary key(richiesta,tecnico)  
 )
 
-
-create table formazione(  
+CREATE TABLE formazione(  
     richiesta numeric(5) not null references richiestaAggiornamento(ID),  
     staff char(20) not null references staff(CF),  
-     primary key(richiesta, staff)  
-    )   
+    primary key(richiesta, staff)  
+)   
 
-create table operato(  
+CREATE TABLE operato(  
     tecnico char(20) not null references tecnici(CF),  
     paese char(10) not null references paese(ISO),  
     primary key(tecnico, paese)   
 )   
 
-create table situata (   
+CREATE TABLE situata (   
     sede char(20) not null references sede(PIva),  
     paese char(10) not null references paese(ISO),  
     primary key(sede, paese)   
 )  
 
-create table contenuto(  
-   macchina  numeric(5) not null,  
-   componente numeric(5) not null references componente(ID),  
-   primary key(macchina, componente)  
+CREATE TABLE contenuto(  
+    macchina  numeric(5) not null,  
+    componente numeric(5) not null references componente(ID),  
+    primary key(macchina, componente)  
 )  
 
-
-create table dipendente(  
-	sede char(20) not null references sede(PIva),  
-	staff char(20) not null references staff(CF),  
-	primary key(sede,staff)  
-)  
+CREATE TABLE dipendente(  
+    sede char(20) not null references sede(PIva),  
+    staff char(20) not null references staff(CF),  
+    primary key(sede,staff)  
+)
+```
 
 ### 4c codifica delle operazioni
-1. Inserire una nuova sede (1 volta all'anno)  
-INSERT INTO sede (PIva, nome, indirizzo) VALUES('S01', 'ITALY1', 'Via rizzoli')  
+
+1. Inserire una nuova sede (1 volta all'anno)
+```sql
+INSERT INTO sede (PIva, nome, indirizzo)
+VALUES ('S01', 'ITALY1', 'Via rizzoli')
+```
 
 2. Inserire un nuovo tecnico (5 volte all'anno)  
-INSERT INTO tecnici (CF, nome,tel,PermessoPericolo) VALUES('MRARSS111111', 'MARIO ROSSI', '3332445559',7)  
+```sql
+INSERT INTO tecnici (CF, nome,tel,PermessoPericolo)
+VALUES ('MRARSS111111', 'MARIO ROSSI', '3332445559',7)  
+```
 
 3. Inserire un nuovo membro dello staff (2 volte al mese)  
-INSERT INTO staff (CF,ruolo,nome,tel) VALUES ('LGUVRD22222', 'operaio','luigi verdi' '1125656')
+```sql
+INSERT INTO staff (CF,ruolo,nome,tel)
+VALUES ('LGUVRD22222', 'operaio','luigi verdi' '1125656')
+```
 
-4. Inserire un nuovo paese (1 volta ogni paio d'anni  
-INSERT INTO paese(ISO,nome,LivelloPericolo) VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
+4. Inserire un nuovo paese (1 volta ogni paio d'anni
+```sql
+INSERT INTO paese(ISO,nome,LivelloPericolo)
+VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
+```
 
-5. Inserire una nuova macchina (1 volta al mese)  
-INSERT INTO macchina(ID,nome,descrizione,data_inizio,data_fine,stato_operativo) VALUES ('1', 'Caffettiera', 'Macchinetta del caffe',12/01/19,12/01/22,True);  
+5. Inserire una nuova macchina (1 volta al mese)
+```sql
+INSERT INTO macchina(ID,nome,descrizione,data_inizio,data_fine,stato_operativo)
+VALUES ('1', 'Caffettiera', 'Macchinetta del caffe',12/01/19,12/01/22,True);  
+```
 
 6. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
+```sql
 UPDATE contenuto  
 SET ID=C2,  
 WHERE macchina=m1 and componente=c1   
 ON UPDATE CASCADE   
-
+```
 
 7. Richiedere un intervento di riparazione (1 volta al giorno)
-insert into RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione) values('R1','01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
+```sql
+INSERT INTO RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)
+VALUES ('R1','01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
+```
 
 19. Rimuovere un membro dello staff che non è più dipendente
+```sql
 DELETE FROM staff   
-	WHERE CF='LGUVRD22222'  
-	ON DELETE SET DEFAULT   
+WHERE CF='LGUVRD22222'  
+ON DELETE SET DEFAULT   
+```
 
 22. Visualizzare tutte le sedi per un determinato paese dato il codice iso
-create view sediPaese  
+```sql
+CREATE VIEW sediPaese  
         (ID,nomeSede, nomePaese,ISO ) as  
-select Name, Surname, Salary  
-from situata , sede  
-where situata.paese = sede.ISO and ISO='ISO 3166-2:IT'  
-
+SELECT Name, Surname, Salary  
+FROM situata , sede  
+WHERE situata.paese = sede.ISO and ISO='ISO 3166-2:IT'  
+```
 
 23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
-create view paesePericolo  
+```sql
+CREATE VIEW paesePericolo  
         (nomePaese,ISO ) as  
-select Name, Surname, Salary  
-from paese  
-where ISO='ISO 3166-2:IT'  
-
+SELECT Name, Surname, Salary  
+FROM paese  
+WHERE ISO='ISO 3166-2:IT'  
+```
 
 
 ## 5 Testing
