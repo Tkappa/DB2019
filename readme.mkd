@@ -109,8 +109,11 @@ si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse 
 14. Visualizzare tutte le macchine per una sede (1 volta al giorno)
 15. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 16.Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
+17. Calcolare il numero di richiesteAggiornamento che risultano "completate"
+18. Visualizzare tutte le macchine che sono ancora in garanzia
 19. Rimuovere un membro dello staff che non è più dipendente
-20. Risponedere ad un intervento di riparazione  (1 volta al giorno)
+20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)	
+21. Risponedere ad un intervento di riparazione  (1 volta al giorno)
 
 
 ## 2 Progettazione concettuale  
@@ -269,7 +272,7 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 **Eliminazione delle ridondanze:**    
 Data la natura dell'attributo _operativo_ di una macchina si nota una ridondanza. Questo valore si può calcolare controllando tutti i componenti associati alla macchina per vedere se sono tutti operativi.
-Le operazioni che coinvolgono questo attributo sono l'operazione 15, l'operazione 20 (un componente riparato ritorna operativo e quindi anche la macchina ad esso associata)
+Le operazioni che coinvolgono questo attributo sono l'operazione 15, l'operazione 21 (un componente riparato ritorna operativo e quindi anche la macchina ad esso associata)
 
 **Tavole degli accessi in presenza di ridondanza:**  
 
@@ -279,7 +282,7 @@ Operazione 15 (Assumento una media di 10 macchine per sede):
 |-------------|--------------|---|---|
 |Macchina|Entità|20|R|
 
-Operazione 20:  
+Operazione 21:  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
@@ -297,7 +300,7 @@ Operazione 15 (Assumendo una media di 10 macchine per sede e 10 componenti per m
 |Contenuto|Relazione|100|R|
 |Componente|Entità|100|R|   
 
-Operazione 20:  
+Operazione 21:  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
@@ -305,12 +308,12 @@ Operazione 20:
 
 In presenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):  
 Op.15 = 20(costo)\* 150 (Volte al mese) = 3000  
-Op 20 = (1\*2 + 1 + 1\*2)(costo) \* 30 (Volte al mese) = 150  
+Op 21= (1\*2 + 1 + 1\*2)(costo) \* 30 (Volte al mese) = 150  
 Totale = 3150
 
 In assenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):
 Op.15 = (10+100+100)(costo)\* 150 (Volte al mese) = 31500    
-Op 20 = (1\*2)(costo) \* 30 (Volte al mese) = 60  
+Op 21 = (1\*2)(costo) \* 30 (Volte al mese) = 60  
 Totale = 31560  
 
 Di conseguenza si ritiene opportuno mantenere la ridondanza    
