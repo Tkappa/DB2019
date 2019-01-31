@@ -439,11 +439,11 @@ CREATE TABLE tecnici(
 )
 
 CREATE TABLE macchina(  
-    ID numeric(5) not null auto_increment,  
+    ID int not null auto_increment,  
     nome char(30) not null,  
-    descrizione(30),  
-    data inizio date not null,  
-    data fine date not null,  
+    descrizione char(30),  
+    data_inizio date not null,  
+    data_fine date not null,  
     stato_operativo bool not null,
     primary key (ID)
 ) 
