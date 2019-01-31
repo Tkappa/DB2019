@@ -611,7 +611,7 @@ VALUES (..)
 ```
 7. Aggiungere una nuova richiesta di riparazione
 ```sql
-INSERT INTO RichiestaRiparazione(ID, Sede, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)
+INSERT INTO riparazione(ID, Sede, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)
 VALUES (1, 'S01', 15, 20, 'in attesa', 12/01/19, 14/01/19, 'riparazione componente c1' )
 ```
 
