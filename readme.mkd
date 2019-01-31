@@ -98,20 +98,28 @@ si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse 
 3. Inserire un nuovo membro dello staff (2 volte al mese)
 4. Inserire un nuovo paese  (1 volta ogni paio d'anni)
 5. Inserire una nuova macchina  (1 volta al mese)
-6. Inserire un nuvo componente 
-7. Aggiungere una nuova richiesta di riparazione
-. Aggiungere una nuova richiesta di sostituzione
-9. Aggiungere una nuova richiesta di Aggiornamento:
-10. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
-11. Visualizzare tutte le sedi per un determinato paese dato il codice ISO (5 volte al giorno)
-12. Visualizzare tutti i paesi per un livello di pericolo (1 volta al giorno)
-13. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
-14. Visualizzare tutte le macchine per una sede (1 volta al giorno)
-15. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
-16.Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
-19. Rimuovere un membro dello staff che non è più dipendente
-20. Risponedere ad un intervento di riparazione  (1 volta al giorno)
-
+6. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
+7. Richiedere un intervento di riparazione  (1 volta al giorno)
+8. Risponedere ad un intervento di riparazione  (1 volta al giorno)
+9. Richiere un intervento di sostituzione (1 volta a settimana)
+10. Rispondere ad un intervento di sostituzione (1 volta a settimana)
+11. Richiedere un intervento di aggiornamento (1 volta al mese)
+12. Rispondere ad un intervento di aggiornamento (1 volta al mese)
+13. Aggiornare il livello di pericolo di un paese (1 volta all'anno)
+14. Visualizzare tutti gli interventi in corso (5 volte al giorno)
+15. Visualizzare tutti gli interventi completati (1 volta alla settimana)
+16. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
+17. Aggiungere un paese su cui può operare un tecnico (1 volta al mese)
+18. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
+19. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
+20. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
+21. Visualizzare tutte le sedi per un determinato paese dato il codice ISO (5 volte al giorno)
+22. Visualizzare tutti i paesi per un livello di pericolo (1 volta al giorno)
+23. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
+24. Visualizzare tutte le macchine per una sede (1 volta al giorno)
+25. Visualizzare tutti i componenti per una macchina (1 volta al giorno)
+26. Visualizzare tutto lo staff per una data sede. (1 volta al mese)
+27. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 
 ## 2 Progettazione concettuale  
 
@@ -269,17 +277,17 @@ L' entità richiesta è una generalizzazione totale delle possibili richieste ef
 
 **Eliminazione delle ridondanze:**    
 Data la natura dell'attributo _operativo_ di una macchina si nota una ridondanza. Questo valore si può calcolare controllando tutti i componenti associati alla macchina per vedere se sono tutti operativi.
-Le operazioni che coinvolgono questo attributo sono l'operazione 15, l'operazione 20 (un componente riparato ritorna operativo e quindi anche la macchina ad esso associata)
+Le operazioni che coinvolgono questo attributo sono l'operazione 28, l'operazione 8 (un componente riparato ritorna operativo e quindi anche la macchina ad esso associata)
 
 **Tavole degli accessi in presenza di ridondanza:**  
 
-Operazione 15 (Assumento una media di 10 macchine per sede):  
+Operazione 28 (Assumento una media di 10 macchine per sede):  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
 |Macchina|Entità|20|R|
 
-Operazione 20:  
+Operazione 8:  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
@@ -289,7 +297,7 @@ Operazione 20:
 
 **Tavole degli accessi in assenza di ridondanza:**
 
-Operazione 15 (Assumendo una media di 10 macchine per sede e 10 componenti per macchina):  
+Operazione 28 (Assumendo una media di 10 macchine per sede e 10 componenti per macchina):  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
@@ -297,20 +305,20 @@ Operazione 15 (Assumendo una media di 10 macchine per sede e 10 componenti per m
 |Contenuto|Relazione|100|R|
 |Componente|Entità|100|R|   
 
-Operazione 20:  
+Operazione 8:  
 
 |Concetto|Costrutto|Accessi|Tipo|
 |-------------|--------------|---|---|
 |Componente|Entità|1|W|
 
 In presenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):  
-Op.15 = 20(costo)\* 150 (Volte al mese) = 3000  
-Op 20 = (1\*2 + 1 + 1\*2)(costo) \* 30 (Volte al mese) = 150  
+Op.28 = 20(costo)\* 150 (Volte al mese) = 3000  
+Op 8 = (1\*2 + 1 + 1\*2)(costo) \* 30 (Volte al mese) = 150  
 Totale = 3150
 
 In assenza di ridondanza il costo delle varie operazioni (considerando il doppio il costo di una scrittura rispetto alla lettura):
-Op.15 = (10+100+100)(costo)\* 150 (Volte al mese) = 31500    
-Op 20 = (1\*2)(costo) \* 30 (Volte al mese) = 60  
+Op.28 = (10+100+100)(costo)\* 150 (Volte al mese) = 31500    
+Op 8 = (1\*2)(costo) \* 30 (Volte al mese) = 60  
 Totale = 31560  
 
 Di conseguenza si ritiene opportuno mantenere la ridondanza    
@@ -626,7 +634,7 @@ INSERT INTO soddisfaFormazione(Tecnico,Richiesta) values ('MRARSS111111',2)
 INSERT INTO Formazione(staff,richiestaAggiornamento) VALUES(..)
 ```
 
-10. Aggiornamento del componente 1 nella macchina 1 (1 volta al mese)  
+10. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
 ```sql
 UPDATE contenuto  
 SET  macchina=0
@@ -634,6 +642,11 @@ WHERE macchina=1 and componente=1
 
 ```
 
+11. Rimuovere un membro dello staff che non è più dipendente
+```sql
+DELETE FROM staff   
+WHERE CF='LGUVRD22222'    
+```
 
 11. Visualizzare tutte le sedi per un determinato paese dato il codice iso
 ```sql
@@ -689,14 +702,27 @@ WHERE nome = 'MARIO ROSSI'
 ```sql
 select count(*) from richiestaAggiornamento where stato='completata'
 ```
-18. Visualizzare tutte le macchine che sono ancora in garanzia  
+18. Visualizzare tutte le macchine che sono ancora in garanzia
 ```sql
 select nome,descrizione from macchina where data_fine>CURRENT_DATE 
 ```
-19. Rimuovere un membro dello staff che non è più dipendente
-```sql
-DELETE FROM staff   
-WHERE CF='LGUVRD22222'    
+
+18. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
+```
+select sum(
+(select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 
+from richiestaSostituzione 
+where (idsede='S03' and stato='completata' 
+and datediff(datafine,'2019-02-20')<0 
+and datediff(datainizio,'2019-02-09')>0 ))
++
+(select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 
+from richiestaAggiornamento 
+where idsede='S03' and stato='completata'
+and datediff(datafine,'2019-02-20')<0 
+and datediff(datainizio,'2019-02-09')>0 )
+)
+
 ```
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
