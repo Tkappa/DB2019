@@ -702,7 +702,10 @@ WHERE nome = 'MARIO ROSSI'
 ```sql
 select count(*) from richiestaAggiornamento where stato='completata'
 ```
-
+18. Visualizzare tutte le macchine che sono ancora in garanzia
+``sql
+select nome,descrizione from macchina where data_fine>CURRENT_DATE 
+```
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.
