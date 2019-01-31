@@ -1,8 +1,10 @@
+Sito: [](site1909.tw.cs.unibo.it)
+
 # Cose da fare
 
 - [x] Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva
-- [ ] Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
-- [ ] 3c Normalizzazione
+- [x] Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
+- [x] 3c Normalizzazione
 - [x] Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
 - [ ] Rileggere ad alta voce in cerca di errori grammaticali e lessicali
 - [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
@@ -12,8 +14,7 @@
 - [ ] Utilizzare lo styling di markdown per anche per il codice SQL 
 - [ ] Creazione di tutte le operazioni SQL (Fatte da 1 a 7 + varie)
 - [ ] Creazione di tutte le pagine web che supportano le operazioni SQL (Fatte da 0 a 5)
-
-+ Fatto il sito con bootstrap (è comunque brutto lo so), usate una qualsiasi delle operazioni 1-5 insieme al suo php come template
+- [x] Fatto il sito con bootstrap (è comunque brutto lo so), usate una qualsiasi delle operazioni 1-5 insieme al suo php come template
 
 # Relazione (2 punti difficili in più all'esame)
 
