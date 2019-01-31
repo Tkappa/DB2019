@@ -378,8 +378,8 @@ Non sono stati rilevati attributi multivalore.
 |Paese| Paese(__ISO__,nome,LivelloPericolo)|
 |Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo)|
 |Specializzazione| Specializzazione(__ID__,tipo,costo)|
-|Macchina| Macchina(__ID__,nome,descrizione, ginizio,gfine, operativo)|
-|Componente|Componente(__ID__,peso,costo,operativo)|
+|Macchina| Macchina(__ID__,nome,descrizione, ginizio,gfine, stato_operativo)|
+|Componente|Componente(__ID__,peso,costo,stato_operativo)|
 |RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
 |RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
 |Staff |Staff(__CF__,ruolo,nome,tel)|
@@ -399,8 +399,8 @@ Non sono stati rilevati attributi multivalore.
 |Paese(__ISO__,nome,LivelloPericolo)|-|
 | Tecnico(__CF__, nome,tel,PermessoPericolo)|-|
 | Specializzazione(__ID__,tipo,costo)|-|
-| Macchina(__ID__,nome,descrizione,garanzia, ginizio,gfine, operativo)|-|
-|Componente(__ID__,peso,costo,operativo)|-|
+| Macchina(__ID__,nome,descrizione,garanzia, ginizio,gfine,stato_operativo)|-|
+|Componente(__ID__,peso,costo,stato_operativo)|-|
 | RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
 | RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
 |Staff(__CF__,ruolo,nome,tel)|-|
@@ -443,7 +443,7 @@ CREATE TABLE macchina(
     descrizione(30),  
     data inizio date not null,  
     data fine date not null,  
-    stato operativo bool not null,
+    stato_operativo bool not null,
     primary key (ID)
 ) 
 
