@@ -105,21 +105,21 @@ si vorrà salvare data di inizio , fine , descrizione e stato. Ci saranno divers
 10. Rispondere ad un intervento di sostituzione ( 1 volta a settimana)
 11. Richiedere un intervento di aggiornamento (1 volta al mese)
 12. Rispondere ad un intervento di aggiornamento (1 volta al mese)
-14. Aggiornare il livello di pericolo di un paese ( 1 volta all'anno)
-15. Visualizzare tutti gli interventi in corso (5 volte al giorno)
-16. Visualizzare tutti gli interventi completati (1 volta alla settimana)
-17. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
-18. Aggiungere un paese su cui può operare un tecnico ( 1 volta al mese)
-19. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
-20. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
-21. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
-22. Visualizzare tutte le sedi per un determinato paese dato il codice ISO(5 volte al giorno)
-23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
-24. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
-25. Visualizzare tutte le macchine per una sede (1 volta al giorno)
-26. Visualizzare tutti i componenti per una macchina ( 1 volta al giorno)
-27. Visualizzare tutto lo staff per una data sede. (1 volta al mese)
-28. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
+13. Aggiornare il livello di pericolo di un paese ( 1 volta all'anno)
+14. Visualizzare tutti gli interventi in corso (5 volte al giorno)
+15. Visualizzare tutti gli interventi completati (1 volta alla settimana)
+16. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
+17. Aggiungere un paese su cui può operare un tecnico ( 1 volta al mese)
+18. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
+19. Rimuovere un membro dello staff che non è più dipendente (2 volte all'anno)
+20. Rimuovere un tecnico che non è più dipendente (1 volta all'anno)
+21. Visualizzare tutte le sedi per un determinato paese dato il codice ISO(5 volte al giorno)
+22. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+23. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
+24. Visualizzare tutte le macchine per una sede (1 volta al giorno)
+25. Visualizzare tutti i componenti per una macchina ( 1 volta al giorno)
+26. Visualizzare tutto lo staff per una data sede. (1 volta al mese)
+27. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 
 ## 2 Progettazione concettuale  
 
@@ -620,9 +620,34 @@ CREATE VIEW paesePericolo
 SELECT paese.ISO, paese.nome
 FROM paese
 WHERE paese.livelloPericolo = 5 ;
- 
 ```
 
+23. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
+```sql
+CREATE VIEW operatoTecnico
+        (ISO, nomePaese) as
+SELECT p.ISO, p.nome
+FROM paese as p JOIN operato as o ON p.ISO = o.paese JOIN tecnici t ON o.tecnico = t.CF
+WHERE t.PermessoPericolo <= p.livelloPericolo AND t.CF='CCCDDD' ;
+```
+
+24. Visualizzare tutte le macchine per una sede (1 volta al giorno)
+```sql
+CREATE VIEW macchineSede
+        (ID, nomeMacchina) as
+SELECT m.ID, m.nome
+FROM sede as s JOIN possiede as p ON s.PIva = p.sede JOIN macchina as m ON m.ID = p.macchina
+WHERE s.PIva ='S01';
+```
+
+27. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
+```sql
+CREATE VIEW macchineNonOperative
+        (ID, nomeMacchina) as
+SELECT macchina.ID, macchina.nome
+FROM sede JOIN possiede ON sede.PIva=possiede.sede JOIN macchina ON possiede.macchina=macchina.ID
+WHERE sede.PIva = 'S01' and macchina.stato_operativo = 0 ;
+```
 
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
