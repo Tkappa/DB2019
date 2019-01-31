@@ -1,3 +1,8 @@
+% Relazione su AlphaDB
+% Valentina Ferraioli(802243) - Igor Ershov(78952) - Stefano Andriolo(801172)
+% Sessione Invernale 2018-2019
+
+
 Sito: http://site1909.tw.cs.unibo.it
 
 # Cose da fare
@@ -11,7 +16,7 @@ Sito: http://site1909.tw.cs.unibo.it
 - [ ] il campo indirizzo ha bisogno di numero civico e cap
 - [ ] **Ci mancano delle operazioni base come l'aggiunta e la rimozione di uno staff da una sede, controlliamo meglio se tutte le relazioni sono rappresentate**
 - [x] **Considerare di convertire le varie tabelle con un ID numerico in uno autoincrementabile, cosi da non dovere sparare un numero a caso all'inserimento**
-- [x] Utilizzare lo styling di markdown per anche per il codice SQL 
+- [x] Utilizzare lo styling di markdown per anche per il codice SQL
 - [ ] Creazione di tutte le operazioni SQL (Fatte da 1 a 7 + varie)
 - [ ] Creazione di tutte le pagine web che supportano le operazioni SQL (Fatte da 0 a 5)
 - [x] Fatto il sito con bootstrap (è comunque brutto lo so), usate una qualsiasi delle operazioni 1-5 insieme al suo php come template
@@ -98,7 +103,7 @@ si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse 
 3. Inserire un nuovo membro dello staff (2 volte al mese)
 4. Inserire un nuovo paese  (1 volta ogni paio d'anni)
 5. Inserire una nuova macchina  (1 volta al mese)
-6. Inserire un nuvo componente 
+6. Inserire un nuvo componente
 7. Aggiungere una nuova richiesta di riparazione
 8. Aggiungere una nuova richiesta di sostituzione
 9. Aggiungere una nuova richiesta di Aggiornamento:
@@ -441,7 +446,7 @@ CREATE TABLE macchina(
     data_fine date not null,  
     stato_operativo bool not null,
     primary key (ID)
-) 
+)
 
 CREATE TABLE componente(
     ID numeric(5) not null auto_increment,
@@ -592,17 +597,17 @@ VALUES ('S01', 'LGIVRD')
 INSERT INTO macchina(ID, nome, descrizione, data_inizio, data_fine, stato_operativo)
 VALUES ('1', 'Caffettiera', 'Macchinetta del caffe', 12/01/19, 12/01/22, True);  
 ```
-per ogni macchina: 
+per ogni macchina:
 ```sql
 INSERT INTO possiede(sede, macchina)
 VALUES (..)
 ```
-6. Inserire un nuvo componente 
+6. Inserire un nuvo componente
 ```sql
 INSERT INTO componente(peso,costo,stato_operativo)
 VALUES (...)
 ```
-per ogni componente: 
+per ogni componente:
 ```sql
 INSERT INTO contenuto(macchina,componente))
 VALUES (..)
@@ -616,9 +621,9 @@ VALUES (1, 'S01', 15, 20, 'in attesa', 12/01/19, 14/01/19, 'riparazione componen
 8. Aggiungere una nuova richiesta di sostituzione:
 ```sql
 INSERT INTO richiestaSostituzione(ID, IDsede, costogiorn, costotrasf, stato, dataInizio, dataFine, descrizione)
-VALUES (1, 'S03',15,20, 'in attesa', '2019-01-30', '2019-01-31', 'sostituzione' ) 
+VALUES (1, 'S03',15,20, 'in attesa', '2019-01-30', '2019-01-31', 'sostituzione' )
 ```
-per ogni richiesta di sostituzione: 
+per ogni richiesta di sostituzione:
 ```sql
 INSERT INTO soddisfaSostituzione(Tecnico,Richiesta) VALUES (..)
 INSERT INTO sostituisce(Componente,Richiesta) VALUESS (..)
@@ -628,7 +633,7 @@ INSERT INTO sostituisce(Componente,Richiesta) VALUESS (..)
 INSERT INTO richiestaAggiornamento(ID, IDsede, costogiorn, costotrasf, stato, dataInizio, dataFine, descrizione)
 VALUES ('1', 'S03',15,20,'in attesa', '2019-01-30','2019-01-31', 'formazione staff')
 ```
-per ogni richiesta di sostituzione: 
+per ogni richiesta di sostituzione:
 ```sql
 INSERT INTO soddisfaFormazione(Tecnico,Richiesta) values ('MRARSS111111',2)
 INSERT INTO Formazione(staff,richiestaAggiornamento) VALUES(..)
@@ -690,7 +695,7 @@ WHERE sede.PIva = 'S01' and macchina.stato_operativo = 0
 16. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
 ```sql
 UPDATE tecnici
-SET permessoPericolo=10 
+SET permessoPericolo=10
 WHERE nome = 'MARIO ROSSI'
 ```
 17. Calcolare il numero di richiesteAggiornamento che risultano "completate"
@@ -703,7 +708,7 @@ WHERE stato='completata'
 ```sql
 SELECT nome, descrizione
 FROM macchina
-WHERE data_fine > CURRENT_DATE 
+WHERE data_fine > CURRENT_DATE
 ```
 19. Rimuovere un membro dello staff che non è più dipendente
 ```sql
@@ -712,19 +717,19 @@ WHERE CF='LGUVRD22222'
 ```
 
 20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese), i pagamenti vengono effettuati al completamento dell'incarico
-```sql	
-select sum(	
+```sql
+select sum(
 (select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
 from richiestaSostituzione 	
 where (idsede='S03' and stato='completato' 	
 and datediff(datafine,'2019-02-20')<0 	
-and datediff(datafine,'2019-02-09')>0 ))	
-+	
+and datediff(datafine,'2019-02-09')>0 ))
++
 (select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
 as tot from richiestaAggiornamento 	
-where idsede='S03' and stato='completata'	
+where idsede='S03' and stato='completata'
 and datediff(datafine,'2019-02-20')<0 	
-and datediff(datafine,'2019-02-09')>0 )	
+and datediff(datafine,'2019-02-09')>0 )
 )   	
 ```
 ## 5 Testing

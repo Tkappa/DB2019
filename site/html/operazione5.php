@@ -83,6 +83,61 @@
     }
 
 
+    $sql = "select id from macchina order by id desc limit 1";
+
+    echo("<p>Query inserita : ".$sql."</p>");
+
+    $topid = $conn->query($sql);
+    if($topid){
+      if(!is_bool($topid)){
+        echo("<table border=1>");
+        while($row = mysqli_fetch_assoc($topid)){
+          echo("<tr>");
+          foreach($row as $value){
+            echo ("<td>".$value."</td>");
+          }
+          echo("</tr>");
+        }
+        echo("</table>");
+      }
+      else{
+        echo ("<p>Query eseguita con successo<p>");
+      }
+
+    }
+    else{
+      echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
+    }
+
+
+    $sql = "insert into possiede(sede,macchina) values ( '".$_POST["piva"]."','".$value."')";
+
+    echo("<p>Query inserita : ".$sql."</p>");
+
+    $result = $conn->query($sql);
+
+    if($result){
+      if(!is_bool($result)){
+        echo("<table border=1>");
+        while($row = mysqli_fetch_assoc($result)){
+          echo("<tr>");
+          foreach($row as $value){
+            echo ("<td>".$value."</td>");
+          }
+          echo("</tr>");
+        }
+        echo("</table>");
+      }
+      else{
+        echo ("<p>Query eseguita con successo<p>");
+      }
+
+    }
+    else{
+      echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
+    }
+
+
     $conn->close();
     ?>
 
