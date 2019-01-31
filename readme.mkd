@@ -598,7 +598,7 @@ WHERE CF='LGUVRD22222'
 ON DELETE SET DEFAULT   
 ```
 
-22. Visualizzare tutte le sedi per un determinato paese dato il codice iso
+21. Visualizzare tutte le sedi per un determinato paese dato il codice iso
 ```sql
 CREATE VIEW sediPaese  
         (ID, nomeSede, nomePaese, ISO) as  
@@ -607,7 +607,7 @@ FROM situata, sede, paese
 WHERE situata.sede = sede.PIva and paese.ISO='it' ;
 ```
 
-23. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+22. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
 ```sql
 CREATE VIEW paesePericolo  
         (ISO, nomePaese) as  
