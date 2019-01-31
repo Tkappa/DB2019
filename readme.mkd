@@ -100,7 +100,7 @@ si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse 
 5. Inserire una nuova macchina  (1 volta al mese)
 6. Inserire un nuvo componente 
 7. Aggiungere una nuova richiesta di riparazione
-. Aggiungere una nuova richiesta di sostituzione
+8. Aggiungere una nuova richiesta di sostituzione
 9. Aggiungere una nuova richiesta di Aggiornamento:
 10. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
 11. Visualizzare tutte le sedi per un determinato paese dato il codice ISO (5 volte al giorno)
