@@ -375,7 +375,6 @@ Non sono stati rilevati attributi multivalore.
 |Sede|Sede(__PIva__,nome,indirizzo)|
 |Paese| Paese(__ISO__,nome,LivelloPericolo)|
 |Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo,IDspec)|
-|Specializzazione| Specializzazione(__ID__,tipo,costo)|
 |Macchina| Macchina(__ID__,nome,descrizione, ginizio,gfine, stato_operativo)|
 |Componente|Componente(__ID__,peso,costo,stato_operativo)|
 |RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
@@ -396,7 +395,6 @@ Non sono stati rilevati attributi multivalore.
 |Sede(__PIva__,nome,indirizzo)|-|
 |Paese(__ISO__,nome,LivelloPericolo)|-|
 | Tecnico(__CF__, nome,tel,PermessoPericolo,IDspec)|-|
-| Specializzazione(__ID__,tipo,costo)|-|
 | Macchina(__ID__,nome,descrizione,garanzia, ginizio,gfine,stato_operativo)|-|
 |Componente(__ID__,peso,costo,stato_operativo)|-|
 | RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
@@ -484,13 +482,13 @@ CREATE TABLE staff(
     ON DELETE SET DEFAULT   
 )
 
-CREATE TABLE SoddisfaSostituzione(  
+CREATE TABLE soddisfaSostituzione(  
     tecnico char(20) not null references tecnici(CF),  
     richiesta numeric(5) not null references richiestaSostituzione(ID),  
     primary key(tecnico, richiesta)  
 )
 
-CREATE TABLE  Sostituisce(  
+CREATE TABLE  sstituisce(  
     componente numeric(5) not null references componente(ID),  
     richiesta numeric(5) not null references richiestaSostituzione(ID),  
     primary key(componente, richiesta)  
