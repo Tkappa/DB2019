@@ -98,27 +98,27 @@ si vorrà salvare data di inizio, fine, descrizione e stato. Ci saranno diverse 
 
 ### 1e. Specifica operazioni  
 
-1. Inserire una nuova sede (1 volta all'anno)  
-2. Inserire un nuovo tecnico (5 volte all'anno)
-3. Inserire un nuovo membro dello staff (2 volte al mese)
-4. Inserire un nuovo paese  (1 volta ogni paio d'anni)
-5. Inserire una nuova macchina  (1 volta al mese)
-6. Inserire un nuvo componente
-7. Aggiungere una nuova richiesta di riparazione
-8. Aggiungere una nuova richiesta di sostituzione
-9. Aggiungere una nuova richiesta di Aggiornamento:
-10. Aggiornamento del componente nella macchina (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)
-11. Visualizzare tutte le sedi per un determinato paese dato il codice ISO (5 volte al giorno)
-12. Visualizzare tutti i paesi per un livello di pericolo (1 volta al giorno)
-13. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
-14. Visualizzare tutte le macchine per una sede (1 volta al giorno)  
-15. Vedere quali macchine non sono operative data una sede (5 volte al giorno)  
-16. Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)
-17. Calcolare il numero di richiesteAggiornamento che risultano "completate"  
-18. Visualizzare tutte le macchine che sono ancora in garanzia  
-19. Rimuovere un membro dello staff che non è più dipendente  
-20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)	  
-21. Risponedere ad un intervento di riparazione  (1 volta al giorno)  
+1.Inserire un nuovo paese (1 volta ogni paio d'anni)  
+2.Inserire una nuova sede (1 volta all'anno)  
+3.Inserire un nuovo tecnico (5 volte all'anno)  
+4.Inserire un nuovo membro dello staff (2 volte al mese)  
+5.Inserire una nuova macchina (1 volta al mese)  
+6.Inserire un nuvo componente(1 volta al mese)  
+7.Aggiungere una nuova richiesta di riparazione(2 volte al mese)  
+8.Aggiungere una nuova richiesta di sostituzione(1 volta al mese)   
+9.Aggiungere una nuova richiesta di Aggiornamento(1 volta al mese)  
+10.Aggiornamento del componente 1 nella macchina 1 (1 volta al mese)  
+11.Visualizzare tutte le sedi per un determinato paese dato il codice iso(1 volta ogni 6 mesi)  
+12.Visualizzare tutti i paesi per un livello di pericolo (1 volta al giorno)  
+13.Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)  
+14.Visualizzare tutte le macchine per una sede (1 volta al giorno)  
+15.Vedere quali macchine non sono operative data una sede (5 volte al giorno)  
+16.Aggiornare il livello di pericolo su cui può operare un tecnico (1 volta all'anno)  
+17.Calcolare il numero di richiesteAggiornamento che risultano "completate"(1 volta al giorno)  
+18.Visualizzare tutte le macchine che sono ancora in garanzia(1 volta al mese)  
+19.Rimuovere un membro dello staff che non è più dipendente(1 volta ogni 6 mesi)  
+20.Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese), i pagamenti vengono effettuati al completamento dell'incarico  
+21. Risponedere ad un intervento di riparazione  (1 volta al giorno)    
 
 ## 2 Progettazione concettuale  
 
