@@ -1,9 +1,9 @@
 # Cose da fare
 
-- [ ] Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva
+- [x] Cambiare le immagini della progettazione concettuale per cambiare l'id della sede con la sua partita iva
 - [ ] Pensare a modi per rendere più "interessante" (generalizzioni, gerarchie, accorpamenti) il progetto
 - [ ] 3c Normalizzazione
-- [ ] Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
+- [x] Mettere la relazione tra tecnici e specializzazioni (0,1) , bisogna aggiornare le immagini
 - [ ] Rileggere ad alta voce in cerca di errori grammaticali e lessicali
 - [ ] Segnalatemi il prima possibile tutte le cose sbagliate e domani sera le aggiorno
 - [ ] il campo indirizzo ha bisogno di numero civico e cap
@@ -416,9 +416,9 @@ Non sono stati rilevati attributi multivalore.
 ## 4 Codifica SQL
 ### 4a definizione schema in codice  
 create table sede(  
-    PIva char(20) not null primary key,  
-    nome char(30) not null,  
-    indirizzo char(30)  
+	 PIva char(20) not null primary key,  
+	 nome char(30) not null,  
+	 indirizzo char(30)  
 )  
 
 create table paese(  
