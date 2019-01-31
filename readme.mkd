@@ -732,6 +732,19 @@ and datediff(datafine,'2019-02-20')<0
 and datediff(datafine,'2019-02-09')>0 )
 )   	
 ```
+
+21. Rispondere ad un intervento di riparazione
+```sql
+START TRANSACTION
+UPDATE riparazione SET stato = true, dataFine = DATE, staff = 'CCCDDD' WHERE componente = 1 and sede = 'S04' ;
+UPDATE componente c JOIN riparazione r ON c.id = r.componente SET c.stato_operativo = true WHERE r.componente = 1 and r.sede = 'S04' ;
+UPDATE componente c JOIN contenuto co ON c.id = co.componente JOIN macchima m ON co.macchina = m.id JOIN possiede p ON p.macchina = m.id
+    JOIN sede s ON s.PIva = p.sede
+    SET m.stato_operativo = true
+    WHERE c.ID = 1 and s.PIva = 'S04';
+COMMIT;
+```
+
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.
