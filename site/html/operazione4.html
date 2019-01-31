@@ -5,8 +5,8 @@
   <title>DB-Index</title>
 
 
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/site.css" rel="stylesheet">
+  <link href="../css/bootstrap.css" rel="stylesheet">
+  <link href="../css/site.css" rel="stylesheet">
 
 </head>
 
@@ -39,20 +39,23 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
           <h2 class="post-title">
-            Query libera
+            Operazione 4
           </h2>
-          <p class="post-meta">Permette di inserire qualsiasi tipo di query.</p>
+          <p class="post-meta">Inserire una nuovo paese.</p>
 
         </div>
       </div>
       <hr>
     </div>
-
-    <form id="usrform" action="operazione0.php" method="post">
+    <form id="usrform" action="operazione4.php" method="post">
       <div class="inner">
         <div class="form-group">
-          <label for="Query">Query</label>
-          <textarea class="form-control" rows="5" id="usrform" placeholder="Query..." name="sql"></textarea>
+          <label for="PIva">Codice ISO</label>
+          <input type="text" class="form-control" name="iso" >
+          <label for="Nome">Nome</label>
+          <input type="text" class="form-control" name="nome">
+          <label for="Indirizzo">Livello di pericolo</label>
+          <input type="text" class="form-control" name="per">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>

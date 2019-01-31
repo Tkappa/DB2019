@@ -5,8 +5,8 @@
   <title>DB-Index</title>
 
 
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/site.css" rel="stylesheet">
+  <link href="../css/bootstrap.css" rel="stylesheet">
+  <link href="../css/site.css" rel="stylesheet">
 
 </head>
 
@@ -39,20 +39,27 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
           <h2 class="post-title">
-            Query libera
+            Operazione 5
           </h2>
-          <p class="post-meta">Permette di inserire qualsiasi tipo di query.</p>
+          <p class="post-meta">Inserire una nuova macchina.</p>
 
         </div>
       </div>
       <hr>
     </div>
-
-    <form id="usrform" action="operazione0.php" method="post">
+    <form id="usrform" action="operazione5.php" method="post">
       <div class="inner">
         <div class="form-group">
-          <label for="Query">Query</label>
-          <textarea class="form-control" rows="5" id="usrform" placeholder="Query..." name="sql"></textarea>
+          <label for="Id">ID</label>
+          <input type="numeric" class="form-control" name="id" >
+          <label for="Nome">Nome della macchina</label>
+          <input type="text" class="form-control" name="nome">
+          <label for="descrizione">Descrizione della macchina</label>
+          <input type="text" class="form-control" name="desc">
+          <label for="data_inizio">Data inizio garanzia</label>
+          <input type="text" class="form-control" name="din">
+          <label for="data_fine">Data fine garanzia</label>
+          <input type="text" class="form-control" name="dfin">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>

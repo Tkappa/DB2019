@@ -55,7 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = $_POST["sql"];
+    $sql = "insert into paese (ISO,nome,LivelloPericolo) values ( '".$_POST["iso"]."','".$_POST["nome"]."','".$_POST["per"]."')";
 
     echo("<p>Query inserita : ".$sql."</p>");
 
@@ -86,7 +86,7 @@
     $conn->close();
     ?>
 
-    <a href="operazione0.html">Inserisci ancora </a>
+    <a href="operazione4.html">Inserisci ancora </a>
   </div>
 </body>
 </html>

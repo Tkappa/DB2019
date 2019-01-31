@@ -55,7 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = $_POST["sql"];
+    $sql = "insert into macchina(ID,nome,descrizione,data_inizio,data_fine,stato_operativo) values ( '".$_POST["id"]."','".$_POST["nome"]."','".$_POST["desc"]."','".$_POST["din"]."','".$_POST["dfin"]."',True)";
 
     echo("<p>Query inserita : ".$sql."</p>");
 
@@ -86,7 +86,7 @@
     $conn->close();
     ?>
 
-    <a href="operazione0.html">Inserisci ancora </a>
+    <a href="operazione5.html">Inserisci ancora </a>
   </div>
 </body>
 </html>
