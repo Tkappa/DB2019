@@ -690,7 +690,12 @@ SELECT macchina.ID, macchina.nome
 FROM sede JOIN possiede ON sede.PIva=possiede.sede JOIN macchina ON possiede.macchina=macchina.ID
 WHERE sede.PIva = 'S01' and macchina.stato_operativo = 0
 ```
-
+16.  Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)
+```sql
+UPDATE tecnici
+SET permessoPericolo=10 
+WHERE nome = 'MARIO ROSSI'
+```
 ## 5 Testing
 Ogni tabella avrà una pagina web con il display di tute le sue entità  
 Ogni operazione avrà una pagina web in cui si farà quella singola operazione.
