@@ -713,20 +713,20 @@ DELETE FROM staff
 WHERE CF='LGUVRD22222'    
 ```
 
-20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese)	
+20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese), i pagamenti vengono effettuati al completamento dell'incarico
 ```sql	
 select sum(	
 (select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
 from richiestaSostituzione 	
 where (idsede='S03' and stato='completato' 	
 and datediff(datafine,'2019-02-20')<0 	
-and datediff(datainizio,'2019-02-09')>0 ))	
+and datediff(datafine,'2019-02-09')>0 ))	
 +	
 (select sum((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
 as tot from richiestaAggiornamento 	
 where idsede='S03' and stato='completata'	
 and datediff(datafine,'2019-02-20')<0 	
-and datediff(datainizio,'2019-02-09')>0 )	
+and datediff(datafine,'2019-02-09')>0 )	
 )   	
 ```
 ## 5 Testing
