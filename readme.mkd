@@ -54,7 +54,7 @@ I dati da salvare saranno:
 |Identificativo ISO | Codice standard univoco fornito ad ogni paese | ISO
 |Specializzazione | Formazione specialistica su un determinato argomento | nessuno |Tecnico
 |Costo di trasferimento | Costo di trasferta del tecnico dal suo paese attuale a quello della sede in cui dovrà operare | nessuno
-|Aggiornamento | Corsi di formazine dello staff da tecnici specializzati | nessuno
+|Aggiornamento | Corsi di formazione dello staff da tecnici specializzati | nessuno
 |Operativo| Se il componente o la macchina sono funzionanti e non rotti| nessuno|
 
 
@@ -375,46 +375,46 @@ Non sono stati rilevati attributi multivalore.
 
 |Entità-Relazione|Traduzione|
 |-------------|--------------|
-|Sede|Sede(__PIva__, nome, indirizzo)|
-|Paese| Paese(__ISO__, nome, LivelloPericolo)|
-|Tecnico| Tecnico(__CF__, nome, tel, PermessoPericolo)|
-|Specializzazione| Specializzazione(__ID__, tipo, costo)|
-|Macchina| Macchina(__ID__, nome, descrizione, ginizio, gfine, stato_operativo)|
-|Componente|Componente(__ID__, peso, costo, stato_operativo)|
-|RichiestaSostituzione| RichiestaSostituzione(__ID__, __Sede__, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)|
-|RichiestaAggiornamento| RichiestaAggiornamento(__ID__, __Sede__, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)|
-|Staff |Staff(__CF__, ruolo, nome, tel)|
-|SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__, __Richiesta__)
-|Sostituisce | Sostituisce(__Componente__, __Richiesta__)|
-|Riparazione|Riparazione(__Staff__, __Componente__, __Sede__, stato, dataInizio, dataFine, descrizione)|
-|SoddisfaFormazione|SoddisfaFormazione(__RichiestaAggiornamento__, __Tecnico__)|
-|Formazione|Formazione(__Staff__, __RichiestaAggiornamento__, __Tecnico__)|
-|Operato|Operato(__Tecnico__, __Paese__)|  
-|Situata|Situata(__Sede__, __Paese__)|
-|Contenuto|Contenuto(__Macchina__, __Componente__)|
-|Dipendente| Dipendente(__Sede__, __Staff__)|
+|Sede|Sede(__PIva__,nome,indirizzo)|
+|Paese| Paese(__ISO__,nome,LivelloPericolo)|
+|Tecnico| Tecnico(__CF__, nome,tel,PermessoPericolo,IDspec)|
+|Specializzazione| Specializzazione(__ID__,tipo,costo)|
+|Macchina| Macchina(__ID__,nome,descrizione, ginizio,gfine, stato_operativo)|
+|Componente|Componente(__ID__,peso,costo,stato_operativo)|
+|RichiestaSostituzione| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
+|RichiestaAggiornamento| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|
+|Staff |Staff(__CF__,ruolo,nome,tel)|
+|SoddisfaSostituzione| SoddisfaSostituzione(__Tecnico__,__Richiesta__)
+|Sostituisce | Sostituisce(__Componente__,__Richiesta__)|
+|Riparazione|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|
+|SoddisfaFormazione|SoddisfaFormazione(__RichiestaAggiornamento__,__Tecnico__)|
+|Formazione|Formazione(__Staff__,__RichiestaAggiornamento__,)|
+|Operato|Operato(__Tecnico__,__Paese__)|  
+|Situata|Situata(__Sede__,__Paese__)|
+|Contenuto|Contenuto(__Macchina__,__Componente__)|
+|Dipendente| Dipendente(__Sede__,__Staff__)|
 
 |Traduzione|Vincoli di riferimento|
 |-------------|--------------|
-|Sede(__PIva__, nome, indirizzo)|-|
-|Paese(__ISO__, nome, LivelloPericolo)|-|
-| Tecnico(__CF__, nome, tel, PermessoPericolo)|-|
-| Specializzazione(__ID__, tipo, costo)|-|
-| Macchina(__ID__, nome, descrizione, garanzia, ginizio, gfine, stato_operativo)|-|
-|Componente(__ID__, peso, costo, stato_operativo)|-|
-| RichiestaSostituzione(__ID__, __Sede__, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)|Sede -> Sede.PIva|
-| RichiestaAggiornamento(__ID__, __Sede__, costoGG, costoTrasferta, stato, dataInizio, dataFine, descrizione)|Sede -> Sede.PIva|
-|Staff(__CF__, ruolo, nome, tel)|-|
-| SoddisfaSostituzione(__Tecnico__, __Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta -> RichiestaSostituzione.ID|
-| Sostituisce(__Componente__, __Richiesta__)|Componente -> Componente.ID , Richiesta -> RichiestaSostituzione.ID|
-|Riparazione(__Staff__, __Componente__, __Sede__, stato, dataInizio, dataFine, descrizione)|Staff -> Staff.CF , Sede -> Sede.PIva , Componente -> Componente.ID|
-|SoddisfaFormazione(__Richiesta__ , __Tecnico__)| Richiesta -> RichiestaAggiornamento.ID, Tecnico -> Tecnico.CF|
-|Formazione(__Staff__, __Richiesta__)|Richiesta -> RichiestaAggiornamento.ID, Staff.CF|
-|Operato(__Tecnico__ ,__Paese__)|  Tecnico -> Tecnico.ID, Paese -> Paese.ISO|
-|Situata(__Sede__, __Paese__)| Sede -> Sede.PIva, Paese -> Paese.ISO|
-|Contenuto(__Macchina__, __Componente__)| Macchina -> Macchina.ID, Componente -> Componente.ID|
-| Dipendente(__Sede__, __Staff__)| Sede -> Sede.PIva, Staff -> Staff.CF|
-|Possiede(__Sede__, __Macchina__)|Sede -> Sede.PIva, Macchina -> Macchina.ID|
+|Sede(__PIva__,nome,indirizzo)|-|
+|Paese(__ISO__,nome,LivelloPericolo)|-|
+| Tecnico(__CF__, nome,tel,PermessoPericolo,IDspec)|-|
+| Specializzazione(__ID__,tipo,costo)|-|
+| Macchina(__ID__,nome,descrizione,garanzia, ginizio,gfine,stato_operativo)|-|
+|Componente(__ID__,peso,costo,stato_operativo)|-|
+| RichiestaSostituzione(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+| RichiestaAggiornamento(__ID__,__Sede__,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)|Sede -> Sede.PIva|
+|Staff(__CF__,ruolo,nome,tel)|-|
+| SoddisfaSostituzione(__Tecnico__,__Richiesta__)|Tecnico -> Tecnico.Cf , Richiesta->RichiestaSostituzione.ID|
+| Sostituisce(__Componente__,__Richiesta__)|Componente -> Componente.ID , Richiesta->RichiestaSostituzione.ID|
+|Riparazione(__Staff__,__Componente__,__Sede__,stato,dataInizio,dataFine,descrizione)|Staff -> Staff.CF , Sede->Sede.PIva , Componente-> Componente.ID|
+|SoddisfaFormazione(__Richiesta__,__Tecnico__)| Richiesta->RichiestaAggiornamento.ID , Tecnico->Tecnico.CF|
+|Formazione(__Staff__,__Richiesta__)|Richiesta->RichiestaAggiornamento.ID ,Staff.CF|
+|Operato(__Tecnico__,__Paese__)|  Tecnico->Tecnico.ID, Paese->Paese.ISO|
+|Situata(__Sede__,__Paese__)| Sede->Sede.PIva, Paese->Paese.ISO|
+|Contenuto(__Macchina__,__Componente__)| Macchina->Macchina.ID, Componente->Componente.ID|
+| Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
+|Possiede(__Sede__,__Macchina__)|Sede->Sede.PIva, Macchina->Macchina.ID|
 
 ## 4 Codifica SQL
 ### 4a definizione schema in codice
@@ -554,10 +554,19 @@ CREATE TABLE possiede(
 
 ### 4c codifica delle operazioni
 
-1. Inserire una nuova sede (1 volta all'anno)
+1.  Inserire un nuovo paese (1 volta ogni paio d'anni
+```sql
+INSERT INTO paese(ISO,nome,LivelloPericolo)
+VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
+```
+2. Inserire una nuova sede (1 volta all'anno)
 ```sql
 INSERT INTO sede (PIva, nome, indirizzo)
 VALUES ('S01', 'ITALY1', 'Via rizzoli')
+```
+per ogni sede:
+```sql
+INSERT INTO situata(sede, paese) VALUES(..)  
 ```
 
 2. Inserire un nuovo tecnico (5 volte all'anno)  
@@ -565,23 +574,59 @@ VALUES ('S01', 'ITALY1', 'Via rizzoli')
 INSERT INTO tecnici (CF, nome,tel,PermessoPericolo)
 VALUES ('MRARSS111111', 'MARIO ROSSI', '3332445559',7)  
 ```
-
+per ogni tecnico:
+```sql
+INSERT INTO operato(Tecnico,Paese) VALUES('MRARSS111111', 'it')   
+```
 3. Inserire un nuovo membro dello staff (2 volte al mese)  
 ```sql
 INSERT INTO staff (CF,ruolo,nome,tel)
 VALUES ('LGUVRD22222', 'operaio','luigi verdi' '1125656')
 ```
-
-4. Inserire un nuovo paese (1 volta ogni paio d'anni
+per ogni nuovo membro:
 ```sql
-INSERT INTO paese(ISO,nome,LivelloPericolo)
-VALUES ('ISO 3166-2:IT', 'ITALIA', 5);
+INSERT INTO dipendente(sede,staff) VALUES('S01', 'LGIVRD')   
 ```
-
 5. Inserire una nuova macchina (1 volta al mese)
 ```sql
 INSERT INTO macchina(ID,nome,descrizione,data_inizio,data_fine,stato_operativo)
 VALUES ('1', 'Caffettiera', 'Macchinetta del caffe',12/01/19,12/01/22,True);  
+```
+per ogni macchina: 
+```sql
+INSERT INTO possiede(sede, macchina)VALUES(..)
+```
+6. Inserire un nuvo componente 
+```sql
+INSERT INTO componente(peso,costo,stato_operativo) VALUES()
+```
+per ogni componente: 
+```sql
+INSERT INTO contenuto(macchina,componente))VALUES(..)
+```
+7. Aggiungere una nuova richiesta di riparazione
+```sql
+INSERT INTO RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)
+VALUES (1,'S01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
+```
+
+8. Aggiungere una nuova richiesta di sostituzione:
+```sql
+insert into richiestaSostituzione(ID,IDsede,costogiorn,costotrasf,stato,dataInizio,dataFine,descrizione) values (1, 'S03',15,20,'in attesa', '2019-01-30','2019-01-31', 'sostituzione' ) 
+```
+per ogni richiesta di sostituzione: 
+```sql
+INSERT INTO soddisfaSostituzione(Tecnico,Richiesta) VALUES(..)
+INSERT INTO sostituisce(Componente,Richiesta) VALUESS(..)
+```
+9. Aggiungere una nuova richiesta di Aggiornamento:
+```sql
+insert into richiestaAggiornamento(ID,IDsede,costogiorn,costotrasf,stato,dataInizio,dataFine,descrizione) values ('1', 'S03',15,20,'in attesa', '2019-01-30','2019-01-31', 'formazione staff')
+```
+per ogni richiesta di sostituzione: 
+```sql
+INSERT INTO soddisfaFormazione(Tecnico,Richiesta) values ('MRARSS111111',2)
+INSERT INTO Formazione(staff,richiestaAggiornamento) VALUES(..)
 ```
 
 6. Aggiornamento del componente c1 nella macchina m1 (inserimento di quello nuovo e rimozione di quello sostituito) (1 volta al mese)  
@@ -592,20 +637,15 @@ WHERE macchina=m1 and componente=c1
 ON UPDATE CASCADE   
 ```
 
-7. Richiedere un intervento di riparazione (1 volta al giorno)
-```sql
-INSERT INTO RichiestaRiparazione(ID,Sede,costoGG,costoTrasferta,stato,dataInizio,dataFine,descrizione)
-VALUES ('R1','01',15,20,'in attesa',12/01/19,14/01/19, 'riparazione componente c1' )
-```
 
-19. Rimuovere un membro dello staff che non è più dipendente
+10. Rimuovere un membro dello staff che non è più dipendente
 ```sql
 DELETE FROM staff   
 WHERE CF='LGUVRD22222'  
 ON DELETE SET DEFAULT   
 ```
 
-21. Visualizzare tutte le sedi per un determinato paese dato il codice iso
+11. Visualizzare tutte le sedi per un determinato paese dato il codice iso
 ```sql
 CREATE VIEW sediPaese  
         (ID, nomeSede, nomePaese, ISO) as  
@@ -614,7 +654,7 @@ FROM situata, sede, paese
 WHERE situata.sede = sede.PIva and paese.ISO='it' ;
 ```
 
-22. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
+12. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
 ```sql
 CREATE VIEW paesePericolo  
         (ISO, nomePaese) as  
@@ -623,7 +663,7 @@ FROM paese
 WHERE paese.livelloPericolo = 5 ;
 ```
 
-23. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
+13. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
 ```sql
 CREATE VIEW operatoTecnico
         (ISO, nomePaese) as
@@ -632,7 +672,7 @@ FROM paese as p JOIN operato as o ON p.ISO = o.paese JOIN tecnici t ON o.tecnico
 WHERE t.PermessoPericolo <= p.livelloPericolo AND t.CF='CCCDDD' ;
 ```
 
-24. Visualizzare tutte le macchine per una sede (1 volta al giorno)
+14. Visualizzare tutte le macchine per una sede (1 volta al giorno)
 ```sql
 CREATE VIEW macchineSede
         (ID, nomeMacchina) as
@@ -641,7 +681,7 @@ FROM sede as s JOIN possiede as p ON s.PIva = p.sede JOIN macchina as m ON m.ID 
 WHERE s.PIva ='S01';
 ```
 
-27. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
+15. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 ```sql
 CREATE VIEW macchineNonOperative
         (ID, nomeMacchina) as
