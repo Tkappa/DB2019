@@ -55,8 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = "insert into paese (ISO,nome,LivelloPericolo) values ( '".$_POST["iso"]."','".$_POST["nome"]."','".$_POST["per"]."')";
-
+    $sql = "select SUM(  ( SELECT SUM((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf)    FROM richiestaSostituzione    WHERE (idsede='".$_POST["sede"]."' AND stato='completata'  AND DATEDIFF(datafine,'".$_POST["fin"]."')<0    AND DATEDIFF(datafine,'".$_POST["in"]."')>0 )  ) +  ( SELECT SUM((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf)    FROM richiestaAggiornamento    WHERE (idsede='".$_POST["sede"]."' AND stato='completata'    AND DATEDIFF(datafine,'".$_POST["fin"]."')<0 AND DATEDIFF(datafine,'".$_POST["in"]."')>0 )  ))";
     echo("<p>Query inserita : ".$sql."</p>");
 
     $result = $conn->query($sql);
@@ -86,7 +85,7 @@
     $conn->close();
     ?>
 
-    <a href="operazione1.html">Inserisci ancora </a>
+    <a href="operazione20.html">Inserisci ancora </a>
   </div>
 </body>
 </html>

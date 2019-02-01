@@ -55,8 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = "insert into paese (ISO,nome,LivelloPericolo) values ( '".$_POST["iso"]."','".$_POST["nome"]."','".$_POST["per"]."')";
-
+    $sql = "update contenuto set  macchina=0 where macchina='".$_POST["mac"]."' and componente='".$_POST["id"]."'";
     echo("<p>Query inserita : ".$sql."</p>");
 
     $result = $conn->query($sql);
@@ -86,7 +85,7 @@
     $conn->close();
     ?>
 
-    <a href="operazione1.html">Inserisci ancora </a>
+    <a href="operazione10.html">Inserisci ancora </a>
   </div>
 </body>
 </html>

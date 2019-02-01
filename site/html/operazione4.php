@@ -55,7 +55,34 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = "insert into paese (ISO,nome,LivelloPericolo) values ( '".$_POST["iso"]."','".$_POST["nome"]."','".$_POST["per"]."')";
+    $sql = "insert into staff (CF,ruolo,nome,tel) values ( '".$_POST["cf"]."','".$_POST["ruolo"]."','".$_POST["nome"]."','".$_POST["tel"]."')";
+
+    echo("<p>Query inserita : ".$sql."</p>");
+
+    $result = $conn->query($sql);
+
+    if($result){
+      if(!is_bool($result)){
+        echo("<table border=1>");
+        while($row = mysqli_fetch_assoc($result)){
+          echo("<tr>");
+          foreach($row as $value){
+            echo ("<td>".$value."</td>");
+          }
+          echo("</tr>");
+        }
+        echo("</table>");
+      }
+      else{
+        echo ("<p>Query eseguita con successo<p>");
+      }
+
+    }
+    else{
+      echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
+    }
+
+    $sql = "insert into dipendente(sede,staff) values ( '".$_POST["piva"]."','".$_POST["cf"]."')";
 
     echo("<p>Query inserita : ".$sql."</p>");
 

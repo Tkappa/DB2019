@@ -45,74 +45,75 @@
 
     </div>
     <?php
-    $server = "golem.cs.unibo.it";
-    $username = "my1902";
-    $password = "Eech4Ieh";
+      $server = "golem.cs.unibo.it";
+      $username = "my1902";
+      $password = "Eech4Ieh";
 
-    $conn = mysqli_connect($server,$username,$password,$username);
+      $conn = mysqli_connect($server,$username,$password,$username);
 
-    if ($conn->connect_error){
-      die("Connection failed:" . $conn->connect_error);
-    }
+      if ($conn->connect_error){
+      	die("Connection failed:" . $conn->connect_error);
+      }
 
-    $sql = "insert into tecnici (CF, nome,tel,PermessoPericolo) values ( '".$_POST["cf"]."','".$_POST["nome"]."','".$_POST["tel"]."','".$_POST["per"]."')";
+      $sql = "insert into sede(piva,nome,indirizzo) values ( '".$_POST["piva"]."','".$_POST["nome"]."','".$_POST["indirizzo"]."')";
 
-    echo("<p>Query inserita : ".$sql."</p>");
+      echo("<p>Query inserita : ".$sql."</p>");
 
-    $result = $conn->query($sql);
+      $result = $conn->query($sql);
 
-    if($result){
-      if(!is_bool($result)){
-        echo("<table border=1>");
+      if($result){
+        if(!is_bool($result)){
+          echo("<table border=1>");
         while($row = mysqli_fetch_assoc($result)){
           echo("<tr>");
           foreach($row as $value){
-            echo ("<td>".$value."</td>");
-          }
-          echo("</tr>");
+          	echo ("<td>".$value."</td>");
+            }
+            echo("</tr>");
+        	}
+          echo("</table>");
         }
-        echo("</table>");
+        else{
+          echo ("<p>Query eseguita con successo<p>");
+        }
+
       }
       else{
-        echo ("<p>Query eseguita con successo<p>");
+        echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
       }
 
-    }
-    else{
-      echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
-    }
-    $sql = "insert into operato(tecnico,paese) values ( '".$_POST["cf"]."','".$_POST["iso"]."')";
+      $sql = "insert into situata(sede,paese) values ( '".$_POST["piva"]."','".$_POST["iso"]."')";
 
-    echo("<p>Query inserita : ".$sql."</p>");
+      echo("<p>Query inserita : ".$sql."</p>");
 
-    $result = $conn->query($sql);
+      $result = $conn->query($sql);
 
-    if($result){
-      if(!is_bool($result)){
-        echo("<table border=1>");
+      if($result){
+        if(!is_bool($result)){
+          echo("<table border=1>");
         while($row = mysqli_fetch_assoc($result)){
           echo("<tr>");
           foreach($row as $value){
-            echo ("<td>".$value."</td>");
-          }
-          echo("</tr>");
+          	echo ("<td>".$value."</td>");
+            }
+            echo("</tr>");
+        	}
+          echo("</table>");
         }
-        echo("</table>");
+        else{
+          echo ("<p>Query eseguita con successo<p>");
+        }
+
       }
       else{
-        echo ("<p>Query eseguita con successo<p>");
+        echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
       }
 
-    }
-    else{
-      echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
-    }
 
-
-    $conn->close();
+      $conn->close();
     ?>
 
-    <a href="operazione2.html">Inserisci ancora </a>
+  <a href="operazione2.html">Inserisci ancora </a>
   </div>
 </body>
 </html>

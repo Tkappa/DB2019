@@ -55,8 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = "insert into paese (ISO,nome,LivelloPericolo) values ( '".$_POST["iso"]."','".$_POST["nome"]."','".$_POST["per"]."')";
-
+    $sql = "select sede.PIva, sede.nome, paese.nome, paese.ISO FROM situata, sede, paese WHERE situata.sede = sede.PIva and paese.ISO='".$_POST["iso"]."'";
     echo("<p>Query inserita : ".$sql."</p>");
 
     $result = $conn->query($sql);
@@ -86,7 +85,7 @@
     $conn->close();
     ?>
 
-    <a href="operazione1.html">Inserisci ancora </a>
+    <a href="operazione11.html">Inserisci ancora </a>
   </div>
 </body>
 </html>

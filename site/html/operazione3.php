@@ -55,7 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = "insert into staff (CF,ruolo,nome,tel) values ( '".$_POST["cf"]."','".$_POST["ruolo"]."','".$_POST["nome"]."','".$_POST["tel"]."')";
+    $sql = "insert into tecnici (CF, nome,tel,PermessoPericolo) values ( '".$_POST["cf"]."','".$_POST["nome"]."','".$_POST["tel"]."','".$_POST["per"]."')";
 
     echo("<p>Query inserita : ".$sql."</p>");
 
@@ -81,8 +81,7 @@
     else{
       echo ("<p>Query non valida: ". mysqli_error($conn)."<p>");
     }
-
-    $sql = "insert into dipendente(sede,staff) values ( '".$_POST["piva"]."','".$_POST["cf"]."')";
+    $sql = "insert into operato(tecnico,paese) values ( '".$_POST["cf"]."','".$_POST["iso"]."')";
 
     echo("<p>Query inserita : ".$sql."</p>");
 

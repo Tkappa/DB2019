@@ -55,7 +55,7 @@
       die("Connection failed:" . $conn->connect_error);
     }
 
-    $sql = "insert into paese (ISO,nome,LivelloPericolo) values ( '".$_POST["iso"]."','".$_POST["nome"]."','".$_POST["per"]."')";
+    $sql = "insert into richiestaAggiornamento(ID, IDsede, costogiorn,costotrasf, stato, dataInizio, dataFine, descrizione) VALUES ('".$_POST["id"]."', '".$_POST["sede"]."','".$_POST["cgg"]."','".$_POST["ctr"]."', 'in attesa',CURDATE(), , '".$_POST["desc"]."' );"
 
     echo("<p>Query inserita : ".$sql."</p>");
 
@@ -86,7 +86,7 @@
     $conn->close();
     ?>
 
-    <a href="operazione1.html">Inserisci ancora </a>
+    <a href="operazione9.html">Inserisci ancora </a>
   </div>
 </body>
 </html>
