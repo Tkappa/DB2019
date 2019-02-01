@@ -30,7 +30,8 @@ I dati da salvare saranno:
 
     In generale i pagamenti vengono effettuati al completamento di un intervento
 
-Questo DataBase verrà acceduto da utenti attraverso un interfaccia web dove diversi tipi di utenti potranno fare diverse operazioni
+Questo DataBase verrà acceduto da utenti attraverso un interfaccia web dove diversi tipi di utenti potranno fare diverse operazioni.  
+Gli utenti saranno divisi in quattro gruppi: Amministratori, che avranno accesso completo CRUD a tutte le tabelle, Sedi, che avranno permessi di scrittura sulle macchine, sui componenti ,sullo staff e sulle richieste ; Tecnici che avranno accesso CRU alle tabelle richieste e R a se stessi, e staff , che avranno accesso CRU alle tabelle di richieste di riparazione, RU alle tabelle delle macchine ,dei componenti e di R su loro stessi.
 
 ### 1b. Glossario dei termini
 
@@ -420,6 +421,59 @@ Non sono stati rilevati attributi multivalore.
 | Dipendente(__Sede__,__Staff__)| Sede->Sede.PIva,Staff->Staff.CF|
 ||
 |Possiede(__Sede__,__Macchina__)|Sede->Sede.PIva, Macchina->Macchina.ID|
+
+
+### 3e. Tabelle CRUD
+Gli utenti di tipo **Admin** avranno accesso CRUD a tutte le entità.
+
+Ora verranno elencati gli altri utenti, se un entità non è presente vorrà dire che l'utente di quel gruppo non avrà permessi su quell'entità
+
+Gli utenti di tipo **Tecnico** avranno i seguenti permessi:  
+
+|Entità-Relazione|Create|Read|Update|Delete|
+|---------------------|----------------|-----------------|------------------|---------------|
+|Sede||Read|||
+|Paese||Read|||
+|Tecnico||Read|||
+|RichiestaSostituzione||Read|Update||
+|RichiestaAggiornamento||Read|Update||
+|SoddisfaSostituzione|Create|Read|Update||
+|Sostituisce |Create|Read|Update||
+|SoddisfaFormazione|Create|Read|Update||
+|Formazione|Create|Read|Update||
+|Operato||Read|||
+|Situata||Read|||
+
+Gli utenti di tipo **Sede** avranno i seguenti permessi:  
+
+|Entità-Relazione|Create|Read|Update|Delete|
+|---------------------|----------------|-----------------|------------------|---------------|
+|Sede||Read|Update||
+|Tecnico||Read|||
+|Macchina|Create|Read|Update|Delete|
+|Componente|Create|Read|Update|Delete|
+|RichiestaSostituzione|Create|Read||Delete|
+|RichiestaAggiornamento|Create|Read||Delete|
+|Staff |Create|Read|Update|Delete|
+|Riparazione|Create|Read||Delete|
+|Formazione||Read|||
+|Contenuto|Create|Read|Update|Delete|
+|Dipendente|Create|Read|Update|Delete|
+|Possiede|Create|Read|Update|Delete|
+
+Gli utenti di tipo **Staff** avranno i seguenti permessi:  
+
+|Entità-Relazione|Create|Read|Update|Delete|
+|---------------------|----------------|-----------------|------------------|---------------|
+|Sede||Read|||
+|Macchina||Read|Update||
+|Componente||Read|Update||
+|Staff ||Read|||
+|Riparazione||Read|Update||
+|Formazione||Read|Update||
+|Contenuto||Read|Update||
+|Dipendente||Read|||
+|Possiede||Read|||
 
 ## 4 Codifica SQL
 ### 4a. Definizione schema in codice
