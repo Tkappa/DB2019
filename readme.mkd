@@ -619,9 +619,9 @@ VALUES (..)
 ```
 7. Aggiungere una nuova richiesta di riparazione
 ```sql
-INSERT INTO riparazione(ID, Sede, costoGG, costoTrasferta,
-   stato, dataInizio, dataFine, descrizione)
-VALUES (1, 'S01', 15, 20, 'in attesa',
+INSERT INTO riparazione(ID, Sede,
+     stato, dataInizio, dataFine, descrizione)
+VALUES (1, 'S01', 'in attesa',
    12/01/19, 14/01/19, 'riparazione componente c1' )
 ```
 
@@ -661,8 +661,6 @@ WHERE macchina=1 and componente=1
 
 11. Visualizzare tutte le sedi per un determinato paese dato il codice iso
 ```sql
-CREATE VIEW sediPaese  
-        (ID, nomeSede, nomePaese, ISO) as  
 SELECT sede.PIva, sede.nome, paese.nome, paese.ISO
 FROM situata, sede, paese
 WHERE situata.sede = sede.PIva and paese.ISO='it'
@@ -670,8 +668,6 @@ WHERE situata.sede = sede.PIva and paese.ISO='it'
 
 12. Visualizzare tutti i paesi per un livello di pericolo  (1 volta al giorno)
 ```sql
-CREATE VIEW paesePericolo  
-        (ISO, nomePaese) as  
 SELECT paese.ISO, paese.nome
 FROM paese
 WHERE paese.livelloPericolo = 5
@@ -679,8 +675,6 @@ WHERE paese.livelloPericolo = 5
 
 13. Visualizzare tutti i paesi in cui un tecnico può operare (1 volta al giorno)
 ```sql
-CREATE VIEW operatoTecnico
-        (ISO, nomePaese) as
 SELECT p.ISO, p.nome
 FROM paese as p JOIN operato as o ON p.ISO = o.paese
 JOIN tecnici t ON o.tecnico = t.CF
@@ -689,8 +683,6 @@ WHERE t.PermessoPericolo <= p.livelloPericolo AND t.CF='CCCDDD'
 
 14. Visualizzare tutte le macchine per una sede (1 volta al giorno)
 ```sql
-CREATE VIEW macchineSede
-        (ID, nomeMacchina) as
 SELECT m.ID, m.nome
 FROM sede as s JOIN possiede as p ON s.PIva = p.sede
 JOIN macchina as m ON m.ID = p.macchina
@@ -699,8 +691,6 @@ WHERE s.PIva ='S01'
 
 15. Vedere quali macchine non sono operative data una sede (5 volte al giorno)
 ```sql
-CREATE VIEW macchineNonOperative
-        (ID, nomeMacchina) as
 SELECT macchina.ID, macchina.nome
 FROM sede JOIN possiede ON sede.PIva=possiede.sede
 JOIN macchina ON possiede.macchina=macchina.ID
@@ -732,8 +722,7 @@ WHERE CF='LGUVRD22222'
 
 20. Calcolare quanto una sede ha speso in interventi in un certo periodo di tempo (1 volta al mese), i pagamenti vengono effettuati al completamento dell'incarico
 ```sql
-SELECT SUM
-(
+SELECT SUM(
   ( SELECT SUM((costogiorn*(DATEDIFF(dataFine,dataInizio)))+costotrasf) 	
     FROM richiestaSostituzione 	
     WHERE (idsede='S03' AND stato='completata' 	
